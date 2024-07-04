@@ -1,14 +1,13 @@
 {
-  "name": "nestjs-boilerplate",
+  "name": "backend-mobile-app-pln",
   "version": "1.0.5",
   "private": false,
-  "description": "NestJS boilerplate",
+  "description": "Backend for mobile app PLN",
   "license": "MIT",
-  "author": "Gabriel Guedes <gabrielrguedess@gmail.com>",
+  "author": "Midyanisa Yuniar <mnynoname14@gmail.com>",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "commit": "cz",
     "find-deadcode": "ts-prune -p tsconfig.json -e",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --max-warnings=0",
@@ -28,26 +27,17 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "lint-staged": {
-    "package.json": "pnpm sort:package",
+    "package.json": "yarn sort:package",
     "src/**/*.ts": [
-      "bash -c tsc --noEmit",
-      "pnpm find-deadcode",
-      "pnpm lint --fix",
-      "pnpm test -- --findRelatedTests --bail --passWithNoTests"
+      "yarn format"
     ],
     "test/**/*.ts": [
-      "pnpm test:e2e -- --findRelatedTests --bail --passWithNoTests"
+      "yarn test:e2e -- --findRelatedTests --bail --passWithNoTests"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "dependencies": {
     "@fastify/static": "^6.10.2",
@@ -82,8 +72,6 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
