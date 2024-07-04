@@ -1,42 +1,50 @@
+/* eslint-disable @darraghor/nestjs-typed/api-method-should-specify-api-response */
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
+  ValidationPipe,
+  HttpStatus,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+import { SuccessResponse } from 'common';
+
+import { AuthService } from './auth.service';
+import { LoginDto, RegisterDto } from './dto';
+
+@ApiTags('Auth')
 @Controller('auth')
+@ApiCreatedResponse({
+  description: 'The record has been successfully created.',
+  type: SuccessResponse,
+})
+@ApiOkResponse({
+  description: 'The record has been successfully created.',
+  type: SuccessResponse,
+})
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Post('register')
+  async register(@Body(ValidationPipe) data: RegisterDto) {
+    const user = await this.authService.register(data);
+
+    return new SuccessResponse(
+      HttpStatus.CREATED,
+      'User created successfully',
+      user,
+    );
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
-  }
+  @Post('login')
+  async login(@Body(ValidationPipe) data: LoginDto) {
+    const user = await this.authService.login(data);
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+    return new SuccessResponse(
+      HttpStatus.CREATED,
+      'User created successfully',
+      user,
+    );
   }
 }

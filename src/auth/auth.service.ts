@@ -1,26 +1,79 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
+
+import * as bcrypt from 'bcryptjs';
+
+import { PrismaService } from 'infra/database/prisma/prisma.service';
+
+import { getTokens, hashData } from 'utils';
+
+import { type LoginDto, type RegisterDto } from './dto';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async findByUsername(username: string) {
+    return await this.prisma.users.findFirst({
+      where: { username },
+    });
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  async login(data: LoginDto) {
+    const isUserExist = await this.findByUsername(data.username);
+
+    if (!isUserExist) {
+      throw new NotFoundException('User not found');
+    }
+
+    const isPassword = bcrypt.compareSync(data.password, isUserExist.password);
+
+    if (!isPassword) {
+      throw new UnauthorizedException('Wrong username or password');
+    }
+
+    const tokens = await getTokens(
+      isUserExist.id,
+      isUserExist.username,
+      isUserExist.role,
+    );
+
+    // await this.updateRefreshToken(user.id, tokens.refresh_token);
+
+    return {
+      ...tokens,
+      role: isUserExist.role,
+    };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+  async register(data: RegisterDto) {
+    const isUserExist = await this.findByUsername(data.username);
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+    if (isUserExist) {
+      throw new ConflictException('User already exist');
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+    if (data.gi_id) {
+      const isGIExist = await this.prisma.gi.findFirst({
+        where: { id: data.gi_id },
+      });
+
+      if (!isGIExist) {
+        throw new NotFoundException('GI not found');
+      }
+    }
+
+    const password = hashData(data.password);
+
+    return await this.prisma.users.create({
+      data: {
+        ...data,
+        password,
+      },
+    });
   }
 }

@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @darraghor/nestjs-typed/api-property-matches-property-optionality */
 import { ApiProperty } from '@nestjs/swagger';
 
 export class SuccessResponse {
-  constructor(statusCode: number, message: string, data?: never) {
+  constructor(
+    statusCode: number,
+    message: string,
+    data?: string | string[] | object | object[],
+  ) {
     this.statusCode = statusCode;
     this.message = message;
 
@@ -28,8 +33,9 @@ export class SuccessResponse {
       { type: 'string' },
       { type: 'array', items: { type: 'string' } },
       { type: 'object' },
+      { type: 'array', items: { type: 'object' } },
     ],
     required: false,
   })
-  data?: never;
+  data?: string | string[] | object;
 }

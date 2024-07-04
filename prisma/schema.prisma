@@ -189,14 +189,24 @@ model alat {
   tech_id                   String?
   kategori_peralatan        KategoriPeralatan @default(PRIMER)
   kategori_peralatan_detail String?
-  nama                      String
-  merk                      String
-  tipe                      String
+  tanggal_operasi           DateTime
   serial_id                 String
+  fasa_terpasang            FasaTerpasang     @default(R)
+  mekanik_penggerak         String?
+  media_pemadam             String?
+  tipe                      String
+  merk                      String
   negara_pembuat            String
   tahun_pembuatan           String
   tegangan_operasi          String
-  fasa_terpasang            FasaTerpasang     @default(R)
+  rating_arus               String?
+  breaking_current          String?
+  penempatan                String?
+  ratio                     String?
+  jenis_cvt                 String?
+  impedansi                 String?
+  daya                      String?
+  nama                      String
   nameplate                 String?
   status                    StatusOperasiAlat @default(OPERASI)
 
