@@ -22,7 +22,14 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
-import { GetUser, JwtGuard, Roles, RolesGuard, SuccessResponse } from 'common';
+import {
+  ErrorResponse,
+  GetUser,
+  JwtGuard,
+  Roles,
+  RolesGuard,
+  SuccessResponse,
+} from 'common';
 import { FileInjector } from 'nestjs-file-upload';
 
 import {
@@ -53,15 +60,15 @@ import { LaporanService } from './laporan.service';
 })
 @ApiNotFoundResponse({
   description: 'Record not found',
-  type: SuccessResponse,
+  type: ErrorResponse,
 })
 @ApiBadRequestResponse({
   description: 'Bad Request',
-  type: SuccessResponse,
+  type: ErrorResponse,
 })
 @ApiUnauthorizedResponse({
   description: 'Unauthorized',
-  type: SuccessResponse,
+  type: ErrorResponse,
 })
 export class LaporanController {
   constructor(private readonly laporanService: LaporanService) {}
