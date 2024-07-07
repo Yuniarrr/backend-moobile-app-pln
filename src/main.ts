@@ -14,17 +14,23 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  app.setGlobalPrefix('api');
   app.enableCors();
-  app.useGlobalPipes(new ValidationPipe());
+  // eslint-disable-next-line @darraghor/nestjs-typed/should-specify-forbid-unknown-values
+  app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
   const config = new DocumentBuilder()
-    .setTitle('NestJs Boilerplate')
+    .setTitle('Backend API')
     .setDescription('NestJs Boilerplate API.')
     .setVersion('1.0')
     .addTag('users')
     .build();
 
-  SwaggerModule.setup('docs', app, SwaggerModule.createDocument(app, config));
+  SwaggerModule.setup(
+    'api/docs',
+    app,
+    SwaggerModule.createDocument(app, config),
+  );
 
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }

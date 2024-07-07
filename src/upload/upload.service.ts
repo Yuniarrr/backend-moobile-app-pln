@@ -1,27 +1,46 @@
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
 import { Injectable } from '@nestjs/common';
 
-import { type CreateUploadDto } from './dto/create-upload.dto';
-import { type UpdateUploadDto } from './dto/update-upload.dto';
+import sharp from 'sharp';
+
+import { type CreateUploadDto } from './dto';
 
 @Injectable()
 export class UploadService {
-  create(createUploadDto: CreateUploadDto) {
-    return 'This action adds a new upload';
-  }
+  async resizeImage(
+    data: CreateUploadDto,
+    isTransparent: boolean = false,
+  ): Promise<string> {
+    if (data.fileIs === undefined) {
+      return null;
+    }
 
-  findAll() {
-    return `This action returns all upload`;
-  }
+    if (!fs.existsSync('uploads')) {
+      fs.mkdirSync('uploads');
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} upload`;
-  }
+    const newFilePath = path.join('uploads', data.filePath);
 
-  update(id: number, updateUploadDto: UpdateUploadDto) {
-    return `This action updates a #${id} upload`;
-  }
+    if (!fs.existsSync(newFilePath)) {
+      fs.mkdirSync(newFilePath, { recursive: true });
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} upload`;
+    const { fileName, fileIs } = data;
+
+    const newFileName = isTransparent
+      ? `${Date.now()}_${fileName}.png`
+      : `${Date.now()}_${fileName}.jpeg`;
+
+    isTransparent
+      ? await sharp(fileIs.buffer)
+          .png({ quality: 80 })
+          .toFile(path.join(newFilePath, newFileName))
+      : await sharp(fileIs.buffer)
+          .jpeg({ quality: 80 })
+          .toFile(path.join(newFilePath, newFileName));
+
+    return newFileName;
   }
 }
