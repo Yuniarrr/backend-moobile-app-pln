@@ -3,6 +3,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'infra/database/prisma/prisma.service';
 
 import {
+  type UpdateUserDto,
+  type CreateUserDto,
   type UpdateGIDto,
   type CreateGIDto,
   type UpdateULTGDto,
@@ -74,6 +76,68 @@ export class ManagementService {
       where: { id: gi_id },
       data: {
         ...data,
+      },
+    });
+  }
+
+  async createUser(data: CreateUserDto) {
+    await this.checkUsername(data.username);
+
+    return await this.prisma.users.create({
+      data: {
+        ...data,
+      },
+    });
+  }
+
+  async updateUser(user_id: string, data: UpdateUserDto) {
+    const isUserExist = await this.prisma.users.findFirst({
+      where: { id: user_id },
+    });
+
+    if (!isUserExist) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (data.username) {
+      await this.checkUsername(data.username);
+    }
+
+    return await this.prisma.users.update({
+      where: { id: user_id },
+      data: {
+        ...data,
+      },
+    });
+  }
+
+  async checkUsername(username: string) {
+    const isUsernameExist = await this.prisma.users.findFirst({
+      where: { username },
+    });
+
+    if (isUsernameExist) {
+      throw new NotFoundException('Username already exist');
+    }
+
+    return isUsernameExist;
+  }
+
+  async getDetailGI(gi_id: string) {
+    const isGIExist = await this.prisma.gi.findFirst({ where: { id: gi_id } });
+
+    if (!isGIExist) {
+      throw new NotFoundException('GI not found');
+    }
+
+    return await this.prisma.gi.findFirst({
+      where: { id: gi_id },
+      include: {
+        users: {
+          select: {
+            username: true,
+          },
+        },
       },
     });
   }

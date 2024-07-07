@@ -9,6 +9,7 @@ import {
   UseGuards,
   ValidationPipe,
   HttpStatus,
+  BadRequestException,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -28,7 +29,14 @@ import {
   SuccessResponse,
 } from 'common';
 
-import { CreateGIDto, CreateULTGDto, UpdateGIDto, UpdateULTGDto } from './dto';
+import {
+  CreateGIDto,
+  CreateULTGDto,
+  CreateUserDto,
+  UpdateGIDto,
+  UpdateULTGDto,
+  UpdateUserDto,
+} from './dto';
 import { ManagementService } from './management.service';
 
 @ApiTags('management')
@@ -82,10 +90,40 @@ export class ManagementController {
     );
   }
 
+  @Post('user')
+  @Roles('ADMIN')
+  async createUser(@Body(ValidationPipe) data: CreateUserDto) {
+    if (data.gi_id && data.role !== 'GI') {
+      throw new BadRequestException(
+        'If you want to assign a GI, the role must be GI.',
+      );
+    }
+
+    const newGI = await this.managementService.createUser(data);
+
+    return new SuccessResponse(
+      HttpStatus.CREATED,
+      'The record has been successfully created.',
+      newGI,
+    );
+  }
+
   @Get('ultg/:ultg_id')
   @Roles('ADMIN', 'GI', 'HAR')
   async getDetailUltg(@Param('ultg_id') ultg_id: string) {
     const details = await this.managementService.getDetailUltg(ultg_id);
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'The record has been successfully created.',
+      details,
+    );
+  }
+
+  @Get('gi/:gi_id')
+  @Roles('ADMIN', 'GI', 'HAR')
+  async getDetailGI(@Param('gi_id') gi_id: string) {
+    const details = await this.managementService.getDetailGI(gi_id);
 
     return new SuccessResponse(
       HttpStatus.OK,
@@ -116,6 +154,21 @@ export class ManagementController {
     @Body(ValidationPipe) data: UpdateGIDto,
   ) {
     const update = await this.managementService.updateGI(gi_id, data);
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'The record has been successfully created.',
+      update,
+    );
+  }
+
+  @Patch('user/:user_id')
+  @Roles('ADMIN')
+  async updateUser(
+    @Param('user_id') user_id: string,
+    @Body(ValidationPipe) data: UpdateUserDto,
+  ) {
+    const update = await this.managementService.updateUser(user_id, data);
 
     return new SuccessResponse(
       HttpStatus.OK,
