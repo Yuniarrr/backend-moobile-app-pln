@@ -82,8 +82,9 @@ model gi {
 }
 
 model bay {
-  id   String @id @default(uuid())
-  nama String
+  id          String @id @default(uuid())
+  nama_lokasi String
+  funloc_id   String
 
   gi_id String
   gi    gi     @relation(fields: [gi_id], references: [id])
