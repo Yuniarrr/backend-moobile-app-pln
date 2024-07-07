@@ -4,22 +4,28 @@
 import { applyDecorators } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { type TransformFnParams, Transform } from 'class-transformer';
-import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
-import sanitizeHtml from 'sanitize-html';
+import { Expose, Transform } from 'class-transformer';
+import { IsDefined, IsNotEmpty, IsObject } from 'class-validator';
+import { FileField } from 'nestjs-file-upload';
 
-export function IsStringDefined(description: string, example: string) {
+export function IsFileDefined(
+  description: string,
+  allowedMimeTypes: string[],
+  maxSize: number,
+) {
   return applyDecorators(
     Transform(({ value }) => (value === '' ? undefined : value)),
-    Transform((parameters: TransformFnParams) =>
-      sanitizeHtml(parameters.value),
-    ),
-    IsString(),
     IsDefined(),
+    IsObject(),
     IsNotEmpty(),
     ApiProperty({
+      type: String,
       description,
-      example,
+    }),
+    Expose(),
+    FileField({
+      allowedMimeTypes,
+      maxSize: maxSize * 1000 * 1000,
     }),
   );
 }

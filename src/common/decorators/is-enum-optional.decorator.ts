@@ -10,6 +10,7 @@ import sanitizeHtml from 'sanitize-html';
 
 export function IsEnumOptional<T extends object>(description: string, data: T) {
   return applyDecorators(
+    Transform(({ value }) => (value === '' ? undefined : value)),
     Transform((parameters: TransformFnParams) =>
       sanitizeHtml(parameters.value),
     ),

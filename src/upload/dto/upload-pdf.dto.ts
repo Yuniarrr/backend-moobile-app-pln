@@ -7,7 +7,7 @@ import { IsNotEmpty } from 'class-validator';
 import { IsStringOptional } from 'common';
 import * as nestjsFileUpload from 'nestjs-file-upload';
 
-export class CreateUploadDto {
+export class UploadPdfDto {
   @IsStringOptional('upload file path')
   filePath: string;
 
@@ -17,8 +17,8 @@ export class CreateUploadDto {
   @Expose()
   @ApiProperty()
   @nestjsFileUpload.FileField({
-    allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
-    maxSize: 5 * 1000 * 1000,
+    allowedMimeTypes: ['application/pdf'],
+    maxSize: 10 * 1000 * 1000,
   })
   @IsNotEmpty()
   @Type(() => File)

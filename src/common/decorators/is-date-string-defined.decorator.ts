@@ -5,16 +5,16 @@ import { applyDecorators } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 
 import { type TransformFnParams, Transform } from 'class-transformer';
-import { IsDefined, IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsDefined, IsNotEmpty } from 'class-validator';
 import sanitizeHtml from 'sanitize-html';
 
-export function IsStringDefined(description: string, example: string) {
+export function IsDateStringDefined(description: string, example: string) {
   return applyDecorators(
     Transform(({ value }) => (value === '' ? undefined : value)),
     Transform((parameters: TransformFnParams) =>
       sanitizeHtml(parameters.value),
     ),
-    IsString(),
+    IsDateString(),
     IsDefined(),
     IsNotEmpty(),
     ApiProperty({

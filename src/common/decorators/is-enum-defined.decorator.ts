@@ -14,6 +14,7 @@ export function IsEnumDefined<T extends object>(
   example?: string,
 ) {
   return applyDecorators(
+    Transform(({ value }) => (value === '' ? undefined : value)),
     Transform((parameters: TransformFnParams) =>
       sanitizeHtml(parameters.value),
     ),

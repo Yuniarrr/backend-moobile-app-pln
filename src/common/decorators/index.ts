@@ -5,3 +5,5 @@ export * from './is-enum-defined.decorator';
 export * from './is-enum-optional.decorator';
 export * from './is-string-defined.decorator';
 export * from './is-string-optional.decorator';
+export * from './is-date-string-defined.decorator';
+export * from './is-file-defined.decorator';

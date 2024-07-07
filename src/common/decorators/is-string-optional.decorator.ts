@@ -10,6 +10,7 @@ import sanitizeHtml from 'sanitize-html';
 
 export function IsStringOptional(description: string, example?: string) {
   return applyDecorators(
+    Transform(({ value }) => (value === '' ? undefined : value)),
     Transform((parameters: TransformFnParams) =>
       sanitizeHtml(parameters.value),
     ),
