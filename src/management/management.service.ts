@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PrismaService } from 'infra/database/prisma/prisma.service';
 
+import { hashData } from 'utils';
+
 import {
   type UpdateUserDto,
   type CreateUserDto,
@@ -83,9 +85,14 @@ export class ManagementService {
   async createUser(data: CreateUserDto) {
     await this.checkUsername(data.username);
 
+    const password = hashData(data.password);
+
+    delete data.password;
+
     return await this.prisma.users.create({
       data: {
         ...data,
+        password,
       },
     });
   }
@@ -107,6 +114,9 @@ export class ManagementService {
       where: { id: user_id },
       data: {
         ...data,
+        password: data.password
+          ? hashData(data.password)
+          : isUserExist.password,
       },
     });
   }

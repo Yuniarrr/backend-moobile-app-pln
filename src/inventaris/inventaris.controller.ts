@@ -128,19 +128,35 @@ export class InventarisController {
     type: String,
     description: 'ID Bay',
   })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    type: String,
+    description: 'Search',
+  })
   @Roles('ADMIN', 'GI', 'HAR')
   async getAlat(
     @Query('ultg_id') ultg_id: string,
     @Query('gi_id') gi_id: string,
     @Query('jenis_peralatan_id') jenis_peralatan_id: string,
     @Query('bay_id') bay_id: string,
+    @Query('search') search: string,
   ) {
     const alat = await this.inventarisService.getAlat({
       ultg_id,
       gi_id,
       jenis_peralatan_id,
       bay_id,
+      search,
     });
+
+    return new SuccessResponse(HttpStatus.OK, 'Alat berhasil ditemukan', alat);
+  }
+
+  @Get('alat/:alat_id')
+  @Roles('ADMIN', 'GI', 'HAR')
+  async getDetailAlat(@Param('alat_id') alat_id: string) {
+    const alat = await this.inventarisService.getDetailAlat(alat_id);
 
     return new SuccessResponse(HttpStatus.OK, 'Alat berhasil ditemukan', alat);
   }
@@ -160,7 +176,7 @@ export class InventarisController {
   }
 
   @Patch('alat/:alat_id')
-  @Roles('ADMIN')
+  @Roles('ADMIN', 'GI', 'HAR')
   async updateAlat(
     @Param('alat_id') alat_id: string,
     @Body(ValidationPipe) data: UpdateJenisAlatDto,

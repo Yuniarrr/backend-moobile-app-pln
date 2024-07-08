@@ -59,11 +59,13 @@ export class InventarisService {
     gi_id,
     jenis_peralatan_id,
     bay_id,
+    search,
   }: {
     ultg_id?: string;
     gi_id?: string;
     jenis_peralatan_id?: string;
     bay_id?: string;
+    search?: string;
   }) {
     return await this.prisma.alat.findMany({
       where: {
@@ -71,6 +73,9 @@ export class InventarisService {
         gi_id,
         jenis_peralatan_id,
         bay_id,
+        nama: {
+          contains: search,
+        },
       },
     });
   }
@@ -107,6 +112,12 @@ export class InventarisService {
         ...data,
         nameplate: nameplate || alat.nameplate,
       },
+    });
+  }
+
+  async getDetailAlat(alat_id: string) {
+    return await this.prisma.alat.findFirst({
+      where: { id: alat_id },
     });
   }
 
