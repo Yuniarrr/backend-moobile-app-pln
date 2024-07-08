@@ -187,7 +187,7 @@ model laporan_tindak_lanjut {
 
 model alat {
   id                        String            @id @default(uuid())
-  tech_id                   String?
+  techidentno               String?
   kategori_peralatan        KategoriPeralatan @default(PRIMER)
   kategori_peralatan_detail String?
   tanggal_operasi           DateTime

@@ -21,7 +21,7 @@ export class LaporanService {
   ) {}
 
   async createLaporanAnomali(data: CreateLaporanAnomaliDto, user_id: string) {
-    const newFoto = await this.upload.resizeImage({
+    const newFoto = this.upload.resizeImage({
       fileIs: data.foto,
       fileName: data.foto.filename,
       filePath: 'laporan',
@@ -63,7 +63,7 @@ export class LaporanService {
   ) {
     await this.checkLaporanAnomali(data.laporan_anomali_id);
 
-    const newFoto = await this.upload.resizeImage({
+    const newFoto = this.upload.resizeImage({
       fileIs: data.foto,
       fileName: data.foto.filename,
       filePath: 'laporan-tindak-lanjut',
@@ -102,7 +102,7 @@ export class LaporanService {
     let berita_acara;
 
     if (data.foto) {
-      foto = await this.upload.resizeImage({
+      foto = this.upload.resizeImage({
         fileIs: data.foto,
         fileName: data.foto.filename,
         filePath: 'laporan-tindak-lanjut',
@@ -149,7 +149,7 @@ export class LaporanService {
     let berita_acara;
 
     if (data.foto) {
-      foto = await this.upload.resizeImage({
+      foto = this.upload.resizeImage({
         fileIs: data.foto,
         fileName: data.foto.filename,
         filePath: 'laporan-tindak-lanjut',

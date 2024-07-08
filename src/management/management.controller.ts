@@ -14,6 +14,7 @@ import {
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
+  ApiConsumes,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -91,6 +92,7 @@ export class ManagementController {
   }
 
   @Post('user')
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   @Roles('ADMIN')
   async createUser(@Body(ValidationPipe) data: CreateUserDto) {
     if (data.gi_id && data.role !== 'GI') {
