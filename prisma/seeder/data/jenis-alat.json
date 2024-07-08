@@ -1,0 +1,42 @@
+[
+  {
+    "nama": "Pemutus (PMT)",
+    "kategori_peralatan": "PRIMER"
+  },
+  {
+    "nama": "Pemisah (PMS)",
+    "kategori_peralatan": "PRIMER"
+  },
+  {
+    "nama": "Current Transformer (CT)",
+    "kategori_peralatan": "PRIMER"
+  },
+  {
+    "nama": "Capacitive Voltage Transformer/Potential Transformer (CVT/PT)",
+    "kategori_peralatan": "PRIMER"
+  },
+  {
+    "nama": "Lightning Arrester (LA)",
+    "kategori_peralatan": "PRIMER"
+  },
+  {
+    "nama": "Transformer",
+    "kategori_peralatan": "PRIMER"
+  },
+  {
+    "nama": "Baterai",
+    "kategori_peralatan": "SEKUNDER"
+  },
+  {
+    "nama": "Rectifier",
+    "kategori_peralatan": "SEKUNDER"
+  },
+  {
+    "nama": "Relay",
+    "kategori_peralatan": "SEKUNDER"
+  },
+  {
+    "nama": "kWh Meter",
+    "kategori_peralatan": "SEKUNDER"
+  }
+]

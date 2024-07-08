@@ -1,0 +1,56 @@
+[
+  {
+    "nama": "ULTG BATURAJA",
+    "list_gi": [
+      {
+        "nama": "GI Baturaja"
+      },
+      {
+        "nama": "GI Bukit Asam"
+      },
+      {
+        "nama": "GI Martapura"
+      },
+      {
+        "nama": "GI Blambangan Umpu"
+      },
+      {
+        "nama": "GI Muara Dua"
+      }
+    ]
+  },
+  {
+    "nama": "ULTG PRABUMULIH",
+    "list_gi": [
+      {
+        "nama": "GI Prabumulih"
+      },
+      {
+        "nama": "GI Gunung Megang"
+      },
+      {
+        "nama": "GI Simpang Tiga"
+      },
+      {
+        "nama": "GI Pendopo"
+      }
+    ]
+  },
+  {
+    "nama": "ULTG MUARA ENIM",
+    "list_gi": [
+      {
+        "nama": "GITET Muara Enim 275 kV"
+      },
+      {
+        "nama": "GITET Muara Enim 500 kV"
+      },
+      {
+        "nama": "GI Lumut Balai"
+      },
+      {
+        "nama": "GITET Lumut Balai 275 kV"
+      }
+    ]
+  }
+]

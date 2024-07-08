@@ -1,0 +1,72 @@
+[
+  {
+    "id": "9ee8fe76-5e08-43c1-bc83-5c0c80329c6c",
+    "nama": "ULTG BATURAJA",
+    "list_gi": [
+      {
+        "id": "e08dea6a-2158-4af9-82c4-52e4c04cbee2",
+        "nama": "GI Baturaja"
+      },
+      {
+        "id": "9e5690c0-a473-4194-84e8-3dc56a75bf71",
+        "nama": "GI Bukit Asam"
+      },
+      {
+        "id": "781dd137-fc3c-48f0-b277-4596ae1b2e97",
+        "nama": "GI Martapura"
+      },
+      {
+        "id": "a83fe70c-c95e-41b6-ba30-95c272053e16",
+        "nama": "GI Blambangan Umpu"
+      },
+      {
+        "id": "45e6f805-eff6-4eaa-967d-dfa96b09786e",
+        "nama": "GI Muara Dua"
+      }
+    ]
+  },
+  {
+    "id": "b232945a-3abf-458c-b5f6-cd8e560c8261",
+    "nama": "ULTG PRABUMULIH",
+    "list_gi": [
+      {
+        "id": "7c0b44a3-4c32-41fd-89b2-72e3c44ee6c8",
+        "nama": "GI Prabumulih"
+      },
+      {
+        "id": "726d1b7f-b514-4525-9afb-c3faa6c4c003",
+        "nama": "GI Gunung Megang"
+      },
+      {
+        "id": "94edc12d-5686-454f-a1a9-392a75c91c10",
+        "nama": "GI Simpang Tiga"
+      },
+      {
+        "id": "0365f192-d54a-4bf7-b218-326b6c7adb8d",
+        "nama": "GI Pendopo"
+      }
+    ]
+  },
+  {
+    "id": "edc60322-a492-4c14-b0e4-178cc86c43a5",
+    "nama": "ULTG MUARA ENIM",
+    "list_gi": [
+      {
+        "id": "a8ea0870-51cd-4b1b-be35-bc7ec0ff04cc",
+        "nama": "GITET Muara Enim 275 kV"
+      },
+      {
+        "id": "74dfa048-b3ca-41e7-b46b-8ad2f4791915",
+        "nama": "GITET Muara Enim 500 kV"
+      },
+      {
+        "id": "8fa9f16e-ca13-4f4c-b918-4bdbde111b13",
+        "nama": "GI Lumut Balai"
+      },
+      {
+        "id": "0d84d6cb-ea28-4187-a558-57b677252856",
+        "nama": "GITET Lumut Balai 275 kV"
+      }
+    ]
+  }
+]
