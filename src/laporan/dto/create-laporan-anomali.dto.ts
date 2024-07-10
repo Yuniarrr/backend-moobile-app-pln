@@ -51,18 +51,10 @@ export class CreateLaporanAnomaliDto {
   @IsDateStringDefined('Tindak lanjut awal', 'tindak lanjut awal')
   tindak_lanjut_awal: string;
 
-  @IsFileDefined('foto upload', ['image/jpeg', 'image/png', 'image/webp'], 5)
+  @IsFileDefined('foto upload', 5, ['image/jpeg', 'image/png', 'image/webp'])
   foto: File;
 
-  @IsFileDefined(
-    'berita acara upload',
-    [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    ],
-    10,
-  )
+  @IsFileDefined('berita acara upload', 10)
   berita_acara: File;
 
   @IsEnumDefined('pic', PIC, PIC.HARGI)

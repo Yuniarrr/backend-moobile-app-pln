@@ -6,7 +6,12 @@ import {
   ValidationPipe,
   HttpStatus,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiConsumes,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { SuccessResponse } from 'common';
 
@@ -27,6 +32,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
+  @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   async register(@Body(ValidationPipe) data: RegisterDto) {
     const user = await this.authService.register(data);
 

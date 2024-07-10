@@ -58,8 +58,8 @@ export const CREATE_LAPORAN_ANOMALI_BODY =
           tanggal_rusak: { type: 'string', nullable: false },
           tanggal_laporan: { type: 'string', nullable: false },
           tindak_lanjut_awal: { type: 'string', nullable: false },
-          foto: { type: 'binary', nullable: false },
-          berita_acara: { type: 'binary', nullable: false },
+          foto: { type: 'string', format: 'binary', nullable: false },
+          berita_acara: { type: 'string', format: 'binary', nullable: false },
           pic: {
             type: 'string',
             nullable: false,

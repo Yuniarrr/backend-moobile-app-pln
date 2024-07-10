@@ -22,18 +22,10 @@ export class CreateLaporanTindakLanjutDto {
   @IsDateStringDefined('Waktu Pengerjaan', 'Date harus diisi')
   waktu_pengerjaan: Date;
 
-  @IsFileDefined('foto upload', ['image/jpeg', 'image/png', 'image/webp'], 5)
+  @IsFileDefined('foto upload', 5, ['image/jpeg', 'image/png', 'image/webp'])
   foto: File;
 
-  @IsFileDefined(
-    'berita acara upload',
-    [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    ],
-    10,
-  )
+  @IsFileDefined('berita acara upload', 10)
   berita_acara: File;
 
   @IsStringDefined('Nama Pembuat', 'Nama Pembuat harus diisi')

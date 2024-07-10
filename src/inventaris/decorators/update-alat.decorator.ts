@@ -53,7 +53,7 @@ export const UPDATE_ALAT_BODY =
           impedansi: { type: 'string', nullable: true },
           daya: { type: 'string', nullable: true },
           nama: { type: 'string', nullable: false },
-          nameplate: { type: 'binary', nullable: false },
+          nameplate: { type: 'string', format: 'binary', nullable: false },
           status: {
             type: 'string',
             nullable: false,

@@ -43,8 +43,8 @@ export const UPDATE_LAPORAN_ANOMALI_BODY =
           tanggal_rusak: { type: 'string', nullable: true },
           tanggal_laporan: { type: 'string', nullable: true },
           tindak_lanjut_awal: { type: 'string', nullable: true },
-          foto: { type: 'binary', nullable: true },
-          berita_acara: { type: 'binary', nullable: true },
+          foto: { type: 'string', format: 'binary', nullable: true },
+          berita_acara: { type: 'string', format: 'binary', nullable: true },
           pic: {
             type: 'string',
             nullable: true,

@@ -23,6 +23,7 @@ async function bootstrap() {
     .setTitle('Backend API')
     .setDescription('NestJs Boilerplate API.')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   SwaggerModule.setup(

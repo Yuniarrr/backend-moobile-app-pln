@@ -10,8 +10,8 @@ import { FileField } from 'nestjs-file-upload';
 
 export function IsFileDefined(
   description: string,
-  allowedMimeTypes: string[],
   maxSize: number,
+  allowedMimeTypes?: string[],
 ) {
   return applyDecorators(
     Transform(({ value }) => (value === '' ? undefined : value)),

@@ -89,7 +89,7 @@ export class CreateAlatDto {
   @IsStringDefined('Nama Alat', 'nama_alat')
   nama: string;
 
-  @IsFileDefined('Nameplate', ['image/jpeg', 'image/png', 'image/webp'], 5)
+  @IsFileDefined('Nameplate', 5, ['image/jpeg', 'image/png', 'image/webp'])
   nameplate: File;
 
   @IsEnumDefined('Status', StatusOperasiAlat, StatusOperasiAlat.OPERASI)
