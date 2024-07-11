@@ -32,7 +32,7 @@
     "start": "nest start",
     "start:debug": "nest start --debug --watch",
     "start:dev": "dotenv -e .env.development -- nest start --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "studio": "npx prisma studio",
     "studio:dev": "dotenv -e .env.development -- npx prisma studio",
     "studio:prod": "dotenv -e .env.production -- npx prisma studio",
