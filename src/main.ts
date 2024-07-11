@@ -7,6 +7,8 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 // } from '@nestjs/platform-fastify';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
+import basicAuth from 'express-basic-auth';
+
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -15,6 +17,18 @@ async function bootstrap() {
   //   new FastifyAdapter(),
   // );
   const app = await NestFactory.create(AppModule, new ExpressAdapter());
+
+  if (process.env.ENV !== 'development') {
+    app.use(
+      ['/api/docs', '/api/docs-json'],
+      basicAuth({
+        challenge: true,
+        users: {
+          admin: 'g718WCUi',
+        },
+      }),
+    );
+  }
 
   app.setGlobalPrefix('api');
   app.enableCors({
