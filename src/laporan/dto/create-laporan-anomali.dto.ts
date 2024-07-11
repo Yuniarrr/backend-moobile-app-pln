@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @darraghor/nestjs-typed/all-properties-have-explicit-defined */
 /* eslint-disable @darraghor/nestjs-typed/all-properties-are-whitelisted */
+import { ApiProperty } from '@nestjs/swagger';
+
 import { Kategori, KategoriPeralatan, PIC } from '@prisma/client';
+import { Expose, Transform } from 'class-transformer';
+import { IsDefined, IsNotEmpty, IsObject } from 'class-validator';
 import {
   IsDateStringDefined,
   IsEnumDefined,
   IsStringDefined,
   IsStringOptional,
 } from 'common';
-import { IsFileDefined } from 'common/decorators/is-file-defined.decorator';
-import { type File } from 'nestjs-file-upload';
+import { FileField, type File } from 'nestjs-file-upload';
 
 export class CreateLaporanAnomaliDto {
   @IsStringDefined('ULTG id', 'uuid')
@@ -33,6 +37,9 @@ export class CreateLaporanAnomaliDto {
   )
   kategori_peralatan: KategoriPeralatan;
 
+  @IsStringOptional('kategori peralatan detail', 'pendukung')
+  kategori_peralatan_detail?: string;
+
   @IsStringDefined('Anomali', 'Anomali')
   anomali: string;
 
@@ -48,13 +55,39 @@ export class CreateLaporanAnomaliDto {
   @IsDateStringDefined('Tanggal laporan', '2024-04-25')
   tanggal_laporan: Date;
 
-  @IsDateStringDefined('Tindak lanjut awal', 'tindak lanjut awal')
+  @IsStringDefined('Tindak lanjut awal', 'tindak lanjut awal')
   tindak_lanjut_awal: string;
 
-  @IsFileDefined('foto upload', 5, ['image/jpeg', 'image/png', 'image/webp'])
+  // @IsFileDefined('foto upload', 5, ['image/jpeg', 'image/png', 'image/webp'])
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsDefined()
+  @IsObject()
+  @IsNotEmpty()
+  @ApiProperty({
+    type: String,
+    description: 'Upload',
+  })
+  @Expose()
+  @FileField({
+    allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    maxSize: 5 * 1000 * 1000,
+  })
   foto: File;
 
-  @IsFileDefined('berita acara upload', 10)
+  // @IsFileDefined('berita acara upload', 10)
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsDefined()
+  @IsObject()
+  @IsNotEmpty()
+  @ApiProperty({
+    type: String,
+    description: 'Upload',
+  })
+  @Expose()
+  @FileField({
+    // allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    maxSize: 10 * 1000 * 1000,
+  })
   berita_acara: File;
 
   @IsEnumDefined('pic', PIC, PIC.HARGI)

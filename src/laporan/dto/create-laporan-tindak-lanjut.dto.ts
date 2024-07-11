@@ -1,5 +1,7 @@
+import { Kategori, StatusLaporan } from '@prisma/client';
 import {
   IsDateStringDefined,
+  IsEnumOptional,
   IsFileDefined,
   IsStringDefined,
   IsStringOptional,
@@ -19,7 +21,7 @@ export class CreateLaporanTindakLanjutDto {
   @IsStringOptional('Material', 'Material harus diisi')
   material?: string;
 
-  @IsDateStringDefined('Waktu Pengerjaan', 'Date harus diisi')
+  @IsDateStringDefined('Waktu Pengerjaan', '2024-04-25')
   waktu_pengerjaan: Date;
 
   @IsFileDefined('foto upload', 5, ['image/jpeg', 'image/png', 'image/webp'])
@@ -30,4 +32,10 @@ export class CreateLaporanTindakLanjutDto {
 
   @IsStringDefined('Nama Pembuat', 'Nama Pembuat harus diisi')
   nama_pembuat: string;
+
+  @IsEnumOptional('Ubah kategori', Kategori)
+  kategori?: Kategori;
+
+  @IsEnumOptional('Ubah status', StatusLaporan)
+  status?: StatusLaporan;
 }

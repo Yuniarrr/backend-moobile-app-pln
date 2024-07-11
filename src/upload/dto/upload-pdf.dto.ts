@@ -5,7 +5,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 import { IsStringOptional } from 'common';
-import * as nestjsFileUpload from 'nestjs-file-upload';
+// import * as nestjsFileUpload from 'nestjs-file-upload';
+import { FileField, type File } from 'nestjs-file-upload';
 
 export class UploadPdfDto {
   @IsStringOptional('upload file path')
@@ -16,11 +17,11 @@ export class UploadPdfDto {
 
   @Expose()
   @ApiProperty()
-  @nestjsFileUpload.FileField({
-    allowedMimeTypes: ['application/pdf'],
+  @FileField({
+    // allowedMimeTypes: ['application/pdf'],
     maxSize: 10 * 1000 * 1000,
   })
   @IsNotEmpty()
   @Type(() => File)
-  fileIs: nestjsFileUpload.File;
+  fileIs: File;
 }

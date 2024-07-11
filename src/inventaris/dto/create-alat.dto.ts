@@ -6,7 +6,7 @@ import {
 import {
   IsDateStringDefined,
   IsEnumDefined,
-  IsFileDefined,
+  IsFileOptional,
   IsStringDefined,
   IsStringOptional,
 } from 'common';
@@ -35,7 +35,7 @@ export class CreateAlatDto {
   @IsStringOptional('Kategori Peralatan Detail', 'detail')
   kategori_peralatan_detail?: string;
 
-  @IsDateStringDefined('Tanggal Operasi', 'tanggal_operasi')
+  @IsDateStringDefined('Tanggal Operasi', '2024-04-25')
   tanggal_operasi: Date;
 
   @IsStringDefined('Serial ID', 'id')
@@ -86,11 +86,11 @@ export class CreateAlatDto {
   @IsStringOptional('Daya')
   daya?: string;
 
-  @IsStringDefined('Nama Alat', 'nama_alat')
-  nama: string;
+  // @IsStringDefined('Nama Alat', 'nama_alat')
+  // nama: string;
 
-  @IsFileDefined('Nameplate', 5, ['image/jpeg', 'image/png', 'image/webp'])
-  nameplate: File;
+  @IsFileOptional('Nameplate', 5, ['image/jpeg', 'image/png', 'image/webp'])
+  nameplate?: File;
 
   @IsEnumDefined('Status', StatusOperasiAlat, StatusOperasiAlat.OPERASI)
   status: StatusOperasiAlat;

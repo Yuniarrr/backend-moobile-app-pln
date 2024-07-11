@@ -10,6 +10,7 @@ import {
   ValidationPipe,
   HttpStatus,
   BadRequestException,
+  Query,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -18,6 +19,7 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
@@ -114,6 +116,24 @@ export class ManagementController {
   @Roles('ADMIN', 'GI', 'HAR')
   async getDetailUltg(@Param('ultg_id') ultg_id: string) {
     const details = await this.managementService.getDetailUltg(ultg_id);
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'The record has been successfully created.',
+      details,
+    );
+  }
+
+  @Get('bay')
+  @ApiQuery({
+    name: 'gi_id',
+    required: false,
+    type: String,
+    description: 'Id of the gi',
+  })
+  @Roles('ADMIN', 'GI', 'HAR')
+  async getListBay(@Query('gi_id') gi_id: string) {
+    const details = await this.managementService.getListBay(gi_id);
 
     return new SuccessResponse(
       HttpStatus.OK,

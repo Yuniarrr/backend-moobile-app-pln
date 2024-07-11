@@ -158,10 +158,12 @@ export class LaporanController {
   async updateLaporanTindakLanjut(
     @Param('laporan_tindak_lanjut_id') laporan_tindak_lanjut_id: string,
     @Body(ValidationPipe) data: UpdateLaporanTindakLanjutDto,
+    @GetUser('id') user_id: string,
   ) {
     const update = await this.laporanService.updateLaporanTindakLanjut(
       laporan_tindak_lanjut_id,
       data,
+      user_id,
     );
 
     return new SuccessResponse(

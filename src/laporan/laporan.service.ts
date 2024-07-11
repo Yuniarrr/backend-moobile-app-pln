@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, NotFoundException } from '@nestjs/common';
 
@@ -27,7 +28,7 @@ export class LaporanService {
       filePath: 'laporan',
     });
 
-    const newBA = this.upload.uploadPdf({
+    const newBA = this.upload.uploadFile({
       fileIs: data.berita_acara,
       fileName: data.berita_acara.filename,
       filePath: 'laporan',
@@ -61,7 +62,9 @@ export class LaporanService {
     data: CreateLaporanTindakLanjutDto,
     user_id: string,
   ) {
-    await this.checkLaporanAnomali(data.laporan_anomali_id);
+    const isLaporanAnomaliExist = await this.checkLaporanAnomali(
+      data.laporan_anomali_id,
+    );
 
     const newFoto = this.upload.resizeImage({
       fileIs: data.foto,
@@ -69,7 +72,7 @@ export class LaporanService {
       filePath: 'laporan-tindak-lanjut',
     });
 
-    const newBA = this.upload.uploadPdf({
+    const newBA = this.upload.uploadFile({
       fileIs: data.berita_acara,
       fileName: data.berita_acara.filename,
       filePath: 'laporan-tindak-lanjut',
@@ -77,6 +80,25 @@ export class LaporanService {
 
     delete data.foto;
     delete data.berita_acara;
+
+    if (data.status || data.kategori) {
+      const newBatasWaktu = data.kategori
+        ? this.getBatasWaktu(data.kategori)
+        : isLaporanAnomaliExist.batas_waktu;
+
+      await this.prisma.laporan_anomali.update({
+        where: { id: data.laporan_anomali_id },
+        data: {
+          status: data.status,
+          kategori: data.kategori,
+          batas_waktu: newBatasWaktu,
+          diedit_oleh: user_id,
+        },
+      });
+    }
+
+    delete data.status;
+    delete data.kategori;
 
     return await this.prisma.laporan_tindak_lanjut.create({
       data: {
@@ -110,7 +132,7 @@ export class LaporanService {
     }
 
     if (data.berita_acara) {
-      berita_acara = this.upload.uploadPdf({
+      berita_acara = this.upload.uploadFile({
         fileIs: data.berita_acara,
         fileName: data.berita_acara.filename,
         filePath: 'laporan-tindak-lanjut',
@@ -140,6 +162,7 @@ export class LaporanService {
   async updateLaporanTindakLanjut(
     laporan_tindak_lanjut_id: string,
     data: UpdateLaporanTindakLanjutDto,
+    user_id: string,
   ) {
     const isLaporanTindakLanjutExist = await this.checkLaporanTindakLanjut(
       laporan_tindak_lanjut_id,
@@ -157,7 +180,7 @@ export class LaporanService {
     }
 
     if (data.berita_acara) {
-      berita_acara = this.upload.uploadPdf({
+      berita_acara = this.upload.uploadFile({
         fileIs: data.berita_acara,
         fileName: data.berita_acara.filename,
         filePath: 'laporan-tindak-lanjut',
@@ -166,6 +189,29 @@ export class LaporanService {
 
     delete data.foto;
     delete data.berita_acara;
+
+    if (data.status || data.kategori) {
+      const isLaporanAnomaliExist = await this.checkLaporanAnomali(
+        isLaporanTindakLanjutExist.laporan_anomali_id,
+      );
+
+      const newBatasWaktu = data.kategori
+        ? this.getBatasWaktu(data.kategori)
+        : isLaporanAnomaliExist.batas_waktu;
+
+      await this.prisma.laporan_anomali.update({
+        where: { id: data.laporan_anomali_id },
+        data: {
+          status: data.status,
+          kategori: data.kategori,
+          batas_waktu: newBatasWaktu,
+          diedit_oleh: user_id,
+        },
+      });
+    }
+
+    delete data.status;
+    delete data.kategori;
 
     return await this.prisma.laporan_tindak_lanjut.update({
       where: { id: laporan_tindak_lanjut_id },

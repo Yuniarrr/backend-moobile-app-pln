@@ -23,6 +23,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
+import { KategoriPeralatan } from '@prisma/client';
 import {
   ErrorResponse,
   GetUser,
@@ -96,9 +97,20 @@ export class InventarisController {
   }
 
   @Get('jenis/alat')
+  @ApiQuery({
+    name: 'kategori_alat',
+    required: false,
+    type: String,
+    enum: [
+      KategoriPeralatan.PENDUKUNG,
+      KategoriPeralatan.PRIMER,
+      KategoriPeralatan.SEKUNDER,
+    ],
+    description: 'Kategori Alat',
+  })
   @Roles('ADMIN', 'GI', 'HAR')
-  async getJenisAlat() {
-    const alat = await this.inventarisService.getJenisAlat();
+  async getJenisAlat(@Query('kategori_alat') kategori_alat: KategoriPeralatan) {
+    const alat = await this.inventarisService.getJenisAlat(kategori_alat);
 
     return new SuccessResponse(HttpStatus.OK, 'Alat berhasil ditemukan', alat);
   }
@@ -128,26 +140,20 @@ export class InventarisController {
     type: String,
     description: 'ID Bay',
   })
-  @ApiQuery({
-    name: 'search',
-    required: false,
-    type: String,
-    description: 'Search',
-  })
   @Roles('ADMIN', 'GI', 'HAR')
   async getAlat(
     @Query('ultg_id') ultg_id: string,
     @Query('gi_id') gi_id: string,
     @Query('jenis_peralatan_id') jenis_peralatan_id: string,
     @Query('bay_id') bay_id: string,
-    @Query('search') search: string,
+    // @Query('search') search: string,
   ) {
     const alat = await this.inventarisService.getAlat({
       ultg_id,
       gi_id,
       jenis_peralatan_id,
       bay_id,
-      search,
+      // search,
     });
 
     return new SuccessResponse(HttpStatus.OK, 'Alat berhasil ditemukan', alat);

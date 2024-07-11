@@ -23,14 +23,15 @@ export const UPDATE_ALAT_BODY =
             nullable: false,
           },
           gi_id: { type: 'string', nullable: false },
-          jenis_peralatan_id: { type: 'string', nullable: false },
-          bay_id: { type: 'string', nullable: false },
           kategori_peralatan: {
             type: 'string',
             nullable: false,
             enum: Object.values(KategoriPeralatan),
           },
+          jenis_peralatan_id: { type: 'string', nullable: false },
+          bay_id: { type: 'string', nullable: false },
           kategori_peralatan_detail: { type: 'string', nullable: true },
+          techidentno: { type: 'string', nullable: true },
           tanggal_operasi: { type: 'string', nullable: false },
           serial_id: { type: 'string', nullable: false },
           fasa_terpasang: {
@@ -52,7 +53,7 @@ export const UPDATE_ALAT_BODY =
           jenis_cvt: { type: 'string', nullable: true },
           impedansi: { type: 'string', nullable: true },
           daya: { type: 'string', nullable: true },
-          nama: { type: 'string', nullable: false },
+          // nama: { type: 'string', nullable: false },
           nameplate: { type: 'string', format: 'binary', nullable: false },
           status: {
             type: 'string',

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-string-replace-all */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
@@ -25,8 +26,8 @@ export class UploadService {
     const { fileName, fileIs } = data;
 
     const newFileName = isTransparent
-      ? `${Date.now()}_${fileName}.png`
-      : `${Date.now()}_${fileName}.jpeg`;
+      ? `${Date.now()}_${fileName}`
+      : `${Date.now()}_${fileName}`;
 
     // isTransparent
     //   ? await sharp(fileIs.buffer)
@@ -35,13 +36,14 @@ export class UploadService {
     //   : await sharp(fileIs.buffer)
     //       .jpeg({ quality: 80 })
     //       .toFile(path.join(newFilePath, newFileName));
+    const pathFile = path.join(newFilePath, newFileName);
 
-    fs.writeFileSync(path.join(newFilePath, newFileName), fileIs.buffer);
+    fs.writeFileSync(pathFile, fileIs.buffer);
 
-    return newFilePath;
+    return pathFile.replace(/\\/g, '/');
   }
 
-  uploadPdf(data: UploadPdfDto): string {
+  uploadFile(data: UploadPdfDto): string {
     if (!data.fileIs) {
       return null;
     }
@@ -57,11 +59,11 @@ export class UploadService {
     }
 
     const { fileName, fileIs } = data;
-    const newFileName = `${Date.now()}_${fileName}.pdf`;
+    const newFileName = `${Date.now()}_${fileName}`;
     const filePath = path.join(newFilePath, newFileName);
 
     fs.writeFileSync(filePath, Buffer.from(fileIs.buffer));
 
-    return filePath;
+    return filePath.replace(/\\/g, '/');
   }
 }

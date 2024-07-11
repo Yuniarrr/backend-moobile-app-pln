@@ -21,9 +21,6 @@ export const UPDATE_LAPORAN_ANOMALI_BODY =
         properties: {
           ultg_id: { type: 'string', nullable: true },
           gi_id: { type: 'string', nullable: true },
-          jenis_peralatan_id: { type: 'string', nullable: true },
-          bay_id: { type: 'string', nullable: true },
-          alat_id: { type: 'string', nullable: true },
           kategori_peralatan: {
             type: 'string',
             nullable: true,
@@ -33,6 +30,10 @@ export const UPDATE_LAPORAN_ANOMALI_BODY =
               KategoriPeralatan.PENDUKUNG,
             ],
           },
+          kategori_peralatan_detail: { type: 'string', nullable: true },
+          jenis_peralatan_id: { type: 'string', nullable: true },
+          bay_id: { type: 'string', nullable: true },
+          alat_id: { type: 'string', nullable: true },
           anomali: { type: 'string', nullable: true },
           detail_anomali: { type: 'string', nullable: true },
           kategori: {

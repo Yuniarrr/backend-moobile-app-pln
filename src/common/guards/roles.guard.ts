@@ -74,7 +74,7 @@ export class RolesGuard implements CanActivate {
       return null;
     }
 
-    const user = await this.prisma.users.findUnique({
+    const user = await this.prisma.users.findFirst({
       where: {
         username: decodedToken.username,
       },

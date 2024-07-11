@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
+import { type KategoriPeralatan } from '@prisma/client';
 import { UploadService } from 'upload/upload.service';
 
 import { PrismaService } from 'infra/database/prisma/prisma.service';
@@ -32,11 +33,15 @@ export class InventarisService {
     await this.checkJenisPeralatan(data.jenis_peralatan_id);
     await this.checkBay(data.bay_id);
 
-    const nameplate = this.upload.uploadPdf({
-      fileIs: data.nameplate,
-      fileName: data.nameplate.filename,
-      filePath: 'alat',
-    });
+    let nameplate;
+
+    if (data.nameplate) {
+      nameplate = this.upload.uploadFile({
+        fileIs: data.nameplate,
+        fileName: data.nameplate.filename,
+        filePath: 'alat',
+      });
+    }
 
     delete data.nameplate;
 
@@ -50,8 +55,12 @@ export class InventarisService {
     });
   }
 
-  async getJenisAlat() {
-    return await this.prisma.jenis_peralatan.findMany();
+  async getJenisAlat(kategori_alat?: KategoriPeralatan) {
+    return await this.prisma.jenis_peralatan.findMany({
+      where: {
+        kategori_peralatan: kategori_alat,
+      },
+    });
   }
 
   async getAlat({
@@ -59,13 +68,13 @@ export class InventarisService {
     gi_id,
     jenis_peralatan_id,
     bay_id,
-    search,
-  }: {
+  }: // search,
+  {
     ultg_id?: string;
     gi_id?: string;
     jenis_peralatan_id?: string;
     bay_id?: string;
-    search?: string;
+    // search?: string;
   }) {
     return await this.prisma.alat.findMany({
       where: {
@@ -73,9 +82,9 @@ export class InventarisService {
         gi_id,
         jenis_peralatan_id,
         bay_id,
-        nama: {
-          contains: search,
-        },
+        // nama: {
+        //   contains: search,
+        // },
       },
     });
   }
@@ -97,7 +106,7 @@ export class InventarisService {
     let nameplate;
 
     if (data.nameplate) {
-      nameplate = this.upload.uploadPdf({
+      nameplate = this.upload.uploadFile({
         fileIs: data.nameplate,
         fileName: data.nameplate.filename,
         filePath: 'alat',

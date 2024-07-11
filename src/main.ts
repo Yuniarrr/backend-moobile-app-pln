@@ -1,21 +1,29 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import {
-  type NestFastifyApplication,
-  FastifyAdapter,
-} from '@nestjs/platform-fastify';
+import { ExpressAdapter } from '@nestjs/platform-express';
+// import {
+//   type NestFastifyApplication,
+//   FastifyAdapter,
+// } from '@nestjs/platform-fastify';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
-    AppModule,
-    new FastifyAdapter(),
-  );
+  // const app = await NestFactory.create<NestFastifyApplication>(
+  //   AppModule,
+  //   new FastifyAdapter(),
+  // );
+  const app = await NestFactory.create(AppModule, new ExpressAdapter());
 
   app.setGlobalPrefix('api');
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: '*',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  });
   // eslint-disable-next-line @darraghor/nestjs-typed/should-specify-forbid-unknown-values
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 

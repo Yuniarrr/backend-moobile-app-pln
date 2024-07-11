@@ -34,9 +34,6 @@ export const CREATE_LAPORAN_ANOMALI_BODY =
         properties: {
           ultg_id: { type: 'string', nullable: false },
           gi_id: { type: 'string', nullable: false },
-          jenis_peralatan_id: { type: 'string', nullable: false },
-          bay_id: { type: 'string', nullable: false },
-          alat_id: { type: 'string', nullable: false },
           kategori_peralatan: {
             type: 'string',
             nullable: false,
@@ -47,6 +44,10 @@ export const CREATE_LAPORAN_ANOMALI_BODY =
             ],
             example: KategoriPeralatan.PRIMER,
           },
+          kategori_peralatan_detail: { type: 'string', nullable: true },
+          jenis_peralatan_id: { type: 'string', nullable: false },
+          bay_id: { type: 'string', nullable: false },
+          alat_id: { type: 'string', nullable: false },
           anomali: { type: 'string', nullable: false },
           detail_anomali: { type: 'string', nullable: false },
           kategori: {

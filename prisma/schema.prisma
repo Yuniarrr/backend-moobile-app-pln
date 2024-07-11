@@ -127,22 +127,23 @@ model jenis_peralatan {
 }
 
 model laporan_anomali {
-  id                 String            @id @default(uuid())
-  kategori_peralatan KategoriPeralatan @default(PRIMER)
-  anomali            String
-  detail_anomali     String            @db.Text
-  kategori           Kategori          @default(K4)
-  tanggal_rusak      DateTime
-  tanggal_laporan    DateTime
-  batas_waktu        DateTime
-  tindak_lanjut_awal String            @db.Text
-  foto               String
-  berita_acara       String
-  pic                PIC?              @default(LAINNYA)
-  detail_pic         String?
-  nama_pembuat       String
-  status             StatusLaporan     @default(OPEN)
-  laporan_anomali_id String
+  id                        String            @id @default(uuid())
+  kategori_peralatan        KategoriPeralatan @default(PRIMER)
+  kategori_peralatan_detail String?
+  anomali                   String
+  detail_anomali            String            @db.Text
+  kategori                  Kategori          @default(K4)
+  tanggal_rusak             DateTime
+  tanggal_laporan           DateTime
+  batas_waktu               DateTime
+  tindak_lanjut_awal        String            @db.Text
+  foto                      String
+  berita_acara              String
+  pic                       PIC?              @default(LAINNYA)
+  detail_pic                String?
+  nama_pembuat              String
+  status                    StatusLaporan     @default(OPEN)
+  laporan_anomali_id        String
 
   ultg_id            String
   ultg               ultg            @relation(fields: [ultg_id], references: [id])
@@ -207,7 +208,7 @@ model alat {
   jenis_cvt                 String?
   impedansi                 String?
   daya                      String?
-  nama                      String
+  // nama                      String
   nameplate                 String?
   status                    StatusOperasiAlat @default(OPERASI)
 

@@ -151,4 +151,16 @@ export class ManagementService {
       },
     });
   }
+
+  async getListBay(gi_id: string) {
+    const isGIExist = await this.prisma.gi.findFirst({ where: { id: gi_id } });
+
+    if (!isGIExist) {
+      throw new NotFoundException('GI not found');
+    }
+
+    return await this.prisma.bay.findMany({
+      where: { gi_id },
+    });
+  }
 }
