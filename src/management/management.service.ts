@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
+import { type Prisma } from '@prisma/client';
+
 import { PrismaService } from 'infra/database/prisma/prisma.service';
 
 import { hashData } from 'utils';
@@ -161,6 +163,53 @@ export class ManagementService {
 
     return await this.prisma.bay.findMany({
       where: { gi_id },
+    });
+  }
+
+  async getUsers(where: Prisma.usersWhereInput) {
+    return await this.prisma.users.findMany({
+      where,
+      select: {
+        id: true,
+        username: true,
+        role: true,
+        gi_id: true,
+        gi: {
+          select: {
+            id: true,
+            nama: true,
+            ultg: {
+              select: {
+                id: true,
+                nama: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  async getUltg(ultg_id?: string) {
+    return await this.prisma.ultg.findMany({
+      where: { id: ultg_id },
+      include: {
+        gi: true,
+      },
+    });
+  }
+
+  async deleteUser(user_id: string) {
+    const isUserExist = await this.prisma.users.findFirst({
+      where: { id: user_id },
+    });
+
+    if (!isUserExist) {
+      throw new NotFoundException('User not found');
+    }
+
+    return await this.prisma.users.delete({
+      where: { id: user_id },
     });
   }
 }

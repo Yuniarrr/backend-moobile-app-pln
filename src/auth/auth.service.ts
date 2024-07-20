@@ -11,7 +11,7 @@ import { PrismaService } from 'infra/database/prisma/prisma.service';
 
 import { getTokens, hashData } from 'utils';
 
-import { type LoginDto, type RegisterDto } from './dto';
+import { type GantiPasswordDto, type LoginDto, type RegisterDto } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -42,7 +42,7 @@ export class AuthService {
       isUserExist.role,
     );
 
-    // await this.updateRefreshToken(user.id, tokens.refresh_token);
+    await this.updateRefreshToken(isUserExist.id, tokens.refresh_token);
 
     return {
       ...tokens,
@@ -72,6 +72,53 @@ export class AuthService {
     return await this.prisma.users.create({
       data: {
         ...data,
+        password,
+      },
+    });
+  }
+
+  async updateRefreshToken(user_id: string, refresh_token: string) {
+    return await this.prisma.users.update({
+      where: { id: user_id },
+      data: {
+        refresh_token,
+      },
+    });
+  }
+
+  async logout(user_id: string) {
+    return await this.prisma.users.update({
+      where: { id: user_id },
+      data: {
+        refresh_token: null,
+      },
+    });
+  }
+
+  async userMe(user_id: string) {
+    return await this.prisma.users.findFirst({
+      where: { id: user_id },
+      select: {
+        id: true,
+        username: true,
+        role: true,
+        gi_id: true,
+        created_at: true,
+        updated_at: true,
+      },
+    });
+  }
+
+  async gantiPassword(user_id: string, data: GantiPasswordDto) {
+    if (data.password !== data.confirm_password) {
+      throw new ConflictException('Password not match');
+    }
+
+    const password = hashData(data.confirm_password);
+
+    return await this.prisma.users.update({
+      where: { id: user_id },
+      data: {
         password,
       },
     });

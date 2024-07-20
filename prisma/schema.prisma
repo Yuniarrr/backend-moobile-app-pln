@@ -97,10 +97,11 @@ model bay {
 }
 
 model users {
-  id       String @id @default(uuid())
-  username String @unique
-  password String
-  role     Role
+  id            String  @id @default(uuid())
+  username      String  @unique
+  password      String
+  role          Role
+  refresh_token String?
 
   gi_id String?
   gi    gi?     @relation(fields: [gi_id], references: [id])

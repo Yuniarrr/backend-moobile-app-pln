@@ -11,6 +11,7 @@ import {
   HttpStatus,
   BadRequestException,
   Query,
+  Delete,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -24,6 +25,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
+import { type Prisma, Role } from '@prisma/client';
 import {
   ErrorResponse,
   JwtGuard,
@@ -112,10 +114,53 @@ export class ManagementController {
     );
   }
 
-  @Get('ultg/:ultg_id')
+  @Get('user')
+  @ApiQuery({
+    name: 'role',
+    required: false,
+    type: String,
+    enum: [Role.ADMIN, Role.GI, Role.HAR],
+    description: 'Role of the user',
+  })
+  @ApiQuery({
+    name: 'ultg_id',
+    required: false,
+    type: String,
+    description: 'Id of the ultg',
+  })
+  @ApiQuery({
+    name: 'gi_id',
+    required: false,
+    type: String,
+    description: 'Id of the gi',
+  })
+  @Roles('ADMIN')
+  async getUsers(
+    @Query('role') role: Role,
+    @Query('ultg_id') ultg_id: string,
+    @Query('gi_id') gi_id: string,
+  ) {
+    const where: Prisma.usersWhereInput = { role, gi_id, gi: { ultg_id } };
+
+    const details = await this.managementService.getUsers(where);
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'The record has been successfully created.',
+      details,
+    );
+  }
+
+  @Get('ultg')
+  @ApiQuery({
+    name: 'ultg_id',
+    required: false,
+    type: String,
+    description: 'Id of the ultg',
+  })
   @Roles('ADMIN', 'GI', 'HAR')
-  async getDetailUltg(@Param('ultg_id') ultg_id: string) {
-    const details = await this.managementService.getDetailUltg(ultg_id);
+  async getUltg(@Query('ultg_id') ultg_id: string) {
+    const details = await this.managementService.getUltg(ultg_id);
 
     return new SuccessResponse(
       HttpStatus.OK,
@@ -196,6 +241,17 @@ export class ManagementController {
       HttpStatus.OK,
       'The record has been successfully created.',
       update,
+    );
+  }
+
+  @Delete('user/:user_id')
+  @Roles('ADMIN')
+  async deleteUser(@Param('user_id') user_id: string) {
+    await this.managementService.deleteUser(user_id);
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'The record has been successfully deleted.',
     );
   }
 }
