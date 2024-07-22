@@ -5,3 +5,4 @@ export * from './jenis-alat';
 export * from './bay';
 export * from './users';
 export * from './alat';
+export * from './tindak-lanjut';

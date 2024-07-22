@@ -1,0 +1,68 @@
+[
+  {
+    "id": "e5d7dd24-5682-4ebf-8979-a4c431e8e192",
+    "kegiatan": "kegiatan 1",
+    "ket_kegiatan": "mari kita melanjutkan ngoding",
+    "material": "material 1",
+    "waktu_pengerjaan": "2022-03-01T00:00:00.000Z",
+    "foto": "uploads/laporan/1721616412090_node js.png",
+    "nama_pembuat": "Yuniar",
+    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "dibuat_oleh": "c6bf3673-80e0-4a14-abb1-c5058f44b1d6"
+  },
+  {
+    "id": "a3aa1645-94ce-46bb-afa7-0a6b8c6f4806",
+    "kegiatan": "kegiatan 2",
+    "ket_kegiatan": "mari kita melanjutkan ngoding 2",
+    "material": null,
+    "waktu_pengerjaan": "2022-03-01T00:00:00.000Z",
+    "foto": "uploads/laporan/1721616412090_node js.png",
+    "nama_pembuat": "Yuniar",
+    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "dibuat_oleh": "c6bf3673-80e0-4a14-abb1-c5058f44b1d6"
+  },
+  {
+    "id": "9fcb1c7f-c4f5-4617-be2a-b55fd8bae972",
+    "kegiatan": "kegiatan 3",
+    "ket_kegiatan": "mari kita melanjutkan ngoding 3",
+    "material": null,
+    "waktu_pengerjaan": "2022-03-01T00:00:00.000Z",
+    "foto": "uploads/laporan/1721616412090_node js.png",
+    "nama_pembuat": "Yuniar",
+    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "dibuat_oleh": "c6bf3673-80e0-4a14-abb1-c5058f44b1d6"
+  },
+  {
+    "id": "edd39ecd-fde7-4906-a934-cf240ce91bf9",
+    "kegiatan": "kegiatan 1",
+    "ket_kegiatan": "mari kita melanjutkan ngoding 1",
+    "material": null,
+    "waktu_pengerjaan": "2022-03-01T00:00:00.000Z",
+    "foto": "uploads/laporan/1721616412090_node js.png",
+    "nama_pembuat": "Yuniar",
+    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "dibuat_oleh": "4955e789-6e5a-4641-a35c-e6e675f97dc8"
+  },
+  {
+    "id": "94e79947-8f09-45fe-9b96-7968b92a5610",
+    "kegiatan": "kegiatan 2",
+    "ket_kegiatan": "mari kita melanjutkan ngoding 2",
+    "material": null,
+    "waktu_pengerjaan": "2022-03-01T00:00:00.000Z",
+    "foto": "uploads/laporan/1721616412090_node js.png",
+    "nama_pembuat": "Yuniar",
+    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "dibuat_oleh": "4955e789-6e5a-4641-a35c-e6e675f97dc8"
+  },
+  {
+    "id": "9157fcd3-0d52-465f-9cee-c738567982fc",
+    "kegiatan": "kegiatan 3",
+    "ket_kegiatan": "mari kita melanjutkan ngoding 3",
+    "material": null,
+    "waktu_pengerjaan": "2022-03-01T00:00:00.000Z",
+    "foto": "uploads/laporan/1721616412090_node js.png",
+    "nama_pembuat": "Yuniar",
+    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "dibuat_oleh": "4955e789-6e5a-4641-a35c-e6e675f97dc8"
+  }
+]
