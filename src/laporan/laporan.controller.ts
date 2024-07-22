@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @darraghor/nestjs-typed/api-method-should-specify-api-response */
 import {
   Controller,
@@ -10,6 +12,7 @@ import {
   HttpStatus,
   Delete,
   Get,
+  Query,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -18,10 +21,12 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
+import { type Prisma, Kategori, StatusLaporan } from '@prisma/client';
 import {
   ErrorResponse,
   GetUser,
@@ -115,10 +120,79 @@ export class LaporanController {
     );
   }
 
-  @Get('anomali')
+  @Get('total-anomali')
   @Roles('ADMIN', 'GI', 'HAR')
-  async getLaporanAnomali() {
-    const laporan = await this.laporanService.getLaporanAnomali();
+  async getTotalLaporanAnomali() {
+    const laporan = await this.laporanService.getTotalLaporanAnomali();
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'Data Laporan Anomali berhasil didapatkan',
+      laporan,
+    );
+  }
+
+  @Get('anomali')
+  @ApiQuery({
+    name: 'gi_id',
+    required: false,
+    type: String,
+    description: 'ID GI',
+  })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    type: [String],
+    enum: [StatusLaporan.CLOSE, StatusLaporan.DELETE, StatusLaporan.OPEN],
+    description: 'Status Laporan',
+  })
+  @ApiQuery({
+    name: 'kategori',
+    required: false,
+    type: [String],
+    enum: [Kategori.K1, Kategori.K2, Kategori.K3, Kategori.K4],
+    description: 'Kategori Laporan',
+  })
+  @Roles('ADMIN', 'GI', 'HAR')
+  async getLaporanAnomali(
+    @Query('gi_id') gi_id: string,
+    @Query('status') status: StatusLaporan,
+    @Query('kategori') kategori: Kategori,
+  ) {
+    const formatStatus: StatusLaporan[] = status
+      ? status
+          .toUpperCase()
+          .replace('HAPUS', 'DELETE')
+          .split(',')
+          .map(s => StatusLaporan[s as keyof typeof StatusLaporan])
+      : [];
+    const formatKategori: Kategori[] = kategori
+      ? kategori.split(',').map(k => Kategori[k as keyof typeof Kategori])
+      : [];
+
+    const where: Prisma.laporan_anomaliWhereInput = {
+      gi_id,
+      ...(status && { status: { in: formatStatus } }),
+      ...(kategori && { kategori: { in: formatKategori } }),
+    };
+
+    const laporan = await this.laporanService.getLaporanAnomali(where);
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'Data Laporan Anomali berhasil didapatkan',
+      laporan,
+    );
+  }
+
+  @Get('anomali/:laporan_anomali_id')
+  @Roles('ADMIN', 'GI', 'HAR')
+  async getDetailLaporanAnomali(
+    @Param('laporan_anomali_id') laporan_anomali_id: string,
+  ) {
+    const laporan = await this.laporanService.getDetailLaporanAnomali(
+      laporan_anomali_id,
+    );
 
     return new SuccessResponse(
       HttpStatus.OK,

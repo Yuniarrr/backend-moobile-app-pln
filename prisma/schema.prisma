@@ -209,20 +209,22 @@ model alat {
   jenis_cvt                 String?
   impedansi                 String?
   daya                      String?
+  vector                    String?
+  arus_dn                   String?
   // nama                      String
   nameplate                 String?
   status                    StatusOperasiAlat @default(OPERASI)
 
   ultg_id            String
-  ultg               ultg            @relation(fields: [ultg_id], references: [id])
+  ultg               ultg             @relation(fields: [ultg_id], references: [id])
   gi_id              String
-  gi                 gi              @relation(fields: [gi_id], references: [id])
-  jenis_peralatan_id String
-  jenis_peralatan    jenis_peralatan @relation(fields: [jenis_peralatan_id], references: [id])
+  gi                 gi               @relation(fields: [gi_id], references: [id])
+  jenis_peralatan_id String?
+  jenis_peralatan    jenis_peralatan? @relation(fields: [jenis_peralatan_id], references: [id])
   bay_id             String
-  bay                bay?            @relation(fields: [bay_id], references: [id])
+  bay                bay?             @relation(fields: [bay_id], references: [id])
   dibuat_oleh        String
-  pembuat            users           @relation(fields: [dibuat_oleh], references: [id])
+  pembuat            users            @relation(fields: [dibuat_oleh], references: [id])
 
   created_at      DateTime          @default(now())
   updated_at      DateTime          @default(now()) @updatedAt

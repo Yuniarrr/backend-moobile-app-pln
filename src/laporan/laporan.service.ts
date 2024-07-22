@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { type Kategori } from '@prisma/client';
+import { type Prisma, type Kategori } from '@prisma/client';
 import { UploadService } from 'upload/upload.service';
 
 import { PrismaService } from 'infra/database/prisma/prisma.service';
@@ -226,7 +226,7 @@ export class LaporanService {
     });
   }
 
-  async getLaporanAnomali() {
+  async getTotalLaporanAnomali() {
     return await this.prisma.laporan_anomali.groupBy({
       by: ['ultg_id', 'status'],
       where: {
@@ -308,5 +308,85 @@ export class LaporanService {
         status: 'DELETE',
       },
     });
+  }
+
+  async getLaporanAnomali(where?: Prisma.laporan_anomaliWhereInput) {
+    return await this.prisma.laporan_anomali.findMany({
+      where,
+      orderBy: {
+        created_at: 'desc',
+      },
+      select: {
+        id: true,
+        anomali: true,
+        tanggal_laporan: true,
+        tanggal_rusak: true,
+        batas_waktu: true,
+        status: true,
+        kategori: true,
+      },
+    });
+  }
+
+  async getDetailLaporanAnomali(laporan_anomali_id: string) {
+    const laporan = await this.prisma.laporan_anomali.findFirst({
+      where: { id: laporan_anomali_id },
+      include: {
+        laporan_tindak_lanjut: {
+          select: {
+            id: true,
+            kegiatan: true,
+            ket_kegiatan: true,
+            waktu_pengerjaan: true,
+            nama_pembuat: true,
+            created_at: true,
+            pembuat: {
+              select: {
+                username: true,
+              },
+            },
+          },
+          orderBy: {
+            created_at: 'desc',
+          },
+        },
+        ultg: {
+          select: {
+            nama: true,
+          },
+        },
+        gi: {
+          select: {
+            nama: true,
+          },
+        },
+        pembuat: {
+          select: {
+            username: true,
+          },
+        },
+        pengedit: {
+          select: {
+            username: true,
+          },
+        },
+        bay: {
+          select: {
+            nama_lokasi: true,
+          },
+        },
+        jenis_peralatan: {
+          select: {
+            nama: true,
+          },
+        },
+      },
+    });
+
+    if (!laporan) {
+      throw new NotFoundException('Laporan Anomali tidak ditemukan');
+    }
+
+    return laporan;
   }
 }

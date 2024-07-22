@@ -187,6 +187,18 @@ export class ManagementController {
     );
   }
 
+  @Get('gi')
+  @Roles('ADMIN', 'GI', 'HAR')
+  async getGI() {
+    const details = await this.managementService.getGI();
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'The record has been successfully created.',
+      details,
+    );
+  }
+
   @Get('gi/:gi_id')
   @Roles('ADMIN', 'GI', 'HAR')
   async getDetailGI(@Param('gi_id') gi_id: string) {

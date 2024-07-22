@@ -10,7 +10,10 @@ import {
   HttpStatus,
   ValidationPipe,
   Query,
+  UseInterceptors,
+  UsePipes,
 } from '@nestjs/common';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -68,8 +71,10 @@ export class InventarisController {
   @Post('alat')
   @Roles('ADMIN', 'GI', 'HAR')
   @ApiConsumes('multipart/form-data')
-  @CREATE_ALAT_BODY()
-  @FileInjector(CreateAlatDto)
+  // @CREATE_ALAT_BODY()
+  // @FileInjector(CreateAlatDto)
+  // @UsePipes(new ValidationPipe())
+  @UseInterceptors(FilesInterceptor('nameplate'))
   async createAlat(
     @Body(ValidationPipe) data: CreateAlatDto,
     @GetUser('id') user_id: string,
@@ -79,7 +84,7 @@ export class InventarisController {
     return new SuccessResponse(
       HttpStatus.CREATED,
       'Alat berhasil ditambahkan',
-      alat,
+      // alat,
     );
   }
 
@@ -181,14 +186,14 @@ export class InventarisController {
     return new SuccessResponse(HttpStatus.OK, 'Alat berhasil diperbarui', alat);
   }
 
-  @Patch('alat/:alat_id')
-  @Roles('ADMIN', 'GI', 'HAR')
-  async updateAlat(
-    @Param('alat_id') alat_id: string,
-    @Body(ValidationPipe) data: UpdateJenisAlatDto,
-  ) {
-    const alat = await this.inventarisService.updateAlat(alat_id, data);
+  // @Patch('alat/:alat_id')
+  // @Roles('ADMIN', 'GI', 'HAR')
+  // async updateAlat(
+  //   @Param('alat_id') alat_id: string,
+  //   @Body(ValidationPipe) data: UpdateJenisAlatDto,
+  // ) {
+  //   const alat = await this.inventarisService.updateAlat(alat_id, data);
 
-    return new SuccessResponse(HttpStatus.OK, 'Alat berhasil diperbarui', alat);
-  }
+  //   return new SuccessResponse(HttpStatus.OK, 'Alat berhasil diperbarui', alat);
+  // }
 }

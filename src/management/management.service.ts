@@ -212,4 +212,19 @@ export class ManagementService {
       where: { id: user_id },
     });
   }
+
+  async getGI() {
+    return await this.prisma.gi.findMany({
+      select: {
+        id: true,
+        nama: true,
+        bay: {
+          select: {
+            id: true,
+            nama_lokasi: true,
+          },
+        },
+      },
+    });
+  }
 }
