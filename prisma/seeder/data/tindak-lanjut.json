@@ -4,7 +4,7 @@
     "kegiatan": "kegiatan 1",
     "ket_kegiatan": "mari kita melanjutkan ngoding",
     "material": "material 1",
-    "waktu_pengerjaan": "2024-07-22",
+    "waktu_pengerjaan": "2024-07-22T00:00:00.000Z",
     "foto": "uploads/laporan/1721616412090_node js.png",
     "nama_pembuat": "Yuniar",
     "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
@@ -15,7 +15,7 @@
     "kegiatan": "kegiatan 2",
     "ket_kegiatan": "mari kita melanjutkan ngoding 2",
     "material": null,
-    "waktu_pengerjaan": "2024-07-22",
+    "waktu_pengerjaan": "2024-07-22T00:00:00.000Z",
     "foto": "uploads/laporan/1721616412090_node js.png",
     "nama_pembuat": "Yuniar",
     "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
@@ -26,7 +26,7 @@
     "kegiatan": "kegiatan 3",
     "ket_kegiatan": "mari kita melanjutkan ngoding 3",
     "material": null,
-    "waktu_pengerjaan": "2024-07-22",
+    "waktu_pengerjaan": "2024-07-22T00:00:00.000Z",
     "foto": "uploads/laporan/1721616412090_node js.png",
     "nama_pembuat": "Yuniar",
     "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
@@ -37,10 +37,10 @@
     "kegiatan": "kegiatan 1",
     "ket_kegiatan": "mari kita melanjutkan ngoding 1",
     "material": null,
-    "waktu_pengerjaan": "2024-07-22",
+    "waktu_pengerjaan": "2024-07-22T00:00:00.000Z",
     "foto": "uploads/laporan/1721616412090_node js.png",
     "nama_pembuat": "Yuniar",
-    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "laporan_anomali_id": "4955e789-6e5a-4641-a35c-e6e675f97dc8",
     "dibuat_oleh": "4955e789-6e5a-4641-a35c-e6e675f97dc8"
   },
   {
@@ -48,10 +48,10 @@
     "kegiatan": "kegiatan 2",
     "ket_kegiatan": "mari kita melanjutkan ngoding 2",
     "material": null,
-    "waktu_pengerjaan": "2024-07-22",
+    "waktu_pengerjaan": "2024-07-22T00:00:00.000Z",
     "foto": "uploads/laporan/1721616412090_node js.png",
     "nama_pembuat": "Yuniar",
-    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "laporan_anomali_id": "4955e789-6e5a-4641-a35c-e6e675f97dc8",
     "dibuat_oleh": "4955e789-6e5a-4641-a35c-e6e675f97dc8"
   },
   {
@@ -59,10 +59,10 @@
     "kegiatan": "kegiatan 3",
     "ket_kegiatan": "mari kita melanjutkan ngoding 3",
     "material": null,
-    "waktu_pengerjaan": "2024-07-22",
+    "waktu_pengerjaan": "2024-07-22T00:00:00.000Z",
     "foto": "uploads/laporan/1721616412090_node js.png",
     "nama_pembuat": "Yuniar",
-    "laporan_anomali_id": "1d70323a-3dfe-4a1a-bdf4-0dfa4e3d8034",
+    "laporan_anomali_id": "4955e789-6e5a-4641-a35c-e6e675f97dc8",
     "dibuat_oleh": "4955e789-6e5a-4641-a35c-e6e675f97dc8"
   }
 ]

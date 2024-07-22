@@ -19,7 +19,7 @@ interface laporanTL {
 
 export const tindakLanjut = async () => {
   try {
-    const pathFile = path.join(__dirname, '..', 'data', 'users.json');
+    const pathFile = path.join(__dirname, '..', 'data', 'tindak-lanjut.json');
 
     const jsonData = await fsPromises.readFile(pathFile, 'utf8');
 
