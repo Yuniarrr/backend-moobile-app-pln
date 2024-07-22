@@ -38,6 +38,7 @@ enum FasaTerpasang {
   R
   S
   T
+  N
   RST
 }
 
@@ -45,6 +46,8 @@ enum StatusOperasiAlat {
   OPERASI
   TIDAK_OPERASI
   DIHAPUS
+  DIGUDANGKAN
+  BELUM_OPERASI
 }
 
 enum KategoriPeralatan {
@@ -192,16 +195,16 @@ model alat {
   techidentno               String?
   kategori_peralatan        KategoriPeralatan @default(PRIMER)
   kategori_peralatan_detail String?
-  tanggal_operasi           DateTime
-  serial_id                 String
+  tanggal_operasi           DateTime?
+  serial_id                 String?
   fasa_terpasang            FasaTerpasang     @default(R)
   mekanik_penggerak         String?
   media_pemadam             String?
-  tipe                      String
-  merk                      String
-  negara_pembuat            String
-  tahun_pembuatan           String
-  tegangan_operasi          String
+  tipe                      String?
+  merk                      String?
+  negara_pembuat            String?
+  tahun_pembuatan           String?
+  tegangan_operasi          String?
   rating_arus               String?
   breaking_current          String?
   penempatan                String?

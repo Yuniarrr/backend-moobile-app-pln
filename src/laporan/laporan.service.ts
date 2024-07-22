@@ -352,11 +352,13 @@ export class LaporanService {
         },
         ultg: {
           select: {
+            id: true,
             nama: true,
           },
         },
         gi: {
           select: {
+            id: true,
             nama: true,
           },
         },
@@ -372,11 +374,13 @@ export class LaporanService {
         },
         bay: {
           select: {
+            id: true,
             nama_lokasi: true,
           },
         },
         jenis_peralatan: {
           select: {
+            id: true,
             nama: true,
           },
         },

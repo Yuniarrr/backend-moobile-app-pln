@@ -110,8 +110,8 @@ export class CreateAlatDto {
   @IsOptional()
   daya?: string | null;
 
-  @ApiProperty({ description: 'Nameplate' })
-  nameplate: Express.Multer.File[];
+  @ApiPropertyOptional({ description: 'Nameplate' })
+  nameplate?: Express.Multer.File[];
   // @ApiProperty({ description: 'Nameplate' })
   // nameplate: File | null;
 }

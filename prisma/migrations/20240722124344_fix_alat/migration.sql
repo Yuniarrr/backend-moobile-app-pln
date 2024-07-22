@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE "alat" ALTER COLUMN "merk" DROP NOT NULL,
+ALTER COLUMN "tipe" DROP NOT NULL,
+ALTER COLUMN "serial_id" DROP NOT NULL,
+ALTER COLUMN "negara_pembuat" DROP NOT NULL,
+ALTER COLUMN "tahun_pembuatan" DROP NOT NULL,
+ALTER COLUMN "tegangan_operasi" DROP NOT NULL,
+ALTER COLUMN "tanggal_operasi" DROP NOT NULL;
