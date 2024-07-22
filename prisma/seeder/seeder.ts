@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { jenisAlat, ultg, bay, users } from './seed';
+import { jenisAlat, ultg, bay, users, alats } from './seed';
 
 const prisma = new PrismaClient();
 
@@ -10,6 +10,7 @@ async function main() {
     await jenisAlat();
     await bay();
     await users();
+    await alats();
   } catch (error) {
     console.error('Seeding error:', error);
   } finally {
