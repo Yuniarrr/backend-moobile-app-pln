@@ -12,6 +12,7 @@ import {
   Query,
   UseInterceptors,
   UsePipes,
+  UploadedFile,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import {
@@ -38,7 +39,12 @@ import {
 import { FileInjector } from 'nestjs-file-upload';
 
 import { CREATE_ALAT_BODY } from './decorators';
-import { CreateAlatDto, CreateJenisAlatDto, UpdateJenisAlatDto } from './dto';
+import {
+  CreateAlatDto,
+  CreateJenisAlatDto,
+  UpdateAlatDto,
+  UpdateJenisAlatDto,
+} from './dto';
 import { InventarisService } from './inventaris.service';
 
 @ApiTags('inventaris')
@@ -71,20 +77,22 @@ export class InventarisController {
   @Post('alat')
   @Roles('ADMIN', 'GI', 'HAR')
   @ApiConsumes('multipart/form-data')
-  // @CREATE_ALAT_BODY()
-  // @FileInjector(CreateAlatDto)
-  // @UsePipes(new ValidationPipe())
-  @UseInterceptors(FilesInterceptor('nameplate'))
+  @UseInterceptors(FileInterceptor('nameplate'))
   async createAlat(
     @Body(ValidationPipe) data: CreateAlatDto,
     @GetUser('id') user_id: string,
+    @UploadedFile() nameplate: Express.Multer.File | null,
   ) {
-    const alat = await this.inventarisService.createAlat(data, user_id);
+    const alat = await this.inventarisService.createAlat(
+      data,
+      user_id,
+      nameplate,
+    );
 
     return new SuccessResponse(
       HttpStatus.CREATED,
       'Alat berhasil ditambahkan',
-      // alat,
+      alat,
     );
   }
 
@@ -186,14 +194,22 @@ export class InventarisController {
     return new SuccessResponse(HttpStatus.OK, 'Alat berhasil diperbarui', alat);
   }
 
-  // @Patch('alat/:alat_id')
-  // @Roles('ADMIN', 'GI', 'HAR')
-  // async updateAlat(
-  //   @Param('alat_id') alat_id: string,
-  //   @Body(ValidationPipe) data: UpdateJenisAlatDto,
-  // ) {
-  //   const alat = await this.inventarisService.updateAlat(alat_id, data);
+  @Patch('alat/:alat_id')
+  @Roles('ADMIN', 'GI', 'HAR')
+  // @ApiConsumes('multipart/form-data')
+  @UsePipes(new ValidationPipe())
+  @UseInterceptors(FileInterceptor('nameplate'))
+  async updateAlat(
+    @Param('alat_id') alat_id: string,
+    @Body() data: UpdateAlatDto,
+    @UploadedFile() nameplate: Express.Multer.File | null,
+  ) {
+    const alat = await this.inventarisService.updateAlat(
+      alat_id,
+      data,
+      nameplate,
+    );
 
-  //   return new SuccessResponse(HttpStatus.OK, 'Alat berhasil diperbarui', alat);
-  // }
+    return new SuccessResponse(HttpStatus.OK, 'Alat berhasil diperbarui', alat);
+  }
 }

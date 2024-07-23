@@ -1,41 +1,47 @@
+/* eslint-disable @darraghor/nestjs-typed/all-properties-have-explicit-defined */
+/* eslint-disable @darraghor/nestjs-typed/all-properties-are-whitelisted */
+/* eslint-disable @darraghor/nestjs-typed/validated-non-primitive-property-needs-type-decorator */
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+
 import { Kategori, StatusLaporan } from '@prisma/client';
-import {
-  IsDateStringDefined,
-  IsEnumOptional,
-  IsFileDefined,
-  IsStringDefined,
-  IsStringOptional,
-} from 'common';
-import { type File } from 'nestjs-file-upload';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateLaporanTindakLanjutDto {
-  @IsStringDefined('Laporan anomali id', 'id')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   laporan_anomali_id: string;
 
-  @IsStringDefined('Kegiatan', 'Kegiatan harus diisi')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   kegiatan: string;
 
-  @IsStringDefined('Ket Kegiatan', 'Ket Kegiatan harus diisi')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   ket_kegiatan: string;
 
-  @IsStringOptional('Material', 'Material harus diisi')
-  material?: string;
+  @ApiPropertyOptional({})
+  @IsOptional()
+  material?: string | null;
 
-  @IsDateStringDefined('Waktu Pengerjaan', '2024-04-25')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   waktu_pengerjaan: Date;
 
-  @IsFileDefined('foto upload', 5, ['image/jpeg', 'image/png', 'image/webp'])
-  foto: File;
+  @ApiProperty({ description: 'Nameplate' })
+  foto: Express.Multer.File;
 
-  @IsFileDefined('berita acara upload', 10)
-  berita_acara: File;
+  @ApiProperty({ description: 'Nameplate' })
+  berita_acara: Express.Multer.File;
 
-  @IsStringDefined('Nama Pembuat', 'Nama Pembuat harus diisi')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   nama_pembuat: string;
 
-  @IsEnumOptional('Ubah kategori', Kategori)
+  @ApiPropertyOptional({})
+  @IsOptional()
   kategori?: Kategori;
 
-  @IsEnumOptional('Ubah status', StatusLaporan)
+  @ApiPropertyOptional({})
+  @IsOptional()
   status?: StatusLaporan;
 }

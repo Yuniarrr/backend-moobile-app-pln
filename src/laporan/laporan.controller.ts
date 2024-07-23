@@ -13,7 +13,14 @@ import {
   Delete,
   Get,
   Query,
+  UseInterceptors,
+  UploadedFile,
+  UsePipes,
 } from '@nestjs/common';
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -81,15 +88,26 @@ export class LaporanController {
   @Post('anomali')
   @Roles('ADMIN', 'GI')
   @ApiConsumes('multipart/form-data')
-  @CREATE_LAPORAN_ANOMALI_BODY()
-  @FileInjector(CreateLaporanAnomaliDto)
+  // @CREATE_LAPORAN_ANOMALI_BODY()
+  // @FileInjector(CreateLaporanAnomaliDto)
+  // @UsePipes(new ValidationPipe())
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'foto', maxCount: 1 },
+      { name: 'berita_acara', maxCount: 1 },
+    ]),
+  )
   async createLaporanAnomali(
-    @Body(ValidationPipe) data: CreateLaporanAnomaliDto,
+    @Body() data: CreateLaporanAnomaliDto,
     @GetUser('id') user_id: string,
+    @UploadedFile() foto: Express.Multer.File | null,
+    @UploadedFile() berita_acara: Express.Multer.File | null,
   ) {
     const newLaporan = await this.laporanService.createLaporanAnomali(
       data,
       user_id,
+      foto,
+      berita_acara,
     );
 
     return new SuccessResponse(
@@ -101,16 +119,27 @@ export class LaporanController {
 
   @Post('tindak/lanjut')
   @Roles('ADMIN', 'GI', 'HAR')
-  @ApiConsumes('multipart/form-data')
-  @CREATE_LAPORAN_TINDAK_LANJUT_BODY()
-  @FileInjector(CreateLaporanTindakLanjutDto)
+  // @ApiConsumes('multipart/form-data')
+  // @CREATE_LAPORAN_TINDAK_LANJUT_BODY()
+  // @FileInjector(CreateLaporanTindakLanjutDto)
+  @UsePipes(new ValidationPipe())
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'foto', maxCount: 1 },
+      { name: 'berita_acara', maxCount: 1 },
+    ]),
+  )
   async createLaporanTindakLanjut(
-    @Body(ValidationPipe) data: CreateLaporanTindakLanjutDto,
+    @Body() data: CreateLaporanTindakLanjutDto,
     @GetUser('id') user_id: string,
+    @UploadedFile() foto: Express.Multer.File | null,
+    @UploadedFile() berita_acara: Express.Multer.File | null,
   ) {
     const newLaporan = await this.laporanService.createLaporanTindakLanjut(
       data,
       user_id,
+      foto,
+      berita_acara,
     );
 
     return new SuccessResponse(
@@ -203,18 +232,29 @@ export class LaporanController {
 
   @Patch('anomali/:laporan_anomali_id')
   @Roles('ADMIN', 'GI')
-  @ApiConsumes('multipart/form-data')
-  @UPDATE_LAPORAN_ANOMALI_BODY()
-  @FileInjector(UpdateLaporanAnomaliDto)
+  // @ApiConsumes('multipart/form-data')
+  // @UPDATE_LAPORAN_ANOMALI_BODY()
+  // @FileInjector(UpdateLaporanAnomaliDto)
+  @UsePipes(new ValidationPipe())
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'foto', maxCount: 1 },
+      { name: 'berita_acara', maxCount: 1 },
+    ]),
+  )
   async updateLaporanAnomali(
     @Param('laporan_anomali_id') laporan_anomali_id: string,
     @Body(ValidationPipe) data: UpdateLaporanAnomaliDto,
     @GetUser('id') user_id: string,
+    @UploadedFile() foto: Express.Multer.File | null,
+    @UploadedFile() berita_acara: Express.Multer.File | null,
   ) {
     const update = await this.laporanService.updateLaporanAnomali(
       laporan_anomali_id,
       data,
       user_id,
+      foto,
+      berita_acara,
     );
 
     return new SuccessResponse(
@@ -228,16 +268,22 @@ export class LaporanController {
   @Roles('ADMIN', 'GI')
   @ApiConsumes('multipart/form-data')
   @UPDATE_LAPORAN_TINDAK_LANJUT_BODY()
-  @FileInjector(UpdateLaporanTindakLanjutDto)
+  // @FileInjector(UpdateLaporanTindakLanjutDto)
+  @UseInterceptors(FileInterceptor('nameplate'))
+  @UseInterceptors(FileInterceptor('berita_acara'))
   async updateLaporanTindakLanjut(
     @Param('laporan_tindak_lanjut_id') laporan_tindak_lanjut_id: string,
     @Body(ValidationPipe) data: UpdateLaporanTindakLanjutDto,
     @GetUser('id') user_id: string,
+    @UploadedFile() nameplate: Express.Multer.File | null,
+    @UploadedFile() berita_acara: Express.Multer.File | null,
   ) {
     const update = await this.laporanService.updateLaporanTindakLanjut(
       laporan_tindak_lanjut_id,
       data,
       user_id,
+      nameplate,
+      berita_acara,
     );
 
     return new SuccessResponse(

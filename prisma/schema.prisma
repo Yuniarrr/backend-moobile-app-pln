@@ -57,7 +57,7 @@ enum KategoriPeralatan {
 }
 
 model ultg {
-  id   String @id @default(uuid())
+  id   String @id @unique @default(uuid())
   nama String
 
   created_at      DateTime          @default(now())
@@ -73,7 +73,7 @@ model gi {
   nama String
 
   ultg_id String
-  ultg    ultg   @relation(fields: [ultg_id], references: [id])
+  ultg    ultg   @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at      DateTime          @default(now())
   updated_at      DateTime          @default(now()) @updatedAt
@@ -90,7 +90,7 @@ model bay {
   funloc_id   String
 
   gi_id String
-  gi    gi     @relation(fields: [gi_id], references: [id])
+  gi    gi     @relation(fields: [gi_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   created_at      DateTime          @default(now())
   updated_at      DateTime          @default(now()) @updatedAt
@@ -107,7 +107,7 @@ model users {
   refresh_token String?
 
   gi_id String?
-  gi    gi?     @relation(fields: [gi_id], references: [id])
+  gi    gi?     @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at               DateTime                @default(now())
   updated_at               DateTime                @default(now()) @updatedAt
@@ -150,24 +150,26 @@ model laporan_anomali {
   laporan_anomali_id        String
 
   ultg_id            String
-  ultg               ultg            @relation(fields: [ultg_id], references: [id])
+  ultg               ultg            @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   gi_id              String
-  gi                 gi              @relation(fields: [gi_id], references: [id])
+  gi                 gi              @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   jenis_peralatan_id String
-  jenis_peralatan    jenis_peralatan @relation(fields: [jenis_peralatan_id], references: [id])
+  jenis_peralatan    jenis_peralatan @relation(fields: [jenis_peralatan_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   bay_id             String?
-  bay                bay?            @relation(fields: [bay_id], references: [id])
+  bay                bay?            @relation(fields: [bay_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   alat_id            String
-  alat               alat            @relation(fields: [alat_id], references: [id])
+  alat               alat            @relation(fields: [alat_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   dibuat_oleh        String
-  pembuat            users           @relation("dibuat", fields: [dibuat_oleh], references: [id])
+  pembuat            users           @relation("dibuat", fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
   diedit_oleh        String?
-  pengedit           users?          @relation("diedit", fields: [diedit_oleh], references: [id])
+  pengedit           users?          @relation("diedit", fields: [diedit_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at            DateTime                @default(now())
   updated_at            DateTime                @default(now()) @updatedAt
   deleted_at            DateTime?
   laporan_tindak_lanjut laporan_tindak_lanjut[]
+
+  @@index([ultg_id], name: "ultg_id")
 }
 
 model laporan_tindak_lanjut {
@@ -181,9 +183,9 @@ model laporan_tindak_lanjut {
   nama_pembuat     String
 
   laporan_anomali_id String
-  laporan_anomali    laporan_anomali @relation(fields: [laporan_anomali_id], references: [id])
+  laporan_anomali    laporan_anomali @relation(fields: [laporan_anomali_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   dibuat_oleh        String
-  pembuat            users           @relation(fields: [dibuat_oleh], references: [id])
+  pembuat            users           @relation(fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at DateTime  @default(now())
   updated_at DateTime  @default(now()) @updatedAt
@@ -219,15 +221,15 @@ model alat {
   status                    StatusOperasiAlat @default(OPERASI)
 
   ultg_id            String
-  ultg               ultg             @relation(fields: [ultg_id], references: [id])
+  ultg               ultg             @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   gi_id              String
-  gi                 gi               @relation(fields: [gi_id], references: [id])
+  gi                 gi               @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   jenis_peralatan_id String?
-  jenis_peralatan    jenis_peralatan? @relation(fields: [jenis_peralatan_id], references: [id])
+  jenis_peralatan    jenis_peralatan? @relation(fields: [jenis_peralatan_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   bay_id             String
-  bay                bay?             @relation(fields: [bay_id], references: [id])
+  bay                bay?             @relation(fields: [bay_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   dibuat_oleh        String
-  pembuat            users            @relation(fields: [dibuat_oleh], references: [id])
+  pembuat            users            @relation(fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at      DateTime          @default(now())
   updated_at      DateTime          @default(now()) @updatedAt

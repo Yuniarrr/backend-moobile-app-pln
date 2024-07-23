@@ -27,37 +27,30 @@ export class InventarisService {
     });
   }
 
-  async createAlat(data: CreateAlatDto, user_id: string) {
-    console.log(user_id);
-    console.log(data);
-    console.log(data.ultg_id);
-    console.log(Date.now());
-    console.log(data.nameplate);
-    // await this.checkUltg(data.ultg_id);
-    // await this.checkGi(data.gi_id);
-    // await this.checkJenisPeralatan(data.jenis_peralatan_id);
-    // await this.checkBay(data.bay_id);
+  async createAlat(
+    data: CreateAlatDto,
+    user_id: string,
+    nameplate?: Express.Multer.File,
+  ) {
+    await this.checkUltg(data.ultg_id);
+    await this.checkGi(data.gi_id);
+    await this.checkJenisPeralatan(data.jenis_peralatan_id);
+    await this.checkBay(data.bay_id);
 
-    // let nameplate;
+    const nameplatePath = nameplate
+      ? `uploads/inventaris/${nameplate.filename}`
+      : null;
 
-    // if (data.nameplate) {
-    //   nameplate = this.upload.uploadFile({
-    //     fileIs: data.nameplate,
-    //     fileName: data.nameplate.filename,
-    //     filePath: 'alat',
-    //   });
-    // }
+    delete data.nameplate;
 
-    // delete data.nameplate;
-
-    // return await this.prisma.alat.create({
-    //   data: {
-    //     ...data,
-    //     nameplate,
-    //     tanggal_operasi: new Date(data.tanggal_operasi),
-    //     dibuat_oleh: user_id,
-    //   },
-    // });
+    return await this.prisma.alat.create({
+      data: {
+        ...data,
+        nameplate: nameplatePath,
+        tanggal_operasi: new Date(data.tanggal_operasi),
+        dibuat_oleh: user_id,
+      },
+    });
   }
 
   async getJenisAlat(kategori_alat?: KategoriPeralatan) {
@@ -110,29 +103,28 @@ export class InventarisService {
     });
   }
 
-  // async updateAlat(alat_id: string, data: UpdateAlatDto) {
-  //   const alat = await this.checkAlat(alat_id);
+  async updateAlat(
+    alat_id: string,
+    data: UpdateAlatDto,
+    nameplate?: Express.Multer.File,
+  ) {
+    const alat = await this.checkAlat(alat_id);
 
-  //   let nameplate;
+    const nameplatePath = nameplate
+      ? `uploads/inventaris/${nameplate.filename}`
+      : alat.nameplate;
 
-  //   if (data.nameplate) {
-  //     nameplate = this.upload.uploadFile({
-  //       fileIs: data.nameplate,
-  //       fileName: data.nameplate.filename,
-  //       filePath: 'alat',
-  //     });
-  //   }
+    delete data.nameplate;
 
-  //   delete data.nameplate;
-
-  //   return await this.prisma.alat.update({
-  //     where: { id: alat_id },
-  //     data: {
-  //       ...data,
-  //       nameplate: nameplate || alat.nameplate,
-  //     },
-  //   });
-  // }
+    return await this.prisma.alat.update({
+      where: { id: alat_id },
+      data: {
+        ...data,
+        nameplate: nameplatePath ?? alat.nameplate,
+        tanggal_operasi: data.tanggal_operasi ?? alat.tanggal_operasi,
+      },
+    });
+  }
 
   async getDetailAlat(alat_id: string) {
     return await this.prisma.alat.findFirst({

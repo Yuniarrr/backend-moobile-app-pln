@@ -2,10 +2,12 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { type Prisma, type Kategori } from '@prisma/client';
+import { type PIC, type Prisma, type Kategori } from '@prisma/client';
 import { UploadService } from 'upload/upload.service';
 
 import { PrismaService } from 'infra/database/prisma/prisma.service';
+
+import { getTime } from 'utils';
 
 import {
   type UpdateLaporanTindakLanjutDto,
@@ -21,18 +23,17 @@ export class LaporanService {
     private readonly upload: UploadService,
   ) {}
 
-  async createLaporanAnomali(data: CreateLaporanAnomaliDto, user_id: string) {
-    const newFoto = this.upload.resizeImage({
-      fileIs: data.foto,
-      fileName: data.foto.filename,
-      filePath: 'laporan',
-    });
+  async createLaporanAnomali(
+    data: CreateLaporanAnomaliDto,
+    user_id: string,
+    foto?: Express.Multer.File,
+    berita_acara?: Express.Multer.File,
+  ) {
+    const fotoPath = foto ? `uploads/laporan/${foto.filename}` : null;
 
-    const newBA = this.upload.uploadFile({
-      fileIs: data.berita_acara,
-      fileName: data.berita_acara.filename,
-      filePath: 'laporan',
-    });
+    const beritaAcaraPath = berita_acara
+      ? `uploads/laporan/${berita_acara.filename}`
+      : null;
 
     delete data.foto;
     delete data.berita_acara;
@@ -43,15 +44,20 @@ export class LaporanService {
     const total = await this.prisma.laporan_anomali.count();
     const nextNumber = total + 1;
     const formattedNumber = nextNumber.toString().padStart(6, '0');
+    // const ultg_id = data.ultg_id;
+    // delete data.ultg_id;
 
     return await this.prisma.laporan_anomali.create({
       data: {
         ...data,
-        tanggal_rusak: new Date(data.tanggal_rusak),
-        tanggal_laporan: new Date(data.tanggal_laporan),
+        pic: data.pic as PIC,
+        ultg_id: data.ultg_id,
+        // tanggal_rusak: new Date(data.tanggal_rusak),
+        tanggal_laporan: getTime(),
         batas_waktu,
-        foto: newFoto,
-        berita_acara: newBA,
+        status: 'OPEN',
+        foto: fotoPath,
+        berita_acara: beritaAcaraPath,
         laporan_anomali_id: `LA-${formattedNumber}`,
         dibuat_oleh: user_id,
       },
@@ -61,22 +67,18 @@ export class LaporanService {
   async createLaporanTindakLanjut(
     data: CreateLaporanTindakLanjutDto,
     user_id: string,
+    foto?: Express.Multer.File,
+    berita_acara?: Express.Multer.File,
   ) {
     const isLaporanAnomaliExist = await this.checkLaporanAnomali(
       data.laporan_anomali_id,
     );
 
-    const newFoto = this.upload.resizeImage({
-      fileIs: data.foto,
-      fileName: data.foto.filename,
-      filePath: 'laporan-tindak-lanjut',
-    });
+    const newFoto = foto ? `uploads/laporan/${foto.filename}` : null;
 
-    const newBA = this.upload.uploadFile({
-      fileIs: data.berita_acara,
-      fileName: data.berita_acara.filename,
-      filePath: 'laporan-tindak-lanjut',
-    });
+    const newBA = berita_acara
+      ? `uploads/laporan/${berita_acara.filename}`
+      : null;
 
     delete data.foto;
     delete data.berita_acara;
@@ -115,29 +117,24 @@ export class LaporanService {
     laporan_anomali_id: string,
     data: UpdateLaporanAnomaliDto,
     user_id: string,
+    foto?: Express.Multer.File,
+    berita_acara?: Express.Multer.File,
   ) {
+    console.log('data');
+    console.log(data);
+    console.log('nameplate');
+    console.log(foto);
     const isLaporanAnomaliExist = await this.checkLaporanAnomali(
       laporan_anomali_id,
     );
 
-    let foto;
-    let berita_acara;
+    const fotoPath = foto
+      ? `uploads/laporan/${foto.filename}`
+      : isLaporanAnomaliExist.foto;
 
-    if (data.foto) {
-      foto = this.upload.resizeImage({
-        fileIs: data.foto,
-        fileName: data.foto.filename,
-        filePath: 'laporan-tindak-lanjut',
-      });
-    }
-
-    if (data.berita_acara) {
-      berita_acara = this.upload.uploadFile({
-        fileIs: data.berita_acara,
-        fileName: data.berita_acara.filename,
-        filePath: 'laporan-tindak-lanjut',
-      });
-    }
+    const beritaAcaraPath = berita_acara
+      ? `uploads/laporan/${berita_acara.filename}`
+      : isLaporanAnomaliExist.berita_acara;
 
     delete data.foto;
     delete data.berita_acara;
@@ -146,15 +143,10 @@ export class LaporanService {
       where: { id: laporan_anomali_id },
       data: {
         ...data,
-        foto: foto || isLaporanAnomaliExist.foto,
-        berita_acara: berita_acara || isLaporanAnomaliExist.berita_acara,
+        pic: data.pic as PIC,
+        foto: fotoPath,
+        berita_acara: beritaAcaraPath,
         diedit_oleh: user_id,
-        tanggal_rusak: data.tanggal_rusak
-          ? new Date(data.tanggal_rusak)
-          : isLaporanAnomaliExist.tanggal_rusak,
-        tanggal_laporan: data.tanggal_laporan
-          ? new Date(data.tanggal_laporan)
-          : isLaporanAnomaliExist.tanggal_laporan,
       },
     });
   }
@@ -163,29 +155,21 @@ export class LaporanService {
     laporan_tindak_lanjut_id: string,
     data: UpdateLaporanTindakLanjutDto,
     user_id: string,
+    nameplate?: Express.Multer.File,
+    berita_acara?: Express.Multer.File,
   ) {
+    console.log(data);
     const isLaporanTindakLanjutExist = await this.checkLaporanTindakLanjut(
       laporan_tindak_lanjut_id,
     );
 
-    let foto;
-    let berita_acara;
+    const fotoPath = nameplate
+      ? `uploads/laporan/${nameplate.filename}`
+      : isLaporanTindakLanjutExist.foto;
 
-    if (data.foto) {
-      foto = this.upload.resizeImage({
-        fileIs: data.foto,
-        fileName: data.foto.filename,
-        filePath: 'laporan-tindak-lanjut',
-      });
-    }
-
-    if (data.berita_acara) {
-      berita_acara = this.upload.uploadFile({
-        fileIs: data.berita_acara,
-        fileName: data.berita_acara.filename,
-        filePath: 'laporan-tindak-lanjut',
-      });
-    }
+    const beritaAcaraPath = berita_acara
+      ? `uploads/laporan/${berita_acara.filename}`
+      : isLaporanTindakLanjutExist.berita_acara;
 
     delete data.foto;
     delete data.berita_acara;
@@ -206,6 +190,8 @@ export class LaporanService {
           kategori: data.kategori,
           batas_waktu: newBatasWaktu,
           diedit_oleh: user_id,
+          foto: fotoPath,
+          berita_acara: beritaAcaraPath,
         },
       });
     }
@@ -217,8 +203,9 @@ export class LaporanService {
       where: { id: laporan_tindak_lanjut_id },
       data: {
         ...data,
-        foto: foto || isLaporanTindakLanjutExist.foto,
-        berita_acara: berita_acara || isLaporanTindakLanjutExist.berita_acara,
+        foto: fotoPath || isLaporanTindakLanjutExist.foto,
+        berita_acara:
+          beritaAcaraPath || isLaporanTindakLanjutExist.berita_acara,
         waktu_pengerjaan: data.waktu_pengerjaan
           ? new Date(data.waktu_pengerjaan)
           : isLaporanTindakLanjutExist.waktu_pengerjaan,
@@ -382,6 +369,19 @@ export class LaporanService {
           select: {
             id: true,
             nama: true,
+          },
+        },
+        alat: {
+          select: {
+            id: true,
+            techidentno: true,
+            serial_id: true,
+            fasa_terpasang: true,
+            tipe: true,
+            merk: true,
+            negara_pembuat: true,
+            tahun_pembuatan: true,
+            status: true,
           },
         },
       },

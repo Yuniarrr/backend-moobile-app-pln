@@ -10,7 +10,6 @@ import {
   type KategoriPeralatan,
 } from '@prisma/client';
 import { IsDateString, IsNotEmpty, IsOptional } from 'class-validator';
-import { type File } from 'nestjs-file-upload';
 
 export class CreateAlatDto {
   @ApiProperty({ example: 'ULTG ID' })
@@ -34,9 +33,8 @@ export class CreateAlatDto {
   bay_id: string;
 
   @ApiProperty({ example: 'ULTG ID' })
-  @IsDateString()
   @IsNotEmpty()
-  tanggal_operasi: Date;
+  tanggal_operasi: string;
 
   @ApiProperty({ example: 'ULTG ID' })
   @IsNotEmpty()
@@ -111,7 +109,5 @@ export class CreateAlatDto {
   daya?: string | null;
 
   @ApiPropertyOptional({ description: 'Nameplate' })
-  nameplate?: Express.Multer.File[];
-  // @ApiProperty({ description: 'Nameplate' })
-  // nameplate: File | null;
+  nameplate?: Express.Multer.File;
 }

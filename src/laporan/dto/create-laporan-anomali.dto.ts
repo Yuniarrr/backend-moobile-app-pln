@@ -1,101 +1,80 @@
+/* eslint-disable @darraghor/nestjs-typed/validated-non-primitive-property-needs-type-decorator */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @darraghor/nestjs-typed/all-properties-have-explicit-defined */
 /* eslint-disable @darraghor/nestjs-typed/all-properties-are-whitelisted */
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-import { Kategori, KategoriPeralatan, PIC } from '@prisma/client';
-import { Expose, Transform } from 'class-transformer';
-import { IsDefined, IsNotEmpty, IsObject } from 'class-validator';
-import {
-  IsDateStringDefined,
-  IsEnumDefined,
-  IsStringDefined,
-  IsStringOptional,
-} from 'common';
-import { FileField, type File } from 'nestjs-file-upload';
+import { Kategori, KategoriPeralatan } from '@prisma/client';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateLaporanAnomaliDto {
-  @IsStringDefined('ULTG id', 'uuid')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   ultg_id: string;
 
-  @IsStringDefined('GI id', 'uuid')
+  @ApiProperty({ example: 'GI ID' })
+  @IsNotEmpty()
   gi_id: string;
 
-  @IsStringDefined('jenis peralatan id', 'uuid')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   jenis_peralatan_id: string;
 
-  @IsStringDefined('bay id', 'uuid')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   bay_id: string;
 
-  @IsStringDefined('alat id', 'uuid')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   alat_id: string;
 
-  @IsEnumDefined(
-    'Kategori peralatan',
-    KategoriPeralatan,
-    KategoriPeralatan.PRIMER,
-  )
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   kategori_peralatan: KategoriPeralatan;
 
-  @IsStringOptional('kategori peralatan detail', 'pendukung')
-  kategori_peralatan_detail?: string;
+  @ApiPropertyOptional({ example: 'ULTG ID' })
+  @IsOptional()
+  kategori_peralatan_detail?: string | null;
 
-  @IsStringDefined('Anomali', 'Anomali')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   anomali: string;
 
-  @IsStringDefined('Detail anomali', 'Detail anomali')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   detail_anomali: string;
 
-  @IsEnumDefined('Kategori', Kategori, Kategori.K1)
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   kategori: Kategori;
 
-  @IsDateStringDefined('Tanggal rusak', '2024-04-25')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   tanggal_rusak: Date;
 
-  @IsDateStringDefined('Tanggal laporan', '2024-04-25')
-  tanggal_laporan: Date;
+  // @IsDateStringDefined('Tanggal laporan', '2024-04-25')
+  // tanggal_laporan: Date;
 
-  @IsStringDefined('Tindak lanjut awal', 'tindak lanjut awal')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   tindak_lanjut_awal: string;
 
-  // @IsFileDefined('foto upload', 5, ['image/jpeg', 'image/png', 'image/webp'])
-  @Transform(({ value }) => (value === '' ? undefined : value))
-  @IsDefined()
-  @IsObject()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    description: 'Upload',
-  })
-  @Expose()
-  @FileField({
-    allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
-    maxSize: 5 * 1000 * 1000,
-  })
-  foto: File;
+  @ApiPropertyOptional({ description: 'Nameplate' })
+  foto?: Express.Multer.File;
 
   // @IsFileDefined('berita acara upload', 10)
-  @Transform(({ value }) => (value === '' ? undefined : value))
-  @IsDefined()
-  @IsObject()
+  @ApiPropertyOptional({ description: 'Nameplate' })
+  berita_acara?: Express.Multer.File;
+
+  @ApiProperty({ example: 'ULTG ID' })
   @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    description: 'Upload',
-  })
-  @Expose()
-  @FileField({
-    // allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
-    maxSize: 10 * 1000 * 1000,
-  })
-  berita_acara: File;
+  pic: string;
 
-  @IsEnumDefined('pic', PIC, PIC.HARGI)
-  pic: PIC;
-
-  @IsStringOptional('Detail pic', 'lainnya')
+  @ApiPropertyOptional({ example: 'ULTG ID' })
+  @IsOptional()
   detail_pic?: string;
 
-  @IsStringDefined('Nama pembuat', 'user')
+  @ApiProperty({ example: 'ULTG ID' })
+  @IsNotEmpty()
   nama_pembuat: string;
 }

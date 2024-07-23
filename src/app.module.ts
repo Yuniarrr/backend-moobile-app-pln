@@ -34,6 +34,11 @@ import { UploadModule } from './upload/upload.module';
     UploadModule,
     ManagementModule,
     InventarisModule,
+    // MulterModule.registerAsync({
+    //   useFactory: () => ({
+    //     dest: './uploads',
+    //   }),
+    // }),
   ],
   providers: [PrismaService],
 })
