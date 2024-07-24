@@ -64,7 +64,7 @@ export const fixAlat = async () => {
 
     const datas: alat[] = JSON.parse(jsonData);
 
-    for (const data of datas) {
+    for (const data of datas.slice(0, 19)) {
       const findJenisAlat = await prisma.jenis_peralatan.findFirst({
         where: {
           nama: {

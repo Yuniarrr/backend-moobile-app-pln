@@ -1,6 +1,13 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { type KategoriPeralatan } from '@prisma/client';
+import { type Response } from 'express';
+import xlsx, { type ISettings } from 'json-as-xlsx';
 import { UploadService } from 'upload/upload.service';
 
 import { PrismaService } from 'infra/database/prisma/prisma.service';
@@ -17,6 +24,7 @@ export class InventarisService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly upload: UploadService,
+    private readonly config: ConfigService,
   ) {}
 
   async createJenisAlat(data: CreateJenisAlatDto) {
@@ -66,30 +74,73 @@ export class InventarisService {
     gi_id,
     jenis_peralatan_id,
     bay_id,
+    page,
+    perPage,
   }: // search,
   {
     ultg_id?: string;
     gi_id?: string;
     jenis_peralatan_id?: string;
     bay_id?: string;
+    page?: number;
+    perPage?: number;
     // search?: string;
   }) {
-    return await this.prisma.alat.findMany({
-      where: {
-        ultg_id,
-        gi_id,
-        jenis_peralatan_id,
-        bay_id,
-        // nama: {
-        //   contains: search,
-        // },
+    const skip = page > 0 ? perPage * (page - 1) : 0;
+
+    const [total, data] = await Promise.all([
+      this.prisma.alat.count({
+        where: {
+          ultg_id,
+          gi_id,
+          jenis_peralatan_id,
+          bay_id,
+        },
+      }),
+      this.prisma.alat.findMany({
+        skip,
+        take: perPage,
+        where: {
+          ultg_id,
+          gi_id,
+          jenis_peralatan_id,
+          bay_id,
+        },
+        select: {
+          id: true,
+          merk: true,
+          tipe: true,
+        },
+      }),
+    ]);
+
+    const lastPage = Math.ceil(total / perPage);
+
+    return {
+      meta: {
+        total,
+        lastPage,
+        currentPage: page,
+        perPage,
+        prev: page > 1 ? page - 1 : null,
+        next: page < lastPage ? page + 1 : null,
       },
-      select: {
-        id: true,
-        merk: true,
-        tipe: true,
-      },
-    });
+      data,
+    };
+
+    // return await this.prisma.alat.findMany({
+    //   where: {
+    //     ultg_id,
+    //     gi_id,
+    //     jenis_peralatan_id,
+    //     bay_id,
+    //   },
+    //   select: {
+    //     id: true,
+    //     merk: true,
+    //     tipe: true,
+    //   },
+    // });
   }
 
   async updateJenisAlat(jenis_alat_id: string, data: UpdateJenisAlatDto) {
@@ -218,5 +269,154 @@ export class InventarisService {
     }
 
     return isAlatExist;
+  }
+
+  async unduhAlat({
+    response,
+    awal,
+    akhir,
+  }: {
+    response: Response;
+    awal?: string;
+    akhir?: string;
+  }) {
+    const fileName = 'List Alat';
+    const data = await this.prisma.alat.findMany({
+      where: {},
+      include: {
+        ultg: {
+          select: {
+            nama: true,
+          },
+        },
+        gi: {
+          select: {
+            nama: true,
+          },
+        },
+        jenis_peralatan: {
+          select: {
+            nama: true,
+          },
+        },
+        bay: {
+          select: {
+            nama_lokasi: true,
+            funloc_id: true,
+          },
+        },
+        pembuat: {
+          select: {
+            username: true,
+          },
+        },
+      },
+    });
+
+    const formattedData = [
+      {
+        sheet: 'List Alat',
+        columns: [
+          { label: 'ID Alat', value: 'id' },
+          { label: 'ULTG', value: 'ultg' },
+          { label: 'GI', value: 'gi' },
+          { label: 'Jenis Peralatan', value: 'jenis_peralatan' },
+          { label: 'Nama Lokasi', value: 'bay' },
+          { label: 'Funloc ID', value: 'funloc_id' },
+          { label: 'Pembuat', value: 'pembuat' },
+          { label: 'Techidentno (TID)', value: 'techidentno' },
+          { label: 'Kategori Peralatan', value: 'kategori_peralatan' },
+          {
+            label: 'Kategori Peralatan Detail',
+            value: 'kategori_peralatan_detail',
+          },
+          { label: 'Tanggal Operasi', value: 'tanggal_operasi' },
+          { label: 'Serial ID', value: 'serial_id' },
+          { label: 'Fasa Terpasang', value: 'fasa_terpasang' },
+          { label: 'Mekanik Penggerak', value: 'mekanik_penggerak' },
+          { label: 'Media Pemadam', value: 'media_pemadam' },
+          { label: 'Tipe', value: 'tipe' },
+          { label: 'Merk', value: 'merk' },
+          { label: 'Negara', value: 'negara_pembuat' },
+          { label: 'Tahun', value: 'tahun_pembuatan' },
+          { label: 'Tegangan Operasi', value: 'tegangan_operasi' },
+          { label: 'Rating Arus', value: 'rating_arus' },
+          { label: 'Breaking Current', value: 'breaking_current' },
+          { label: 'Penempatan', value: 'penempatan' },
+          { label: 'Ratio', value: 'ratio' },
+          { label: 'Jenis CVT', value: 'jenis_cvt' },
+          { label: 'Impedansi', value: 'impedansi' },
+          { label: 'Daya', value: 'daya' },
+          { label: 'Vector', value: 'vector' },
+          { label: 'Arus Discharge NominaL', value: 'arus_dn' },
+          { label: 'Nameplate', value: 'nameplate' },
+          { label: 'Status', value: 'status' },
+        ],
+        content: data.map(item => ({
+          id: item.id,
+          ultg: item.ultg.nama,
+          gi: item.gi.nama,
+          jenis_peralatan: item.jenis_peralatan.nama,
+          bay: item.bay.nama_lokasi,
+          funloc_id: item.bay.funloc_id,
+          pembuat: item.pembuat.username,
+          techidentno: item.techidentno,
+          kategori_peralatan: item.kategori_peralatan,
+          kategori_peralatan_detail: item.kategori_peralatan_detail,
+          tanggal_operasi: item.tanggal_operasi
+            ? this.formatDate(item.tanggal_operasi.toISOString())
+            : '',
+          serial_id: item.serial_id,
+          fasa_terpasang: item.fasa_terpasang,
+          mekanik_penggerak: item.mekanik_penggerak,
+          media_pemadam: item.media_pemadam,
+          tipe: item.tipe,
+          merk: item.merk,
+          negara_pembuat: item.negara_pembuat,
+          tahun_pembuatan: item.tahun_pembuatan,
+          tegangan_operasi: item.tegangan_operasi,
+          rating_arus: item.rating_arus,
+          breaking_current: item.breaking_current,
+          penempatan: item.penempatan,
+          ratio: item.ratio,
+          jenis_cvt: item.jenis_cvt,
+          impedansi: item.impedansi,
+          daya: item.daya,
+          vector: item.vector,
+          arus_dn: item.arus_dn,
+          nameplate: item.nameplate
+            ? `${this.config.get('BASE_URL')}/${item.nameplate}`
+            : '',
+          status: item.status,
+        })),
+      },
+    ];
+
+    const settings: ISettings = {
+      fileName,
+      writeOptions: {
+        type: 'buffer',
+        bookType: 'xlsx',
+      },
+    };
+
+    const result = xlsx(formattedData, settings);
+
+    response.writeHead(200, {
+      'Content-Type': 'application/octet-stream',
+      'Content-disposition': `attachment; filename=${fileName}.xlsx`,
+    });
+
+    response.end(result);
+  }
+
+  formatDate(dateString: string) {
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString('id-ID', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
   }
 }

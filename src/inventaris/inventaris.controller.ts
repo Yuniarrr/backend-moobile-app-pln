@@ -13,6 +13,7 @@ import {
   UseInterceptors,
   UsePipes,
   UploadedFile,
+  Res,
 } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import {
@@ -36,6 +37,7 @@ import {
   RolesGuard,
   SuccessResponse,
 } from 'common';
+import { type Response } from 'express';
 import { FileInjector } from 'nestjs-file-upload';
 
 import { CREATE_ALAT_BODY } from './decorators';
@@ -153,31 +155,68 @@ export class InventarisController {
     type: String,
     description: 'ID Bay',
   })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'Page number (optional)',
+  })
+  @ApiQuery({
+    name: 'perPage',
+    required: false,
+    type: Number,
+    description: 'Per page (optional)',
+  })
   @Roles('ADMIN', 'GI', 'HAR')
   async getAlat(
     @Query('ultg_id') ultg_id: string,
     @Query('gi_id') gi_id: string,
     @Query('jenis_peralatan_id') jenis_peralatan_id: string,
     @Query('bay_id') bay_id: string,
+    @Query('page') page: number | undefined,
+    @Query('perPage') perPage: number | undefined,
     // @Query('search') search: string,
   ) {
+    const sanitizedPage = Number.isNaN(page) ? 1 : page;
+    const sanitizedPerPage = Number.isNaN(perPage) ? 10 : perPage;
+
     const alat = await this.inventarisService.getAlat({
       ultg_id,
       gi_id,
       jenis_peralatan_id,
       bay_id,
+      page: sanitizedPage,
+      perPage: sanitizedPerPage,
       // search,
     });
 
     return new SuccessResponse(HttpStatus.OK, 'Alat berhasil ditemukan', alat);
   }
 
-  @Get('alat/:alat_id')
+  @Get('alat/download')
+  @ApiQuery({
+    name: 'awal',
+    required: false,
+    type: String,
+    description: 'Tanggal awal Laporan',
+  })
+  @ApiQuery({
+    name: 'akhir',
+    required: false,
+    type: String,
+    description: 'Tanggal akhir Laporan',
+  })
   @Roles('ADMIN', 'GI', 'HAR')
-  async getDetailAlat(@Param('alat_id') alat_id: string) {
-    const alat = await this.inventarisService.getDetailAlat(alat_id);
-
-    return new SuccessResponse(HttpStatus.OK, 'Alat berhasil ditemukan', alat);
+  async unduhAlat(
+    @Res() response: Response,
+    @Query('awal') awal?: string,
+    @Query('akhir') akhir?: string,
+  ) {
+    await this.inventarisService.unduhAlat({
+      awal,
+      akhir,
+      response,
+    });
   }
 
   @Patch('jenis/alat/:jenis_alat_id')

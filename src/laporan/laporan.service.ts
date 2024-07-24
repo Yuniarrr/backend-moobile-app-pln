@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { type PIC, type Prisma, type Kategori } from '@prisma/client';
+import { type Response } from 'express';
+import xlsx, { type ISettings } from 'json-as-xlsx';
 import { UploadService } from 'upload/upload.service';
 
 import { PrismaService } from 'infra/database/prisma/prisma.service';
@@ -21,6 +24,7 @@ export class LaporanService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly upload: UploadService,
+    private readonly config: ConfigService,
   ) {}
 
   async createLaporanAnomali(
@@ -392,5 +396,233 @@ export class LaporanService {
     }
 
     return laporan;
+  }
+
+  async unduhLaporan({
+    tipe,
+    awal,
+    akhir,
+    response,
+  }: {
+    tipe?: string;
+    awal?: string;
+    akhir?: string;
+    response: Response;
+  }) {
+    let fileName;
+    let result;
+
+    switch (tipe) {
+      case 'Laporan Anomali': {
+        fileName = `Laporan Anomali`;
+        result = await this.unduhLaporanAnomali(fileName, awal, akhir);
+        break;
+      }
+
+      case 'Tindak Lanjut': {
+        fileName = `Laporan Tindak Lanjut`;
+        result = await this.unduhTindakLanjut(fileName, awal, akhir);
+        break;
+      }
+    }
+
+    response.writeHead(200, {
+      'Content-Type': 'application/octet-stream',
+      'Content-disposition': `attachment; filename=${fileName}.xlsx`,
+    });
+
+    response.end(result);
+  }
+
+  async unduhLaporanAnomali(fileName: string, awal?: string, akhir?: string) {
+    const where: Prisma.laporan_anomaliWhereInput = awal
+      ? {
+          tanggal_laporan: {
+            gte: awal,
+            lte: akhir,
+          },
+        }
+      : {};
+
+    const data = await this.prisma.laporan_anomali.findMany({
+      where,
+      include: {
+        ultg: {
+          select: {
+            nama: true,
+          },
+        },
+        gi: {
+          select: {
+            nama: true,
+          },
+        },
+        jenis_peralatan: {
+          select: {
+            nama: true,
+          },
+        },
+        bay: {
+          select: {
+            nama_lokasi: true,
+            funloc_id: true,
+          },
+        },
+        alat: {
+          select: {
+            techidentno: true,
+          },
+        },
+      },
+    });
+
+    const formattedData = [
+      {
+        sheet: 'Laporan Anomali',
+        columns: [
+          { label: 'ID Laporan Anomali', value: 'id' },
+          { label: 'ULTG', value: 'ultg' },
+          { label: 'GI', value: 'gi' },
+          { label: 'Jenis Peralatan', value: 'jenis_peralatan' },
+          { label: 'Nama Lokasi', value: 'bay' },
+          { label: 'Funloc ID', value: 'funloc_id' },
+          { label: 'Techidentno (TID)', value: 'funloc_id' },
+          { label: 'ID Alat', value: 'alat_id' },
+          { label: 'Kategori Peralatan', value: 'kategori_peralatan' },
+          {
+            label: 'Kategori Peralatan Detail',
+            value: 'kategori_peralatan_detail',
+          },
+          { label: 'Anomali', value: 'anomali' },
+          { label: 'Detail Anomali', value: 'detail_anomali' },
+          { label: 'Kategori Laporan', value: 'kategori' },
+          { label: 'Tanggal Rusak', value: 'tanggal_rusak' },
+          { label: 'Tanggal Laporan', value: 'tanggal_laporan' },
+          { label: 'Tenggat Waktu', value: 'batas_waktu' },
+          { label: 'Tindak Lanjut Awal', value: 'tindak_lanjut_awal' },
+          { label: 'Link Foto', value: 'foto' },
+          { label: 'Link Berita Acara', value: 'berita_acara' },
+          { label: 'PIC', value: 'pic' },
+          { label: 'Detail PIC', value: 'detail_pic' },
+          { label: 'Nama Pelapor', value: 'nama_pembuat' },
+          { label: 'Status', value: 'status' },
+          { label: 'ID Laporan Anomali', value: 'laporan_anomali_id' },
+        ],
+        content: data.map(item => ({
+          id: item.id,
+          kategori_peralatan: item.kategori_peralatan,
+          kategori_peralatan_detail: item.kategori_peralatan_detail,
+          anomali: item.anomali,
+          detail_anomali: item.detail_anomali,
+          kategori: item.kategori,
+          tanggal_rusak: this.formatDate(item.tanggal_rusak.toISOString()),
+          tanggal_laporan: this.formatDate(item.tanggal_laporan.toISOString()),
+          batas_waktu: this.formatDate(item.batas_waktu.toISOString()),
+          tindak_lanjut_awal: item.tindak_lanjut_awal,
+          foto: item.foto ? `${this.config.get('BASE_URL')}/${item.foto}` : '',
+          berita_acara: item.berita_acara
+            ? `${this.config.get('BASE_URL')}/${item.berita_acara}`
+            : '',
+          pic: item.pic,
+          detail_pic: item.detail_pic,
+          nama_pembuat: item.nama_pembuat,
+          status: item.status,
+          laporan_anomali_id: item.laporan_anomali_id,
+          ultg: item.ultg.nama,
+          gi: item.gi.nama,
+          jenis_peralatan: item.jenis_peralatan.nama,
+          bay: item.bay.nama_lokasi,
+          funloc_id: item.bay.funloc_id,
+          techidentno: item.alat.techidentno,
+          alat_id: item.alat_id,
+        })),
+      },
+    ];
+
+    const settings: ISettings = {
+      fileName,
+      writeOptions: {
+        type: 'buffer',
+        bookType: 'xlsx',
+      },
+    };
+
+    return xlsx(formattedData, settings);
+  }
+
+  async unduhTindakLanjut(fileName: string, awal?: string, akhir?: string) {
+    const where: Prisma.laporan_tindak_lanjutWhereInput = awal
+      ? {
+          created_at: {
+            gte: awal,
+            lte: akhir,
+          },
+        }
+      : {};
+
+    const data = await this.prisma.laporan_tindak_lanjut.findMany({
+      where,
+      include: {
+        pembuat: {
+          select: {
+            username: true,
+          },
+        },
+      },
+    });
+
+    const formattedData = [
+      {
+        sheet: 'Laporan Tindak Lanjut',
+        columns: [
+          { label: 'ID', value: 'id' },
+          { label: 'Kegiatan', value: 'kegiatan' },
+          { label: 'Keterangan Kegiatan', value: 'ket_kegiatan' },
+          { label: 'Material', value: 'material' },
+          { label: 'Waktu Pengerjaan', value: 'waktu_pengerjaan' },
+          { label: 'Link Foto', value: 'foto' },
+          { label: 'Link Berita Acara', value: 'berita_acara' },
+          { label: 'Nama Pelapor', value: 'nama_pembuat' },
+          { label: 'Nama Pembuat', value: 'pembuat' },
+          { label: 'ID Laporan Anomali', value: 'laporan_anomali_id' },
+        ],
+        content: data.map(item => ({
+          id: item.id,
+          kegiatan: item.kegiatan,
+          ket_kegiatan: item.ket_kegiatan,
+          material: item.material,
+          waktu_pengerjaan: this.formatDate(
+            item.waktu_pengerjaan.toISOString(),
+          ),
+          foto: item.foto ? `${this.config.get('BASE_URL')}/${item.foto}` : '',
+          berita_acara: item.berita_acara
+            ? `${this.config.get('BASE_URL')}/${item.berita_acara}`
+            : '',
+          nama_pembuat: item.nama_pembuat,
+          pembuat: item.pembuat.username,
+          laporan_anomali_id: item.laporan_anomali_id,
+        })),
+      },
+    ];
+
+    const settings: ISettings = {
+      fileName,
+      writeOptions: {
+        type: 'buffer',
+        bookType: 'xlsx',
+      },
+    };
+
+    return xlsx(formattedData, settings);
+  }
+
+  formatDate(dateString: string) {
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString('id-ID', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
   }
 }

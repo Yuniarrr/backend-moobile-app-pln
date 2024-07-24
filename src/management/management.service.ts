@@ -166,28 +166,59 @@ export class ManagementService {
     });
   }
 
-  async getUsers(where: Prisma.usersWhereInput) {
-    return await this.prisma.users.findMany({
-      where,
-      select: {
-        id: true,
-        username: true,
-        role: true,
-        gi_id: true,
-        gi: {
-          select: {
-            id: true,
-            nama: true,
-            ultg: {
-              select: {
-                id: true,
-                nama: true,
+  async getUsers({
+    where,
+    page,
+    perPage,
+  }: {
+    where: Prisma.usersWhereInput;
+    page?: number;
+    perPage?: number;
+  }) {
+    const skip = page > 0 ? perPage * (page - 1) : 0;
+
+    const [total, data] = await Promise.all([
+      this.prisma.users.count({
+        where,
+      }),
+      this.prisma.users.findMany({
+        skip,
+        take: perPage,
+        where,
+        select: {
+          id: true,
+          username: true,
+          role: true,
+          gi_id: true,
+          gi: {
+            select: {
+              id: true,
+              nama: true,
+              ultg: {
+                select: {
+                  id: true,
+                  nama: true,
+                },
               },
             },
           },
         },
+      }),
+    ]);
+
+    const lastPage = Math.ceil(total / perPage);
+
+    return {
+      meta: {
+        total,
+        lastPage,
+        currentPage: page,
+        perPage,
+        prev: page > 1 ? page - 1 : null,
+        next: page < lastPage ? page + 1 : null,
       },
-    });
+      data,
+    };
   }
 
   async getUltg(ultg_id?: string) {

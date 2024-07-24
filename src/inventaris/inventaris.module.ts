@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 
 import { UploadService } from 'upload/upload.service';
@@ -16,6 +17,6 @@ import { InventarisService } from './inventaris.service';
     }),
   ],
   controllers: [InventarisController],
-  providers: [InventarisService, PrismaService, UploadService],
+  providers: [InventarisService, PrismaService, UploadService, ConfigService],
 })
 export class InventarisModule {}

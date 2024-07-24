@@ -16,8 +16,8 @@ import {
   UseInterceptors,
   UploadedFile,
   UsePipes,
-  Req,
   UploadedFiles,
+  Res,
 } from '@nestjs/common';
 import {
   FileFieldsInterceptor,
@@ -44,6 +44,7 @@ import {
   RolesGuard,
   SuccessResponse,
 } from 'common';
+import { Response } from 'express';
 import { FileInjector } from 'nestjs-file-upload';
 
 import {
@@ -165,6 +166,41 @@ export class LaporanController {
       'Data Laporan Anomali berhasil didapatkan',
       laporan,
     );
+  }
+
+  @Get('download')
+  @Roles('ADMIN', 'GI', 'HAR')
+  @ApiQuery({
+    name: 'tipe',
+    required: false,
+    type: String,
+    enum: ['Tindak Lanjut', 'Laporan Anomali'],
+    description: 'Tipe Laporan',
+  })
+  @ApiQuery({
+    name: 'awal',
+    required: false,
+    type: String,
+    description: 'Tanggal awal Laporan',
+  })
+  @ApiQuery({
+    name: 'akhir',
+    required: false,
+    type: String,
+    description: 'Tanggal akhir Laporan',
+  })
+  async unduhLaporan(
+    @Res() response: Response,
+    @Query('tipe') tipe?: string,
+    @Query('awal') awal?: string,
+    @Query('akhir') akhir?: string,
+  ) {
+    await this.laporanService.unduhLaporan({
+      tipe,
+      awal,
+      akhir,
+      response,
+    });
   }
 
   @Get('anomali')

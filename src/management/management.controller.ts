@@ -134,15 +134,36 @@ export class ManagementController {
     type: String,
     description: 'Id of the gi',
   })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'Page number (optional)',
+  })
+  @ApiQuery({
+    name: 'perPage',
+    required: false,
+    type: Number,
+    description: 'Per page (optional)',
+  })
   @Roles('ADMIN')
   async getUsers(
     @Query('role') role: Role,
     @Query('ultg_id') ultg_id: string,
     @Query('gi_id') gi_id: string,
+    @Query('page') page: number | undefined,
+    @Query('perPage') perPage: number | undefined,
   ) {
+    const sanitizedPage = Number.isNaN(page) ? 1 : page;
+    const sanitizedPerPage = Number.isNaN(perPage) ? 10 : perPage;
+
     const where: Prisma.usersWhereInput = { role, gi_id, gi: { ultg_id } };
 
-    const details = await this.managementService.getUsers(where);
+    const details = await this.managementService.getUsers({
+      where,
+      page: sanitizedPage,
+      perPage: sanitizedPerPage,
+    });
 
     return new SuccessResponse(
       HttpStatus.OK,
