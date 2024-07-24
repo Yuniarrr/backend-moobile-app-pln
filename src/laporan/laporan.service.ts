@@ -392,6 +392,18 @@ export class LaporanService {
             status: true,
           },
         },
+        rencana_penyelesaian: {
+          select: {
+            nama_pembuat: true,
+            tanggal_rencana: true,
+            deskripsi: true,
+            pembuat: {
+              select: {
+                username: true,
+              },
+            },
+          },
+        },
       },
     });
 
