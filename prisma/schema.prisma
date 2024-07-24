@@ -141,8 +141,8 @@ model laporan_anomali {
   tanggal_laporan           DateTime
   batas_waktu               DateTime
   tindak_lanjut_awal        String            @db.Text
-  foto                      String
-  berita_acara              String
+  foto                      String?
+  berita_acara              String?
   pic                       PIC?              @default(LAINNYA)
   detail_pic                String?
   nama_pembuat              String

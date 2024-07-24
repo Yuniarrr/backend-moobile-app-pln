@@ -34,6 +34,6 @@ export const jenisAlat = async () => {
       });
     }
   } catch (error) {
-    console.error(`Error in ultg: ${error}`);
+    console.error(`Error in jenisAlat: ${error}`);
   }
 };

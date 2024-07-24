@@ -7,3 +7,4 @@ export * from './users';
 export * from './alat';
 export * from './tindak-lanjut';
 export * from './fix-alat';
+export * from './anomali';

@@ -26,13 +26,13 @@ export class LaporanService {
   async createLaporanAnomali(
     data: CreateLaporanAnomaliDto,
     user_id: string,
-    foto?: Express.Multer.File,
-    berita_acara?: Express.Multer.File,
+    foto?: Express.Multer.File[],
+    berita_acara?: Express.Multer.File[],
   ) {
-    const fotoPath = foto ? `uploads/laporan/${foto.filename}` : null;
+    const fotoPath = foto ? `uploads/laporan/${foto[0].filename}` : null;
 
     const beritaAcaraPath = berita_acara
-      ? `uploads/laporan/${berita_acara.filename}`
+      ? `uploads/laporan/${berita_acara[0].filename}`
       : null;
 
     delete data.foto;
@@ -67,17 +67,17 @@ export class LaporanService {
   async createLaporanTindakLanjut(
     data: CreateLaporanTindakLanjutDto,
     user_id: string,
-    foto?: Express.Multer.File,
-    berita_acara?: Express.Multer.File,
+    foto?: Express.Multer.File[],
+    berita_acara?: Express.Multer.File[],
   ) {
     const isLaporanAnomaliExist = await this.checkLaporanAnomali(
       data.laporan_anomali_id,
     );
 
-    const newFoto = foto ? `uploads/laporan/${foto.filename}` : null;
+    const newFoto = foto ? `uploads/laporan/${foto[0].filename}` : null;
 
     const newBA = berita_acara
-      ? `uploads/laporan/${berita_acara.filename}`
+      ? `uploads/laporan/${berita_acara[0].filename}`
       : null;
 
     delete data.foto;
@@ -117,8 +117,8 @@ export class LaporanService {
     laporan_anomali_id: string,
     data: UpdateLaporanAnomaliDto,
     user_id: string,
-    foto?: Express.Multer.File,
-    berita_acara?: Express.Multer.File,
+    foto?: Express.Multer.File[],
+    berita_acara?: Express.Multer.File[],
   ) {
     console.log('data');
     console.log(data);
@@ -129,11 +129,11 @@ export class LaporanService {
     );
 
     const fotoPath = foto
-      ? `uploads/laporan/${foto.filename}`
+      ? `uploads/laporan/${foto[0].filename}`
       : isLaporanAnomaliExist.foto;
 
     const beritaAcaraPath = berita_acara
-      ? `uploads/laporan/${berita_acara.filename}`
+      ? `uploads/laporan/${berita_acara[0].filename}`
       : isLaporanAnomaliExist.berita_acara;
 
     delete data.foto;

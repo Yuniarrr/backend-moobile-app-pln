@@ -16,6 +16,8 @@ import {
   UseInterceptors,
   UploadedFile,
   UsePipes,
+  Req,
+  UploadedFiles,
 } from '@nestjs/common';
 import {
   FileFieldsInterceptor,
@@ -89,8 +91,6 @@ export class LaporanController {
   @Roles('ADMIN', 'GI')
   @ApiConsumes('multipart/form-data')
   // @CREATE_LAPORAN_ANOMALI_BODY()
-  // @FileInjector(CreateLaporanAnomaliDto)
-  // @UsePipes(new ValidationPipe())
   @UseInterceptors(
     FileFieldsInterceptor([
       { name: 'foto', maxCount: 1 },
@@ -98,16 +98,19 @@ export class LaporanController {
     ]),
   )
   async createLaporanAnomali(
-    @Body() data: CreateLaporanAnomaliDto,
+    @Body(ValidationPipe) data: CreateLaporanAnomaliDto,
     @GetUser('id') user_id: string,
-    @UploadedFile() foto: Express.Multer.File | null,
-    @UploadedFile() berita_acara: Express.Multer.File | null,
+    @UploadedFiles()
+    files: {
+      foto?: Express.Multer.File[];
+      berita_acara?: Express.Multer.File[];
+    },
   ) {
     const newLaporan = await this.laporanService.createLaporanAnomali(
       data,
       user_id,
-      foto,
-      berita_acara,
+      files.foto,
+      files.berita_acara,
     );
 
     return new SuccessResponse(
@@ -132,14 +135,17 @@ export class LaporanController {
   async createLaporanTindakLanjut(
     @Body() data: CreateLaporanTindakLanjutDto,
     @GetUser('id') user_id: string,
-    @UploadedFile() foto: Express.Multer.File | null,
-    @UploadedFile() berita_acara: Express.Multer.File | null,
+    @UploadedFiles()
+    files: {
+      foto?: Express.Multer.File[];
+      berita_acara?: Express.Multer.File[];
+    },
   ) {
     const newLaporan = await this.laporanService.createLaporanTindakLanjut(
       data,
       user_id,
-      foto,
-      berita_acara,
+      files.foto,
+      files.berita_acara,
     );
 
     return new SuccessResponse(
@@ -246,15 +252,18 @@ export class LaporanController {
     @Param('laporan_anomali_id') laporan_anomali_id: string,
     @Body(ValidationPipe) data: UpdateLaporanAnomaliDto,
     @GetUser('id') user_id: string,
-    @UploadedFile() foto: Express.Multer.File | null,
-    @UploadedFile() berita_acara: Express.Multer.File | null,
+    @UploadedFiles()
+    files: {
+      foto?: Express.Multer.File[];
+      berita_acara?: Express.Multer.File[];
+    },
   ) {
     const update = await this.laporanService.updateLaporanAnomali(
       laporan_anomali_id,
       data,
       user_id,
-      foto,
-      berita_acara,
+      files.foto,
+      files.berita_acara,
     );
 
     return new SuccessResponse(
