@@ -169,6 +169,7 @@ model laporan_anomali {
   updated_at            DateTime                @default(now()) @updatedAt
   deleted_at            DateTime?
   laporan_tindak_lanjut laporan_tindak_lanjut[]
+  rencana_penyelesaian  rencana_penyelesaian?
 
   @@index([ultg_id], name: "ultg_id")
 }
@@ -244,8 +245,10 @@ model rencana_penyelesaian {
   deskripsi       String   @db.Text
   nama_pembuat    String
 
-  dibuat_oleh String
-  pembuat     users  @relation(fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  laporan_anomali_id String          @unique
+  laporan_anomali    laporan_anomali @relation(fields: [laporan_anomali_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  dibuat_oleh        String
+  pembuat            users           @relation(fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at DateTime  @default(now())
   updated_at DateTime  @default(now()) @updatedAt

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @darraghor/nestjs-typed/api-method-should-specify-api-response */
@@ -56,6 +57,7 @@ import {
 import {
   CreateLaporanAnomaliDto,
   CreateLaporanTindakLanjutDto,
+  CreateRencanaPenyelesaianDto,
   UpdateLaporanAnomaliDto,
   UpdateLaporanTindakLanjutDto,
 } from './dto';
@@ -153,6 +155,24 @@ export class LaporanController {
       HttpStatus.CREATED,
       'Laporan Tindak Lanjut berhasil dibuat',
       newLaporan,
+    );
+  }
+
+  @Post('rencana/penyelesaian')
+  @Roles('ADMIN', 'GI', 'HAR')
+  async createRencanaPenyelesaian(
+    @Body(ValidationPipe) data: CreateRencanaPenyelesaianDto,
+    @GetUser('id') user_id: string,
+  ) {
+    const rencana = await this.laporanService.createRencanaPenyelesaian(
+      data,
+      user_id,
+    );
+
+    return new SuccessResponse(
+      HttpStatus.CREATED,
+      'Rencana Penyelesaian berhasil dibuat',
+      rencana,
     );
   }
 

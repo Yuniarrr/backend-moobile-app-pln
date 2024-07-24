@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -13,6 +16,7 @@ import { PrismaService } from 'infra/database/prisma/prisma.service';
 import { getTime } from 'utils';
 
 import {
+  type CreateRencanaPenyelesaianDto,
   type UpdateLaporanTindakLanjutDto,
   type UpdateLaporanAnomaliDto,
   type CreateLaporanTindakLanjutDto,
@@ -623,6 +627,20 @@ export class LaporanService {
       day: '2-digit',
       month: 'short',
       year: 'numeric',
+    });
+  }
+
+  async createRencanaPenyelesaian(
+    data: CreateRencanaPenyelesaianDto,
+    user_id: string,
+  ) {
+    await this.checkLaporanAnomali(data.laporan_anomali_id);
+
+    return await this.prisma.rencana_penyelesaian.create({
+      data: {
+        ...data,
+        dibuat_oleh: user_id,
+      },
     });
   }
 }
