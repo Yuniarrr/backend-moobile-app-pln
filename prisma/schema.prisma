@@ -116,6 +116,7 @@ model users {
   pengedit_laporan_anomali laporan_anomali[]       @relation("diedit")
   alat                     alat[]
   laporan_tindak_lanjut    laporan_tindak_lanjut[]
+  rencana_penyelesaian     rencana_penyelesaian[]
 }
 
 model jenis_peralatan {
@@ -235,4 +236,18 @@ model alat {
   updated_at      DateTime          @default(now()) @updatedAt
   deleted_at      DateTime?
   laporan_anomali laporan_anomali[]
+}
+
+model rencana_penyelesaian {
+  id              String   @id @default(uuid())
+  tanggal_rencana DateTime
+  deskripsi       String   @db.Text
+  nama_pembuat    String
+
+  dibuat_oleh String
+  pembuat     users  @relation(fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
 }
