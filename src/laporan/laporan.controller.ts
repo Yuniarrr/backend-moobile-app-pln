@@ -178,8 +178,26 @@ export class LaporanController {
 
   @Get('total-anomali')
   @Roles('ADMIN', 'GI', 'HAR')
-  async getTotalLaporanAnomali() {
-    const laporan = await this.laporanService.getTotalLaporanAnomali();
+  @ApiQuery({
+    name: 'bulan',
+    required: false,
+    type: String,
+    description: 'Bulan',
+  })
+  @ApiQuery({
+    name: 'tahun',
+    required: false,
+    type: String,
+    description: 'Tahun',
+  })
+  async getTotalLaporanAnomali(
+    @Query('bulan') bulan?: string,
+    @Query('tahun') tahun?: string,
+  ) {
+    const laporan = await this.laporanService.getTotalLaporanAnomali({
+      bulan,
+      tahun,
+    });
 
     return new SuccessResponse(
       HttpStatus.OK,

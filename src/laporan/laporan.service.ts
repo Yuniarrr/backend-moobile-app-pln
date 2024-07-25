@@ -221,16 +221,60 @@ export class LaporanService {
     });
   }
 
-  async getTotalLaporanAnomali() {
+  async getTotalLaporanAnomali({
+    bulan,
+    tahun,
+  }: {
+    bulan?: string;
+    tahun?: string;
+  }) {
+    const monthMap: Record<string, number> = {
+      Januari: 1,
+      Februari: 2,
+      Maret: 3,
+      April: 4,
+      Mei: 5,
+      Juni: 6,
+      Juli: 7,
+      Agustus: 8,
+      September: 9,
+      Oktober: 10,
+      November: 11,
+      Desember: 12,
+    };
+
+    // Convert the month name to a number
+    const month = bulan ? monthMap[bulan] : null;
+    const year = tahun ? Number.parseInt(tahun, 10) : null;
+
+    // Construct the date range for the given month and year
+    let startDate: Date | undefined;
+    let endDate: Date | undefined;
+
+    if (month !== null && year !== null) {
+      startDate = new Date(year, month - 1, 1);
+      endDate = new Date(year, month, 0, 23, 59, 59); // Last day of the month
+    }
+
     return await this.prisma.laporan_anomali.groupBy({
       by: ['ultg_id', 'status'],
       where: {
         status: {
           in: ['OPEN', 'CLOSE'],
         },
+        tanggal_laporan:
+          startDate && endDate
+            ? {
+                gte: startDate,
+                lt: endDate,
+              }
+            : undefined,
       },
       _count: {
         id: true,
+      },
+      orderBy: {
+        ultg_id: 'asc',
       },
     });
   }
@@ -651,6 +695,7 @@ export class LaporanService {
     return await this.prisma.rencana_penyelesaian.create({
       data: {
         ...data,
+        tanggal_rencana: new Date(data.tanggal_rencana),
         dibuat_oleh: user_id,
       },
     });
