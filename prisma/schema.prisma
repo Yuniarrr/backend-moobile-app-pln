@@ -158,8 +158,8 @@ model laporan_anomali {
   jenis_peralatan    jenis_peralatan @relation(fields: [jenis_peralatan_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   bay_id             String?
   bay                bay?            @relation(fields: [bay_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  alat_id            String
-  alat               alat            @relation(fields: [alat_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  alat_id            String?
+  alat               alat?           @relation(fields: [alat_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   dibuat_oleh        String
   pembuat            users           @relation("dibuat", fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
   diedit_oleh        String?
@@ -228,7 +228,7 @@ model alat {
   gi                 gi               @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   jenis_peralatan_id String?
   jenis_peralatan    jenis_peralatan? @relation(fields: [jenis_peralatan_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  bay_id             String
+  bay_id             String?
   bay                bay?             @relation(fields: [bay_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   dibuat_oleh        String
   pembuat            users            @relation(fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)

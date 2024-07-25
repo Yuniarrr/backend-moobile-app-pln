@@ -177,16 +177,16 @@ export class InventarisController {
     @Query('perPage') perPage: number | undefined,
     // @Query('search') search: string,
   ) {
-    const sanitizedPage = Number.isNaN(page) ? 1 : page;
-    const sanitizedPerPage = Number.isNaN(perPage) ? 10 : perPage;
+    // const sanitizedPage = Number.isNaN(page) ? 1 : page;
+    // const sanitizedPerPage = Number.isNaN(perPage) ? 10 : perPage;
 
     const alat = await this.inventarisService.getAlat({
       ultg_id,
       gi_id,
       jenis_peralatan_id,
       bay_id,
-      page: sanitizedPage,
-      perPage: sanitizedPerPage,
+      page,
+      perPage,
       // search,
     });
 

@@ -5,7 +5,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { type KategoriPeralatan } from '@prisma/client';
+import { type Prisma, type KategoriPeralatan } from '@prisma/client';
 import { type Response } from 'express';
 import xlsx, { type ISettings } from 'json-as-xlsx';
 import { UploadService } from 'upload/upload.service';
@@ -86,31 +86,38 @@ export class InventarisService {
     perPage?: number;
     // search?: string;
   }) {
-    const skip = page > 0 ? perPage * (page - 1) : 0;
+    const sanitizedPage = Number.isNaN(page) ? 1 : page;
+    const sanitizedPerPage = Number.isNaN(perPage) ? 10 : perPage;
+
+    const skip = sanitizedPage > 0 ? sanitizedPerPage * (page - 1) : 0;
+
+    const whereOptions: Prisma.alatWhereInput = {
+      ultg_id,
+      gi_id,
+      jenis_peralatan_id,
+      bay_id,
+    };
+
+    const findOptions: Prisma.alatFindManyArgs = {
+      where: whereOptions,
+      select: {
+        id: true,
+        merk: true,
+        tipe: true,
+      },
+    };
+
+    if (!Number.isNaN(perPage) && !Number.isNaN(perPage)) {
+      findOptions.skip = skip;
+      findOptions.take = perPage;
+    }
 
     const [total, data] = await Promise.all([
       this.prisma.alat.count({
-        where: {
-          ultg_id,
-          gi_id,
-          jenis_peralatan_id,
-          bay_id,
-        },
+        where: whereOptions,
       }),
       this.prisma.alat.findMany({
-        skip,
-        take: perPage,
-        where: {
-          ultg_id,
-          gi_id,
-          jenis_peralatan_id,
-          bay_id,
-        },
-        select: {
-          id: true,
-          merk: true,
-          tipe: true,
-        },
+        ...findOptions,
       }),
     ]);
 

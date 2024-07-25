@@ -24,9 +24,9 @@ export class CreateLaporanAnomaliDto {
   @IsNotEmpty()
   bay_id: string;
 
-  @ApiProperty({ example: 'ULTG ID' })
-  @IsNotEmpty()
-  alat_id: string;
+  @ApiPropertyOptional({ example: 'ULTG ID' })
+  @IsOptional()
+  alat_id?: string;
 
   @ApiProperty({ example: 'ULTG ID' })
   @IsNotEmpty()
