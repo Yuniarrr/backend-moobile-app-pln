@@ -82,8 +82,8 @@ export class InventarisService {
     gi_id?: string;
     jenis_peralatan_id?: string;
     bay_id?: string;
-    page?: number;
-    perPage?: number;
+    page?: number | undefined;
+    perPage?: number | undefined;
     // search?: string;
   }) {
     const sanitizedPage = Number.isNaN(page) ? 1 : page;
@@ -107,7 +107,7 @@ export class InventarisService {
       },
     };
 
-    if (!Number.isNaN(perPage) && !Number.isNaN(perPage)) {
+    if (!Number.isNaN(page) && !Number.isNaN(perPage)) {
       findOptions.skip = skip;
       findOptions.take = perPage;
     }
