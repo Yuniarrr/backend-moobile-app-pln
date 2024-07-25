@@ -262,12 +262,29 @@ export class LaporanController {
     enum: [Kategori.K1, Kategori.K2, Kategori.K3, Kategori.K4],
     description: 'Kategori Laporan',
   })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'Page number (optional)',
+  })
+  @ApiQuery({
+    name: 'perPage',
+    required: false,
+    type: Number,
+    description: 'Per page (optional)',
+  })
   @Roles('ADMIN', 'GI', 'HAR')
   async getLaporanAnomali(
     @Query('gi_id') gi_id: string,
     @Query('status') status: StatusLaporan,
     @Query('kategori') kategori: Kategori,
+    @Query('page') page: number | undefined,
+    @Query('perPage') perPage: number | undefined,
   ) {
+    const sanitizedPage = Number.isNaN(page) ? 1 : page;
+    const sanitizedPerPage = Number.isNaN(perPage) ? 20 : perPage;
+
     const formatStatus: StatusLaporan[] = status
       ? status
           .toUpperCase()
@@ -285,7 +302,11 @@ export class LaporanController {
       ...(kategori && { kategori: { in: formatKategori } }),
     };
 
-    const laporan = await this.laporanService.getLaporanAnomali(where);
+    const laporan = await this.laporanService.getLaporanAnomali({
+      where,
+      page: sanitizedPage,
+      perPage: sanitizedPerPage,
+    });
 
     return new SuccessResponse(
       HttpStatus.OK,

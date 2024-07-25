@@ -349,22 +349,53 @@ export class LaporanService {
     });
   }
 
-  async getLaporanAnomali(where?: Prisma.laporan_anomaliWhereInput) {
-    return await this.prisma.laporan_anomali.findMany({
-      where,
-      orderBy: {
-        created_at: 'desc',
+  async getLaporanAnomali({
+    where,
+    page,
+    perPage,
+  }: {
+    where?: Prisma.laporan_anomaliWhereInput;
+    page?: number;
+    perPage?: number;
+  }) {
+    const skip = page > 0 ? perPage * (page - 1) : 0;
+
+    const [total, data] = await Promise.all([
+      this.prisma.laporan_anomali.count({
+        where,
+      }),
+      this.prisma.laporan_anomali.findMany({
+        skip,
+        take: perPage,
+        where,
+        orderBy: {
+          created_at: 'desc',
+        },
+        select: {
+          id: true,
+          anomali: true,
+          tanggal_laporan: true,
+          tanggal_rusak: true,
+          batas_waktu: true,
+          status: true,
+          kategori: true,
+        },
+      }),
+    ]);
+
+    const lastPage = Math.ceil(total / perPage);
+
+    return {
+      meta: {
+        total,
+        lastPage,
+        currentPage: page,
+        perPage,
+        prev: page > 1 ? page - 1 : null,
+        next: page < lastPage ? page + 1 : null,
       },
-      select: {
-        id: true,
-        anomali: true,
-        tanggal_laporan: true,
-        tanggal_rusak: true,
-        batas_waktu: true,
-        status: true,
-        kategori: true,
-      },
-    });
+      data,
+    };
   }
 
   async getDetailLaporanAnomali(laporan_anomali_id: string) {
