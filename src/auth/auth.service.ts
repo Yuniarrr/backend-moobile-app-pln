@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   ConflictException,
   Injectable,
@@ -9,9 +12,14 @@ import * as bcrypt from 'bcryptjs';
 
 import { PrismaService } from 'infra/database/prisma/prisma.service';
 
-import { getTokens, hashData } from 'utils';
+import { decodeRefreshToken, getTokens, hashData } from 'utils';
 
-import { type GantiPasswordDto, type LoginDto, type RegisterDto } from './dto';
+import {
+  type RefreshTokenDto,
+  type GantiPasswordDto,
+  type LoginDto,
+  type RegisterDto,
+} from './dto';
 
 @Injectable()
 export class AuthService {
@@ -47,6 +55,8 @@ export class AuthService {
     return {
       ...tokens,
       role: isUserExist.role,
+      user_id: isUserExist.id,
+      username: isUserExist.username,
     };
   }
 
@@ -122,5 +132,21 @@ export class AuthService {
         password,
       },
     });
+  }
+
+  async refreshToken(data: RefreshTokenDto) {
+    const user = await decodeRefreshToken(data.refresh_token);
+
+    // const currentTime = Math.floor(Date.now() / 1000);
+
+    // if (user.exp < currentTime) {
+    //   throw new UnauthorizedException('Token has expired. Please login');
+    // }
+
+    const tokens = await getTokens(user.user_id, user.email, user.role);
+
+    await this.updateRefreshToken(user.user_id, tokens.refresh_token);
+
+    return tokens;
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @darraghor/nestjs-typed/api-method-should-specify-api-response */
 import {
   Controller,
@@ -27,7 +28,13 @@ import {
 } from 'common';
 
 import { AuthService } from './auth.service';
-import { GantiPasswordDto, LoginDto, RegisterDto } from './dto';
+import {
+  GantiPasswordDto,
+  LoginDto,
+  MeDto,
+  RefreshTokenDto,
+  RegisterDto,
+} from './dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -65,6 +72,17 @@ export class AuthController {
     );
   }
 
+  @Post('refresh-token')
+  async refreshToken(@Body(ValidationPipe) data: RefreshTokenDto) {
+    const refresh_token = await this.authService.refreshToken(data);
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'Getting new access token',
+      refresh_token,
+    );
+  }
+
   @Patch('ganti-password')
   @ApiBearerAuth()
   @UseGuards(JwtGuard, RolesGuard)
@@ -91,18 +109,31 @@ export class AuthController {
     return new SuccessResponse(HttpStatus.OK, 'User logged out successfully');
   }
 
-  @Get('me')
+  @Post('me')
   @ApiBearerAuth()
   @UseGuards(JwtGuard, RolesGuard)
   @Roles('ADMIN', 'GI', 'HAR')
   @NoCache()
-  async userMe(@GetUser('id') user_id: string) {
-    const data = await this.authService.userMe(user_id);
+  async userMe(@Body(ValidationPipe) data: MeDto) {
+    const user = await this.authService.userMe(data.user_id);
 
     return new SuccessResponse(
       HttpStatus.OK,
       'User data retrieved successfully',
-      data,
+      user,
+    );
+  }
+
+  @Get('health-check')
+  @ApiBearerAuth()
+  @UseGuards(JwtGuard, RolesGuard)
+  @Roles('ADMIN', 'GI', 'HAR')
+  @NoCache()
+  healthCheck(@GetUser('id') user_id: string) {
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'User data retrieved successfully',
+      user_id,
     );
   }
 }
