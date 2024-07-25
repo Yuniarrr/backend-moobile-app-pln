@@ -219,6 +219,14 @@ export class InventarisController {
     });
   }
 
+  @Get('alat/:alat_id')
+  @Roles('ADMIN', 'GI', 'HAR')
+  async getDetailAlat(@Param('alat_id') alat_id: string) {
+    const alat = await this.inventarisService.getDetailAlat(alat_id);
+
+    return new SuccessResponse(HttpStatus.OK, 'Alat berhasil ditemukan', alat);
+  }
+
   @Patch('jenis/alat/:jenis_alat_id')
   @Roles('ADMIN', 'GI', 'HAR')
   async updateJenisAlat(
