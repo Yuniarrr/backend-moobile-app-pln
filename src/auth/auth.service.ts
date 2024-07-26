@@ -5,7 +5,6 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 
 import * as bcrypt from 'bcryptjs';
@@ -35,13 +34,13 @@ export class AuthService {
     const isUserExist = await this.findByUsername(data.username);
 
     if (!isUserExist) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException('Username atau password salah');
     }
 
     const isPassword = bcrypt.compareSync(data.password, isUserExist.password);
 
     if (!isPassword) {
-      throw new UnauthorizedException('Wrong username or password');
+      throw new NotFoundException('Username atau password salah');
     }
 
     const tokens = await getTokens(

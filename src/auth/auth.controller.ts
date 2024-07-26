@@ -12,13 +12,17 @@ import {
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
+  ApiConflictResponse,
   ApiConsumes,
   ApiCreatedResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
 import {
+  ErrorResponse,
   GetUser,
   JwtGuard,
   NoCache,
@@ -45,6 +49,18 @@ import {
 @ApiOkResponse({
   description: 'The record has been successfully created.',
   type: SuccessResponse,
+})
+@ApiUnauthorizedResponse({
+  description: 'Unauthorized',
+  type: ErrorResponse,
+})
+@ApiNotFoundResponse({
+  description: 'Record not found',
+  type: ErrorResponse,
+})
+@ApiConflictResponse({
+  description: 'Conflict',
+  type: ErrorResponse,
 })
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

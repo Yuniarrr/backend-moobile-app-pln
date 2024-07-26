@@ -249,6 +249,12 @@ export class LaporanController {
     description: 'ID GI',
   })
   @ApiQuery({
+    name: 'search',
+    required: false,
+    type: String,
+    description: 'Search Laporan',
+  })
+  @ApiQuery({
     name: 'status',
     required: false,
     type: [String],
@@ -281,6 +287,7 @@ export class LaporanController {
     @Query('kategori') kategori: Kategori,
     @Query('page') page: number | undefined,
     @Query('perPage') perPage: number | undefined,
+    @Query('search') search: string | undefined,
   ) {
     const sanitizedPage = Number.isNaN(page) ? 1 : page;
     const sanitizedPerPage = Number.isNaN(perPage) ? 20 : perPage;
@@ -306,6 +313,7 @@ export class LaporanController {
       where,
       page: sanitizedPage,
       perPage: sanitizedPerPage,
+      search,
     });
 
     return new SuccessResponse(

@@ -268,6 +268,8 @@ export class ManagementController {
     @Param('user_id') user_id: string,
     @Body(ValidationPipe) data: UpdateUserDto,
   ) {
+    console.log('data');
+    console.log(data);
     const update = await this.managementService.updateUser(user_id, data);
 
     return new SuccessResponse(

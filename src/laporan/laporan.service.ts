@@ -353,12 +353,22 @@ export class LaporanService {
     where,
     page,
     perPage,
+    search,
   }: {
     where?: Prisma.laporan_anomaliWhereInput;
     page?: number;
     perPage?: number;
+    search?: string | undefined;
   }) {
     const skip = page > 0 ? perPage * (page - 1) : 0;
+
+    if (search) {
+      where = {
+        anomali: {
+          contains: search,
+        },
+      };
+    }
 
     const [total, data] = await Promise.all([
       this.prisma.laporan_anomali.count({
