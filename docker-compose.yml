@@ -1,20 +1,4 @@
 services:
-  # app:
-  #   container_name: api_nestjs
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: .
-  #     target: development
-  #   volumes:
-  #     - .:/usr/src/app
-  #   env_file:
-  #     - .env
-  #   command: pnpm start:dev
-  #   ports:
-  #     - 3000:3000
-  #   depends_on:
-  #     - db
-
   backend-database:
     container_name: mobile-app
     image: postgres:latest
@@ -29,6 +13,9 @@ services:
       - ${POSTGRES_PORT}
     volumes:
       - ./docker/volumes/:/var/lib/postgresql/data
+      - ./docker/postgres-config/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./docker/postgres-config/pg_hba.conf:/etc/postgresql/pg_hba.conf
+    command: ['postgres', '-c', 'config_file=/etc/postgresql/postgresql.conf']
 
 volumes:
   postgres:
