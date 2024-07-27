@@ -13,9 +13,9 @@ services:
       - ${POSTGRES_PORT}
     volumes:
       - ./docker/volumes/:/var/lib/postgresql/data
-      - ./docker/postgres-config/postgresql.conf:/etc/postgresql/postgresql.conf
-      - ./docker/postgres-config/pg_hba.conf:/etc/postgresql/pg_hba.conf
-    command: ['postgres', '-c', 'config_file=/etc/postgresql/postgresql.conf']
+    #   - ./docker/postgres-config/postgresql.conf:/etc/postgresql/postgresql.conf
+    #   - ./docker/postgres-config/pg_hba.conf:/etc/postgresql/pg_hba.conf
+    # command: ['postgres', '-c', 'config_file=/etc/postgresql/postgresql.conf']
 
 volumes:
   postgres:
