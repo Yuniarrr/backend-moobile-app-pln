@@ -102,6 +102,14 @@ export class CreateAlatDto {
 
   @ApiPropertyOptional({})
   @IsOptional()
+  vector?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  arus_dn?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
   impedansi?: string | null;
 
   @ApiPropertyOptional({})

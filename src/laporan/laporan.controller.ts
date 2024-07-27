@@ -19,6 +19,7 @@ import {
   UsePipes,
   UploadedFiles,
   Res,
+  Req,
 } from '@nestjs/common';
 import {
   FileFieldsInterceptor,
@@ -45,7 +46,7 @@ import {
   RolesGuard,
   SuccessResponse,
 } from 'common';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { FileInjector } from 'nestjs-file-upload';
 
 import {
@@ -352,6 +353,7 @@ export class LaporanController {
     ]),
   )
   async updateLaporanAnomali(
+    @Req() request: Request,
     @Param('laporan_anomali_id') laporan_anomali_id: string,
     @Body(ValidationPipe) data: UpdateLaporanAnomaliDto,
     @GetUser('id') user_id: string,

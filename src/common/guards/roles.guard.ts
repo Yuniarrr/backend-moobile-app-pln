@@ -61,9 +61,9 @@ export class RolesGuard implements CanActivate {
 
   async validate(
     token: string,
-  ): Promise<{ sub: string; username: string; role: string }> {
+  ): Promise<{ id: string; username: string; role: string }> {
     interface user {
-      id: string;
+      user_id: string;
       username: string;
       role: Role;
     }
@@ -76,7 +76,7 @@ export class RolesGuard implements CanActivate {
 
     const user = await this.prisma.users.findFirst({
       where: {
-        username: decodedToken.username,
+        id: decodedToken.user_id,
       },
     });
 
@@ -85,7 +85,7 @@ export class RolesGuard implements CanActivate {
     }
 
     return {
-      sub: user.id,
+      id: user.id,
       username: user.username,
       role: decodedToken.role,
     };

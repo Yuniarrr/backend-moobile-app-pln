@@ -20,11 +20,11 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate(payload: { sub: string; username: string; role: string }) {
+  async validate(payload: { user_id: string; username: string; role: string }) {
     return await this.prisma.users.findFirst({
       where: {
-        id: payload.sub,
-        username: payload.username,
+        id: payload.user_id,
+        // username: payload.username,
       },
     });
   }

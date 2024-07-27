@@ -258,4 +258,36 @@ export class ManagementService {
       },
     });
   }
+
+  async getDetailUser(user_id: string) {
+    const isUserExist = await this.prisma.users.findFirst({
+      where: { id: user_id },
+    });
+
+    if (!isUserExist) {
+      throw new NotFoundException('User not found');
+    }
+
+    return await this.prisma.users.findFirst({
+      where: { id: user_id },
+      select: {
+        id: true,
+        username: true,
+        role: true,
+        gi_id: true,
+        gi: {
+          select: {
+            id: true,
+            nama: true,
+            ultg: {
+              select: {
+                id: true,
+                nama: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
 }

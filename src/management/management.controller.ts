@@ -172,6 +172,18 @@ export class ManagementController {
     );
   }
 
+  @Get('user/:user_id')
+  @Roles('ADMIN', 'GI', 'HAR')
+  async getDetailUser(@Param('user_id') user_id: string) {
+    const details = await this.managementService.getDetailUser(user_id);
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'The record has been successfully created.',
+      details,
+    );
+  }
+
   @Get('ultg')
   @ApiQuery({
     name: 'ultg_id',
@@ -268,8 +280,6 @@ export class ManagementController {
     @Param('user_id') user_id: string,
     @Body(ValidationPipe) data: UpdateUserDto,
   ) {
-    console.log('data');
-    console.log(data);
     const update = await this.managementService.updateUser(user_id, data);
 
     return new SuccessResponse(

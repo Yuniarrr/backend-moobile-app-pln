@@ -6,7 +6,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { type PIC, type Prisma, type Kategori } from '@prisma/client';
+import {
+  type KategoriPeralatan,
+  type PIC,
+  type Prisma,
+  type Kategori,
+} from '@prisma/client';
 import { type Response } from 'express';
 import xlsx, { type ISettings } from 'json-as-xlsx';
 import { UploadService } from 'upload/upload.service';
@@ -128,10 +133,6 @@ export class LaporanService {
     foto?: Express.Multer.File[],
     berita_acara?: Express.Multer.File[],
   ) {
-    console.log('data');
-    console.log(data);
-    console.log('nameplate');
-    console.log(foto);
     const isLaporanAnomaliExist = await this.checkLaporanAnomali(
       laporan_anomali_id,
     );
@@ -364,9 +365,45 @@ export class LaporanService {
 
     if (search) {
       where = {
-        anomali: {
-          contains: search,
-        },
+        OR: [
+          {
+            anomali: {
+              contains: search,
+            },
+          },
+          {
+            jenis_peralatan: {
+              nama: {
+                contains: search,
+              },
+            },
+          },
+          {
+            kategori_peralatan_detail: {
+              contains: search,
+            },
+          },
+          {
+            detail_anomali: {
+              contains: search,
+            },
+          },
+          {
+            tindak_lanjut_awal: {
+              contains: search,
+            },
+          },
+          {
+            laporan_anomali_id: {
+              contains: search,
+            },
+          },
+          {
+            kategori_peralatan: {
+              equals: search as KategoriPeralatan,
+            },
+          },
+        ],
       };
     }
 
