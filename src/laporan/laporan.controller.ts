@@ -342,9 +342,6 @@ export class LaporanController {
 
   @Patch('anomali/:laporan_anomali_id')
   @Roles('ADMIN', 'GI')
-  // @ApiConsumes('multipart/form-data')
-  // @UPDATE_LAPORAN_ANOMALI_BODY()
-  // @FileInjector(UpdateLaporanAnomaliDto)
   @UsePipes(new ValidationPipe())
   @UseInterceptors(
     FileFieldsInterceptor([
@@ -353,7 +350,6 @@ export class LaporanController {
     ]),
   )
   async updateLaporanAnomali(
-    @Req() request: Request,
     @Param('laporan_anomali_id') laporan_anomali_id: string,
     @Body(ValidationPipe) data: UpdateLaporanAnomaliDto,
     @GetUser('id') user_id: string,

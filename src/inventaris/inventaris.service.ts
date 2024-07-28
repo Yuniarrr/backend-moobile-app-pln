@@ -9,7 +9,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import {
-  type StatusOperasiAlat,
+  StatusOperasiAlat,
   type FasaTerpasang,
   type Prisma,
   type KategoriPeralatan,
@@ -112,6 +112,7 @@ export class InventarisService {
         id: true,
         merk: true,
         tipe: true,
+        fasa_terpasang: true,
       },
     };
 
@@ -572,8 +573,9 @@ export class InventarisService {
 
         await this.prisma.alat.create({
           data: {
-            techidentno: alat.techidentno,
-            kategori_peralatan: alat.kategori_peralatan as KategoriPeralatan,
+            techidentno: alat.techidentno.toString(),
+            kategori_peralatan:
+              alat.kategori_peralatan.toUpperCase() as KategoriPeralatan,
             kategori_peralatan_detail: alat.kategori_peralatan_detail,
             tanggal_operasi: alat.tanggal_operasi
               ? new Date(alat.tanggal_operasi)
@@ -597,7 +599,9 @@ export class InventarisService {
             vector: alat.vector,
             arus_dn: alat.arus_dn,
             nameplate: alat.nameplate,
-            status: alat.status as StatusOperasiAlat,
+            status: this.changeStatus(
+              alat.status.toUpperCase(),
+            ) as StatusOperasiAlat,
             ultg_id: isUltgExist.id,
             gi_id: isGiExist.id,
             jenis_peralatan_id,
@@ -612,4 +616,32 @@ export class InventarisService {
       throw new Error('Failed to process file');
     }
   }
+
+  changeStatus = (status: string) => {
+    switch (status) {
+      case 'OPERASI': {
+        return StatusOperasiAlat.OPERASI;
+      }
+
+      case 'TIDAK OPERASI': {
+        return StatusOperasiAlat.TIDAK_OPERASI;
+      }
+
+      case 'HAPUS': {
+        return StatusOperasiAlat.DIHAPUS;
+      }
+
+      case 'DIGUDANGKAN': {
+        return StatusOperasiAlat.DIGUDANGKAN;
+      }
+
+      case 'BELUM OPERASI': {
+        return StatusOperasiAlat.BELUM_OPERASI;
+      }
+
+      default: {
+        return null;
+      }
+    }
+  };
 }

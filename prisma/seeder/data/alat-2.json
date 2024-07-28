@@ -1,6 +1,5 @@
 [
   {
-    "id": "ad7e4759-ee8a-42a9-bf40-bf51e8821b70",
     "techidentno": "TEST_ALAT_1",
     "kategori_peralatan": "PRIMER",
     "kategori_peralatan_detail": null,
@@ -18,7 +17,7 @@
     "status": "OPERASI",
     "ultg": "ULTG BATURAJA",
     "gi": "GI 150KV BLAMBANGAN UMPU",
-    "jenis_peralatan_id": "Current Transformer (CT)",
-    "bay_id": "GI BLAMBANGAN UMPU TD.1 150/20kV"
+    "jenis_peralatan": "Current Transformer (CT)",
+    "bay": "GI BLAMBANGAN UMPU TD.1 150/20kV"
   }
 ]

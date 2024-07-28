@@ -111,9 +111,18 @@ export class AuthService {
         id: true,
         username: true,
         role: true,
-        gi_id: true,
         created_at: true,
         updated_at: true,
+        gi: {
+          select: {
+            nama: true,
+            ultg: {
+              select: {
+                nama: true,
+              },
+            },
+          },
+        },
       },
     });
   }
