@@ -1,0 +1,18 @@
+[
+  {
+    "username": "admin 2",
+    "password": "password",
+    "role": "ADMIN"
+  },
+  {
+    "username": "har 2",
+    "password": "password",
+    "role": "HAR"
+  },
+  {
+    "username": "gi 2",
+    "password": "password",
+    "role": "GI",
+    "gi": "GI 150KV SIMPANG TIGA"
+  }
+]

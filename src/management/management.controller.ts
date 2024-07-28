@@ -12,7 +12,10 @@ import {
   BadRequestException,
   Query,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -34,6 +37,7 @@ import {
   SuccessResponse,
 } from 'common';
 
+import { CREATE_UPLOAD_BODY } from './decorators';
 import {
   CreateGIDto,
   CreateULTGDto,
@@ -111,6 +115,20 @@ export class ManagementController {
       HttpStatus.CREATED,
       'The record has been successfully created.',
       newGI,
+    );
+  }
+
+  @Post('upload')
+  @Roles('ADMIN')
+  @CREATE_UPLOAD_BODY()
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadManajemenData(@UploadedFile() file: Express.Multer.File | null) {
+    await this.managementService.createFromFile(file);
+
+    return new SuccessResponse(
+      HttpStatus.CREATED,
+      'The record has been successfully created.',
     );
   }
 

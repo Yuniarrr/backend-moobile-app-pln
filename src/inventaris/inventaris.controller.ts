@@ -40,7 +40,7 @@ import {
 import { type Response } from 'express';
 import { FileInjector } from 'nestjs-file-upload';
 
-import { CREATE_ALAT_BODY } from './decorators';
+import { CREATE_ALAT_BODY, CREATE_UPLOAD_BODY } from './decorators';
 import {
   CreateAlatDto,
   CreateJenisAlatDto,
@@ -95,6 +95,23 @@ export class InventarisController {
       HttpStatus.CREATED,
       'Alat berhasil ditambahkan',
       alat,
+    );
+  }
+
+  @Post('upload/alat')
+  @Roles('ADMIN')
+  @CREATE_UPLOAD_BODY()
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadManajemenData(
+    @UploadedFile() file: Express.Multer.File | null,
+    @GetUser('id') user_id: string,
+  ) {
+    await this.inventarisService.createFromFile(file, user_id);
+
+    return new SuccessResponse(
+      HttpStatus.CREATED,
+      'The record has been successfully created.',
     );
   }
 

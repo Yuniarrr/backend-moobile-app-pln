@@ -398,11 +398,6 @@ export class LaporanService {
               contains: search,
             },
           },
-          {
-            kategori_peralatan: {
-              equals: search as KategoriPeralatan,
-            },
-          },
         ],
       };
     }
@@ -659,7 +654,7 @@ export class LaporanService {
           tindak_lanjut_awal: item.tindak_lanjut_awal,
           foto: item.foto ? `${this.config.get('BASE_URL')}/${item.foto}` : '',
           berita_acara: item.berita_acara
-            ? `${this.config.get('BASE_URL')}/${item.berita_acara}`
+            ? `http://157.173.221.186/${item.berita_acara}`
             : '',
           pic: item.pic,
           detail_pic: item.detail_pic,
@@ -732,7 +727,7 @@ export class LaporanService {
           waktu_pengerjaan: this.formatDate(
             item.waktu_pengerjaan.toISOString(),
           ),
-          foto: item.foto ? `${this.config.get('BASE_URL')}/${item.foto}` : '',
+          foto: item.foto ? `http://157.173.221.186/${item.foto}` : '',
           berita_acara: item.berita_acara
             ? `${this.config.get('BASE_URL')}/${item.berita_acara}`
             : '',

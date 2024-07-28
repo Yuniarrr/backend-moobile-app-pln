@@ -1,0 +1,24 @@
+[
+  {
+    "id": "ad7e4759-ee8a-42a9-bf40-bf51e8821b70",
+    "techidentno": "TEST_ALAT_1",
+    "kategori_peralatan": "PRIMER",
+    "kategori_peralatan_detail": null,
+    "tanggal_operasi": "2024-07-11T00:00:00.000Z",
+    "serial_id": "serial_id",
+    "fasa_terpasang": "R",
+    "mekanik_penggerak": "mekanik_penggerak",
+    "media_pemadam": "media_pemadam",
+    "tipe": "tipe",
+    "merk": "merk",
+    "negara_pembuat": "Indonesia",
+    "tahun_pembuatan": "2024",
+    "tegangan_operasi": "tegangan_operasi",
+    "rating_arus": "rating_arus",
+    "status": "OPERASI",
+    "ultg": "ULTG BATURAJA",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "jenis_peralatan_id": "Current Transformer (CT)",
+    "bay_id": "GI BLAMBANGAN UMPU TD.1 150/20kV"
+  }
+]

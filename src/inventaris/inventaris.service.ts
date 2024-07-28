@@ -2,10 +2,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import fsPromises from 'node:fs/promises';
+import path from 'node:path';
+
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { type Prisma, type KategoriPeralatan } from '@prisma/client';
+import {
+  type StatusOperasiAlat,
+  type FasaTerpasang,
+  type Prisma,
+  type KategoriPeralatan,
+} from '@prisma/client';
 import { type Response } from 'express';
 import xlsx, { type ISettings } from 'json-as-xlsx';
 import { UploadService } from 'upload/upload.service';
@@ -392,7 +400,7 @@ export class InventarisService {
           vector: item.vector,
           arus_dn: item.arus_dn,
           nameplate: item.nameplate
-            ? `${this.config.get('BASE_URL')}/${item.nameplate}`
+            ? `http://157.173.221.186/${item.nameplate}`
             : '',
           status: item.status,
         })),
@@ -425,5 +433,183 @@ export class InventarisService {
       month: 'short',
       year: 'numeric',
     });
+  }
+
+  async createFromFile(file: Express.Multer.File, user_id: string) {
+    interface IAlat {
+      techidentno: string;
+      kategori_peralatan: string;
+      kategori_peralatan_detail?: string | null;
+      tanggal_operasi?: string | null;
+      serial_id?: string | null;
+      fasa_terpasang?: string;
+      mekanik_penggerak?: string | null;
+      media_pemadam?: string | null;
+      tipe?: string | null;
+      merk: string | null;
+      negara_pembuat?: string | null;
+      tahun_pembuatan?: string | null;
+      tegangan_operasi?: string | null;
+      rating_arus?: string | null;
+      breaking_current?: string | null;
+      penempatan?: string | null;
+      ratio?: string | null;
+      jenis_cvt?: string | null;
+      impedansi?: string | null;
+      daya?: string | null;
+      vector?: string | null;
+      arus_dn?: string | null;
+      nameplate?: string | null;
+      status?: string | null;
+      ultg: string;
+      gi: string;
+      jenis_peralatan?: string | null;
+      bay?: string | null;
+    }
+
+    const filePath = path.join(
+      process.cwd(),
+      'uploads',
+      'inventaris',
+      file.filename,
+    );
+
+    try {
+      const jsonData = await fsPromises.readFile(filePath, 'utf8');
+      const alats: IAlat[] = JSON.parse(jsonData);
+
+      const errorUltg = [];
+      const errorGI = [];
+      const errorBay = [];
+      const errorJenisPeralatan = [];
+
+      for (const alat of alats) {
+        const isUltgExist = await this.prisma.ultg.findFirst({
+          where: { nama: alat.ultg },
+        });
+
+        if (!isUltgExist) {
+          errorUltg.push(`ULTG ${alat.ultg} not found`);
+        }
+
+        const isGiExist = await this.prisma.gi.findFirst({
+          where: { nama: alat.gi },
+        });
+
+        if (!isGiExist) {
+          errorGI.push(`GI ${alat.gi} not found`);
+        }
+
+        if (alat.bay) {
+          const isAlatExist = await this.prisma.bay.findFirst({
+            where: { nama_lokasi: alat.bay },
+          });
+
+          if (!isAlatExist) {
+            errorBay.push(`Bay ${alat.bay} not found`);
+          }
+        }
+
+        if (alat.jenis_peralatan) {
+          const isJenisPeralatanExist =
+            await this.prisma.jenis_peralatan.findFirst({
+              where: { nama: alat.jenis_peralatan },
+            });
+
+          if (!isJenisPeralatanExist) {
+            errorJenisPeralatan.push(
+              `Jenis Peralatan ${alat.jenis_peralatan} not found`,
+            );
+          }
+        }
+      }
+
+      if (errorUltg.length > 0) {
+        throw new NotFoundException(errorUltg.join('\n'));
+      }
+
+      if (errorGI.length > 0) {
+        throw new NotFoundException(errorGI.join('\n'));
+      }
+
+      if (errorBay.length > 0) {
+        throw new NotFoundException(errorBay.join('\n'));
+      }
+
+      if (errorJenisPeralatan.length > 0) {
+        throw new NotFoundException(errorJenisPeralatan.join('\n'));
+      }
+
+      for (const alat of alats) {
+        const isUltgExist = await this.prisma.ultg.findFirst({
+          where: { nama: alat.ultg },
+        });
+
+        const isGiExist = await this.prisma.gi.findFirst({
+          where: { nama: alat.gi },
+        });
+
+        let jenis_peralatan_id = null;
+        let bay_id = null;
+
+        if (alat.jenis_peralatan) {
+          const jenisPeralatan = await this.prisma.jenis_peralatan.findFirst({
+            where: { nama: alat.jenis_peralatan },
+            select: { id: true },
+          });
+
+          jenis_peralatan_id = jenisPeralatan.id;
+        }
+
+        if (alat.bay) {
+          const bay = await this.prisma.bay.findFirst({
+            where: { nama_lokasi: alat.bay },
+            select: { id: true },
+          });
+
+          bay_id = bay.id;
+        }
+
+        await this.prisma.alat.create({
+          data: {
+            techidentno: alat.techidentno,
+            kategori_peralatan: alat.kategori_peralatan as KategoriPeralatan,
+            kategori_peralatan_detail: alat.kategori_peralatan_detail,
+            tanggal_operasi: alat.tanggal_operasi
+              ? new Date(alat.tanggal_operasi)
+              : null,
+            serial_id: alat.serial_id,
+            fasa_terpasang: alat.fasa_terpasang as FasaTerpasang,
+            mekanik_penggerak: alat.mekanik_penggerak,
+            media_pemadam: alat.media_pemadam,
+            tipe: alat.tipe,
+            merk: alat.merk,
+            negara_pembuat: alat.negara_pembuat,
+            tahun_pembuatan: alat.tahun_pembuatan,
+            tegangan_operasi: alat.tegangan_operasi,
+            rating_arus: alat.rating_arus,
+            breaking_current: alat.breaking_current,
+            penempatan: alat.penempatan,
+            ratio: alat.ratio,
+            jenis_cvt: alat.jenis_cvt,
+            impedansi: alat.impedansi,
+            daya: alat.daya,
+            vector: alat.vector,
+            arus_dn: alat.arus_dn,
+            nameplate: alat.nameplate,
+            status: alat.status as StatusOperasiAlat,
+            ultg_id: isUltgExist.id,
+            gi_id: isGiExist.id,
+            jenis_peralatan_id,
+            bay_id,
+            dibuat_oleh: user_id,
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Error reading or parsing file:', error);
+
+      throw new Error('Failed to process file');
+    }
   }
 }

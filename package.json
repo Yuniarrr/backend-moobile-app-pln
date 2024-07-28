@@ -11,6 +11,7 @@
     "db": "npm run migrate:dev && npm run seed:dev",
     "db:dev": "dotenv -e .env.development -- npm run migrate:dev && npm run seed:dev",
     "db:prod": "dotenv -e .env.production -- npm run migrate:dev && npm run seed:dev",
+    "dev:api": "stormkit api",
     "docker:down": "docker compose down",
     "docker:down:dev": "dotenv -e .env.development -- docker compose down",
     "docker:down:prod": "dotenv -e .env.production -- docker compose down",

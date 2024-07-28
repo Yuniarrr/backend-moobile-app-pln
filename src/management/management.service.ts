@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import fsPromises from 'node:fs/promises';
+import path from 'node:path';
+
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { type Prisma } from '@prisma/client';
+import { type Role, type Prisma } from '@prisma/client';
 
 import { PrismaService } from 'infra/database/prisma/prisma.service';
 
@@ -289,5 +293,85 @@ export class ManagementService {
         },
       },
     });
+  }
+
+  async createFromFile(file: Express.Multer.File) {
+    interface IUser {
+      username: string;
+      password: string;
+      role: string;
+      gi?: string | null;
+    }
+
+    const filePath = path.join(
+      process.cwd(),
+      'uploads',
+      'management',
+      file.filename,
+    );
+
+    try {
+      const jsonData = await fsPromises.readFile(filePath, 'utf8');
+      const users: IUser[] = JSON.parse(jsonData);
+
+      const errorUsername = [];
+      const errorGI = [];
+
+      for (const user of users) {
+        const isUserExist = await this.prisma.users.findFirst({
+          where: { username: user.username },
+        });
+
+        if (isUserExist) {
+          errorUsername.push(`Username ${user.username} already exist`);
+        }
+
+        if (user.gi) {
+          const isGIExist = await this.prisma.gi.findFirst({
+            where: { nama: user.gi },
+          });
+
+          if (!isGIExist) {
+            errorGI.push(`GI ${user.gi} not found`);
+          }
+        }
+      }
+
+      if (errorUsername.length > 0) {
+        throw new NotFoundException(errorUsername.join('\n'));
+      }
+
+      if (errorGI.length > 0) {
+        throw new NotFoundException(errorGI.join('\n'));
+      }
+
+      for (const data of users) {
+        const password = hashData(data.password);
+
+        let gi;
+
+        if (data.gi) {
+          gi = await this.prisma.gi.findFirst({
+            where: { nama: data.gi },
+            select: {
+              id: true,
+            },
+          });
+        }
+
+        await this.prisma.users.create({
+          data: {
+            username: data.username,
+            password,
+            role: data.role.toUpperCase() as Role,
+            gi_id: data.gi ? gi.id : null,
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Error reading or parsing file:', error);
+
+      throw new Error('Failed to process file');
+    }
   }
 }
