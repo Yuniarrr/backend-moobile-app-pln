@@ -11,6 +11,9 @@ export class CreateUserDto {
   @IsEnumDefined('Role', Role, Role.HAR)
   role: Role;
 
+  @IsStringOptional('ULTG id', 'id')
+  ultg_id?: string;
+
   @IsStringOptional('GI id', 'id')
   gi_id?: string;
 }

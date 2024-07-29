@@ -198,12 +198,12 @@ export class ManagementService {
             select: {
               id: true,
               nama: true,
-              ultg: {
-                select: {
-                  id: true,
-                  nama: true,
-                },
-              },
+            },
+          },
+          ultg: {
+            select: {
+              id: true,
+              nama: true,
             },
           },
         },
@@ -283,12 +283,12 @@ export class ManagementService {
           select: {
             id: true,
             nama: true,
-            ultg: {
-              select: {
-                id: true,
-                nama: true,
-              },
-            },
+          },
+        },
+        ultg: {
+          select: {
+            id: true,
+            nama: true,
           },
         },
       },

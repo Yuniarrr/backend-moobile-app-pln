@@ -116,11 +116,11 @@ export class AuthService {
         gi: {
           select: {
             nama: true,
-            ultg: {
-              select: {
-                nama: true,
-              },
-            },
+          },
+        },
+        ultg: {
+          select: {
+            nama: true,
           },
         },
       },

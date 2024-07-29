@@ -66,6 +66,7 @@ model ultg {
   gi              gi[]
   laporan_anomali laporan_anomali[]
   alat            alat[]
+  users           users[]
 }
 
 model gi {
@@ -106,8 +107,10 @@ model users {
   role          Role
   refresh_token String?
 
-  gi_id String?
-  gi    gi?     @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  gi_id   String?
+  gi      gi?     @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ultg_id String?
+  ultg    ultg?   @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at               DateTime                @default(now())
   updated_at               DateTime                @default(now()) @updatedAt
