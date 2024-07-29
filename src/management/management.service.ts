@@ -301,6 +301,7 @@ export class ManagementService {
       password: string;
       role: string;
       gi?: string | null;
+      ultg?: string | null;
     }
 
     const filePath = path.join(
@@ -316,6 +317,7 @@ export class ManagementService {
 
       const errorUsername = [];
       const errorGI = [];
+      const errorUltg = [];
 
       for (const user of users) {
         const isUserExist = await this.prisma.users.findFirst({
@@ -335,6 +337,16 @@ export class ManagementService {
             errorGI.push(`GI ${user.gi} not found`);
           }
         }
+
+        if (user.ultg) {
+          const isULTGExist = await this.prisma.ultg.findFirst({
+            where: { nama: user.ultg },
+          });
+
+          if (!isULTGExist) {
+            errorUltg.push(`ULTG ${user.ultg} not found`);
+          }
+        }
       }
 
       if (errorUsername.length > 0) {
@@ -345,14 +357,28 @@ export class ManagementService {
         throw new NotFoundException(errorGI.join('\n'));
       }
 
+      if (errorUltg.length > 0) {
+        throw new NotFoundException(errorUltg.join('\n'));
+      }
+
       for (const data of users) {
         const password = hashData(data.password);
 
         let gi;
+        let ultg;
 
         if (data.gi) {
           gi = await this.prisma.gi.findFirst({
             where: { nama: data.gi },
+            select: {
+              id: true,
+            },
+          });
+        }
+
+        if (data.ultg) {
+          ultg = await this.prisma.ultg.findFirst({
+            where: { nama: data.ultg },
             select: {
               id: true,
             },
@@ -365,6 +391,7 @@ export class ManagementService {
             password,
             role: data.role.toUpperCase() as Role,
             gi_id: data.gi ? gi.id : null,
+            ultg_id: data.ultg ? ultg.id : null,
           },
         });
       }
