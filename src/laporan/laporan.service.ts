@@ -7,8 +7,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import {
-  type KategoriPeralatan,
   type PIC,
+  type KategoriPeralatan,
   type Prisma,
   type Kategori,
 } from '@prisma/client';
@@ -42,6 +42,10 @@ export class LaporanService {
     foto?: Express.Multer.File[],
     berita_acara?: Express.Multer.File[],
   ) {
+    console.log('foto');
+    console.log(foto);
+    console.log('berita_acara');
+    console.log(berita_acara);
     const fotoPath = foto ? `uploads/laporan/${foto[0].filename}` : null;
 
     const beritaAcaraPath = berita_acara
@@ -137,16 +141,30 @@ export class LaporanService {
       laporan_anomali_id,
     );
 
-    const fotoPath = foto
-      ? `uploads/laporan/${foto[0].filename}`
-      : isLaporanAnomaliExist.foto;
+    let fotoPath;
 
-    const beritaAcaraPath = berita_acara
-      ? `uploads/laporan/${berita_acara[0].filename}`
-      : isLaporanAnomaliExist.berita_acara;
+    if (data.is_delete_foto === true) {
+      fotoPath = null;
+    } else if (data.is_delete_foto === false) {
+      fotoPath = foto
+        ? `uploads/laporan/${foto[0].filename}`
+        : isLaporanAnomaliExist.foto;
+    }
+
+    let beritaAcaraPath;
+
+    if (data.is_delete_berita_acara === true) {
+      beritaAcaraPath = null;
+    } else if (data.is_delete_berita_acara === false) {
+      beritaAcaraPath = berita_acara
+        ? `uploads/laporan/${berita_acara[0].filename}`
+        : isLaporanAnomaliExist.berita_acara;
+    }
 
     delete data.foto;
     delete data.berita_acara;
+    delete data.is_delete_berita_acara;
+    delete data.is_delete_foto;
 
     return await this.prisma.laporan_anomali.update({
       where: { id: laporan_anomali_id },
