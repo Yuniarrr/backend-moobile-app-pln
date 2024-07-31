@@ -154,19 +154,19 @@ model laporan_anomali {
   laporan_anomali_id        String
 
   ultg_id            String
-  ultg               ultg            @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ultg               ultg             @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   gi_id              String
-  gi                 gi              @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  jenis_peralatan_id String
-  jenis_peralatan    jenis_peralatan @relation(fields: [jenis_peralatan_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  gi                 gi               @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  jenis_peralatan_id String?
+  jenis_peralatan    jenis_peralatan? @relation(fields: [jenis_peralatan_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   bay_id             String?
-  bay                bay?            @relation(fields: [bay_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  bay                bay?             @relation(fields: [bay_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   alat_id            String?
-  alat               alat?           @relation(fields: [alat_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  alat               alat?            @relation(fields: [alat_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   dibuat_oleh        String
-  pembuat            users           @relation("dibuat", fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pembuat            users            @relation("dibuat", fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
   diedit_oleh        String?
-  pengedit           users?          @relation("diedit", fields: [diedit_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pengedit           users?           @relation("diedit", fields: [diedit_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at            DateTime                @default(now())
   updated_at            DateTime                @default(now()) @updatedAt

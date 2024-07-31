@@ -110,8 +110,6 @@ export class LaporanController {
       berita_acara?: Express.Multer.File[];
     },
   ) {
-    console.log('files');
-    console.log(files);
     const newLaporan = await this.laporanService.createLaporanAnomali(
       data,
       user_id,
@@ -343,7 +341,7 @@ export class LaporanController {
   }
 
   @Patch('anomali/:laporan_anomali_id')
-  @Roles('ADMIN', 'GI')
+  @Roles('ADMIN', 'GI', 'HAR')
   @UsePipes(new ValidationPipe())
   @UseInterceptors(
     FileFieldsInterceptor([
@@ -377,7 +375,7 @@ export class LaporanController {
   }
 
   @Patch('tindak/lanjut/:laporan_tindak_lanjut_id')
-  @Roles('ADMIN', 'GI')
+  @Roles('ADMIN', 'GI', 'HAR')
   @ApiConsumes('multipart/form-data')
   @UPDATE_LAPORAN_TINDAK_LANJUT_BODY()
   // @FileInjector(UpdateLaporanTindakLanjutDto)

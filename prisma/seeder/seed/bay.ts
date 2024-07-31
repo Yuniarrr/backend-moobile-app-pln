@@ -46,7 +46,6 @@ export const bay = async () => {
       }
     }
 
-    console.log('Upsert complete.');
   } catch (error) {
     console.error(`Error in bay: ${error}`);
   } finally {

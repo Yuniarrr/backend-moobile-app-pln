@@ -185,7 +185,6 @@ export class LaporanService {
     nameplate?: Express.Multer.File,
     berita_acara?: Express.Multer.File,
   ) {
-    console.log(data);
     const isLaporanTindakLanjutExist = await this.checkLaporanTindakLanjut(
       laporan_tindak_lanjut_id,
     );

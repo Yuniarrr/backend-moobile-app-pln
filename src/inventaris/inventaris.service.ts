@@ -180,14 +180,17 @@ export class InventarisService {
     const nameplatePath = nameplate
       ? `uploads/inventaris/${nameplate.filename}`
       : alat.nameplate;
+    const is_delete_nameplate = data.is_delete_nameplate;
 
     delete data.nameplate;
+    delete data.is_delete_nameplate;
 
     return await this.prisma.alat.update({
       where: { id: alat_id },
       data: {
         ...data,
-        nameplate: nameplatePath ?? alat.nameplate,
+        // nameplate: nameplatePath ?? alat.nameplate,
+        nameplate: is_delete_nameplate ? null : nameplatePath,
         tanggal_operasi: data.tanggal_operasi ?? alat.tanggal_operasi,
       },
     });
@@ -372,9 +375,9 @@ export class InventarisService {
           id: item.id,
           ultg: item.ultg.nama,
           gi: item.gi.nama,
-          jenis_peralatan: item.jenis_peralatan.nama,
-          bay: item.bay.nama_lokasi,
-          funloc_id: item.bay.funloc_id,
+          jenis_peralatan: item.jenis_peralatan?.nama,
+          bay: item.bay?.nama_lokasi,
+          funloc_id: item.bay?.funloc_id,
           pembuat: item.pembuat.username,
           techidentno: item.techidentno,
           kategori_peralatan: item.kategori_peralatan,

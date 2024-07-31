@@ -2,7 +2,11 @@
 import fsPromises from 'node:fs/promises';
 import path from 'node:path';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 import { type Role, type Prisma } from '@prisma/client';
 
@@ -133,7 +137,9 @@ export class ManagementService {
     });
 
     if (isUsernameExist) {
-      throw new NotFoundException('Username already exist');
+      throw new ConflictException(
+        'Username telah digunakan. Buat username lain',
+      );
     }
 
     return isUsernameExist;

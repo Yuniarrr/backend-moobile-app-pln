@@ -60,9 +60,9 @@ export class CreateAlatDto {
   @IsNotEmpty()
   tahun_pembuatan: string;
 
-  @ApiProperty({ example: 'ULTG ID' })
-  @IsNotEmpty()
-  tegangan_operasi: string;
+  @ApiPropertyOptional({ example: 'ULTG ID' })
+  @IsOptional()
+  tegangan_operasi?: string;
 
   @ApiProperty({ example: 'ULTG ID' })
   @IsNotEmpty()

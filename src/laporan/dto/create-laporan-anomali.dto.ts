@@ -16,9 +16,9 @@ export class CreateLaporanAnomaliDto {
   @IsNotEmpty()
   gi_id: string;
 
-  @ApiProperty({ example: 'ULTG ID' })
-  @IsNotEmpty()
-  jenis_peralatan_id: string;
+  @ApiPropertyOptional({ example: 'ULTG ID' })
+  @IsOptional()
+  jenis_peralatan_id?: string;
 
   @ApiProperty({ example: 'ULTG ID' })
   @IsNotEmpty()
