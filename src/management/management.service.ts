@@ -327,7 +327,7 @@ export class ManagementService {
 
       for (const user of users) {
         const isUserExist = await this.prisma.users.findFirst({
-          where: { username: user.username },
+          where: { username: user.username.trim() },
         });
 
         if (isUserExist) {
@@ -336,7 +336,7 @@ export class ManagementService {
 
         if (user.gi) {
           const isGIExist = await this.prisma.gi.findFirst({
-            where: { nama: user.gi },
+            where: { nama: user.gi.trim() },
           });
 
           if (!isGIExist) {
@@ -346,7 +346,7 @@ export class ManagementService {
 
         if (user.ultg) {
           const isULTGExist = await this.prisma.ultg.findFirst({
-            where: { nama: user.ultg },
+            where: { nama: user.ultg.trim() },
           });
 
           if (!isULTGExist) {
@@ -368,14 +368,14 @@ export class ManagementService {
       }
 
       for (const data of users) {
-        const password = hashData(data.password);
+        const password = hashData(data.password.trim());
 
         let gi;
         let ultg;
 
         if (data.gi) {
           gi = await this.prisma.gi.findFirst({
-            where: { nama: data.gi },
+            where: { nama: data.gi.trim() },
             select: {
               id: true,
             },
@@ -384,7 +384,7 @@ export class ManagementService {
 
         if (data.ultg) {
           ultg = await this.prisma.ultg.findFirst({
-            where: { nama: data.ultg },
+            where: { nama: data.ultg.trim() },
             select: {
               id: true,
             },
@@ -393,7 +393,7 @@ export class ManagementService {
 
         await this.prisma.users.create({
           data: {
-            username: data.username,
+            username: data.username.trim(),
             password,
             role: data.role.toUpperCase() as Role,
             gi_id: data.gi ? gi.id : null,
