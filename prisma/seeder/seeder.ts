@@ -18,11 +18,11 @@ async function main() {
     await ultg();
     await jenisAlat();
     await bay();
-    await users();
-    await alats();
+    // await users();
+    // await alats();
     // await tindakLanjut(); // just for prod
     await fixAlat();
-    await anomalis();
+    // await anomalis();
   } catch (error) {
     console.error('Seeding error:', error);
   } finally {

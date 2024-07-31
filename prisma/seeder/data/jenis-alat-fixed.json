@@ -1,27 +1,27 @@
 [
   {
     "id": "2b759454-d3d5-449c-8796-deefa5b7d241",
-    "nama": "Pemutus (PMT)",
+    "nama": "PMT",
     "kategori_peralatan": "PRIMER"
   },
   {
     "id": "755eccc0-d47f-4a83-83ce-2b8ae70245de",
-    "nama": "Pemisah (PMS)",
+    "nama": "PMS",
     "kategori_peralatan": "PRIMER"
   },
   {
     "id": "98183095-e5e0-4a40-b7af-c99b3d6531ba",
-    "nama": "Current Transformer (CT)",
+    "nama": "CT",
     "kategori_peralatan": "PRIMER"
   },
   {
     "id": "c9953859-8801-4f8c-a26f-0443bab7abe1",
-    "nama": "Capacitive Voltage Transformer/Potential Transformer (CVT/PT)",
+    "nama": "CVT/PT",
     "kategori_peralatan": "PRIMER"
   },
   {
     "id": "2d7aa0b3-93b3-4512-a1d2-f8c780f75404",
-    "nama": "Lightning Arrester (LA)",
+    "nama": "LA",
     "kategori_peralatan": "PRIMER"
   },
   {
@@ -47,6 +47,16 @@
   {
     "id": "19302ab7-142a-4518-bdec-8440f5bb1fbb",
     "nama": "kWh Meter",
+    "kategori_peralatan": "SEKUNDER"
+  },
+  {
+    "id": "d1b81e3c-e32e-4b28-b927-60d88c5e12cd",
+    "nama": "Inverter",
+    "kategori_peralatan": "SEKUNDER"
+  },
+  {
+    "id": "7a52188d-9c42-48da-8f8b-619c80814c80",
+    "nama": "Panel ACDB",
     "kategori_peralatan": "SEKUNDER"
   }
 ]
