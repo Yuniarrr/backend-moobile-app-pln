@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import fsPromises from 'node:fs/promises';
 import path from 'node:path';
@@ -120,6 +121,9 @@ export class ManagementService {
       await this.checkUsername(data.username);
     }
 
+    const ultg_id = data.role === 'ADMIN' ? null : data.ultg_id;
+    const gi_id = data.role === 'GI' ? data.gi_id : null;
+
     return await this.prisma.users.update({
       where: { id: user_id },
       data: {
@@ -127,6 +131,8 @@ export class ManagementService {
         password: data.password
           ? hashData(data.password)
           : isUserExist.password,
+        ultg_id,
+        gi_id,
       },
     });
   }

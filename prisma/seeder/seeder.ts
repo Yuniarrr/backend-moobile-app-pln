@@ -21,7 +21,7 @@ async function main() {
     // await users();
     // await alats();
     // await tindakLanjut(); // just for prod
-    // await fixAlat();
+    await fixAlat();
     // await anomalis();
   } catch (error) {
     console.error('Seeding error:', error);

@@ -137,7 +137,7 @@ export const fixAlat = async () => {
           bay_id: findBay.id,
           ultg_id: findGi.ultg.id,
           gi_id: findGi.id,
-          dibuat_oleh: 'c6bf3673-80e0-4a14-abb1-c5058f44b1d6',
+          dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
           ...detailAlat,
         },
         update: {
@@ -145,11 +145,12 @@ export const fixAlat = async () => {
           bay_id: findBay.id,
           ultg_id: findGi.ultg.id,
           gi_id: findGi.id,
-          dibuat_oleh: 'c6bf3673-80e0-4a14-abb1-c5058f44b1d6',
+          dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
           ...detailAlat,
         },
       });
     }
+    console.log('selesai');
   } catch (error) {
     console.error(`Error in fix alat: ${error}`);
   }
