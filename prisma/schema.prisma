@@ -40,6 +40,8 @@ enum FasaTerpasang {
   T
   N
   RST
+  AC
+  DC
 }
 
 enum StatusOperasiAlat {
