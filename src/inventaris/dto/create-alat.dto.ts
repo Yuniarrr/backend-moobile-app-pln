@@ -116,6 +116,62 @@ export class CreateAlatDto {
   @IsOptional()
   daya?: string | null;
 
+  @ApiPropertyOptional({})
+  @IsOptional()
+  kapasitas_baterai?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  jenis_baterai?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  jum_sel?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  kapasitas_arus?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  v_input_ac?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  v_output_dc_floating?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  v_output_dc_boosting?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  v_output_dc_equalizing?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  v_output_load?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  kapasitas_baterai_terhubung?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  jenis_baterai_terhubung?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  jum_sel_baterai_terhubung?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  dc_ground?: string | null;
+
+  @ApiPropertyOptional({})
+  @IsOptional()
+  jenis_relay?: string | null;
+
   @ApiPropertyOptional({ description: 'Nameplate' })
   nameplate?: Express.Multer.File;
 }
