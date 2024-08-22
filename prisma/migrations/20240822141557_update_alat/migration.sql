@@ -1,0 +1,15 @@
+-- AlterTable
+ALTER TABLE "alat" ADD COLUMN     "dc_ground" TEXT,
+ADD COLUMN     "jenis_baterai" TEXT,
+ADD COLUMN     "jenis_baterai_terhubung" TEXT,
+ADD COLUMN     "jenis_relay" TEXT,
+ADD COLUMN     "jum_sel" TEXT,
+ADD COLUMN     "jum_sel_baterai_terhubung" TEXT,
+ADD COLUMN     "kapasitas_arus" TEXT,
+ADD COLUMN     "kapasitas_baterai" TEXT,
+ADD COLUMN     "kapasitas_baterai_terhubung" TEXT,
+ADD COLUMN     "v_input_ac" TEXT,
+ADD COLUMN     "v_output_dc_boosting" TEXT,
+ADD COLUMN     "v_output_dc_equalizing" TEXT,
+ADD COLUMN     "v_output_dc_floating" TEXT,
+ADD COLUMN     "v_output_load" TEXT;

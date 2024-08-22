@@ -6,12 +6,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import {
-  type PIC,
-  type KategoriPeralatan,
-  type Prisma,
-  type Kategori,
-} from '@prisma/client';
+import { type PIC, type Prisma, type Kategori } from '@prisma/client';
 import { type Response } from 'express';
 import xlsx, { type ISettings } from 'json-as-xlsx';
 import { UploadService } from 'upload/upload.service';

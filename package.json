@@ -78,6 +78,7 @@
     "class-validator": "^0.14.0",
     "csvtojson": "^2.0.10",
     "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.2",
     "express-basic-auth": "^1.2.1",
     "json-as-xlsx": "^2.5.6",
     "nestjs-file-upload": "^1.0.4",

@@ -198,32 +198,46 @@ model laporan_tindak_lanjut {
 }
 
 model alat {
-  id                        String            @id @default(uuid())
-  techidentno               String?
-  kategori_peralatan        KategoriPeralatan @default(PRIMER)
-  kategori_peralatan_detail String?
-  tanggal_operasi           DateTime?
-  serial_id                 String?
-  fasa_terpasang            FasaTerpasang     @default(R)
-  mekanik_penggerak         String?
-  media_pemadam             String?
-  tipe                      String?
-  merk                      String?
-  negara_pembuat            String?
-  tahun_pembuatan           String?
-  tegangan_operasi          String?
-  rating_arus               String?
-  breaking_current          String?
-  penempatan                String?
-  ratio                     String?
-  jenis_cvt                 String?
-  impedansi                 String?
-  daya                      String?
-  vector                    String?
-  arus_dn                   String?
+  id                          String            @id @default(uuid())
+  techidentno                 String?
+  kategori_peralatan          KategoriPeralatan @default(PRIMER)
+  kategori_peralatan_detail   String?
+  tanggal_operasi             DateTime?
+  serial_id                   String?
+  fasa_terpasang              FasaTerpasang     @default(R)
+  mekanik_penggerak           String?
+  media_pemadam               String?
+  tipe                        String?
+  merk                        String?
+  negara_pembuat              String?
+  tahun_pembuatan             String?
+  tegangan_operasi            String?
+  rating_arus                 String?
+  breaking_current            String?
+  penempatan                  String?
+  ratio                       String?
+  jenis_cvt                   String?
+  impedansi                   String?
+  daya                        String?
+  vector                      String?
+  arus_dn                     String?
+  kapasitas_baterai           String?
+  jenis_baterai               String?
+  jum_sel                     String?
+  kapasitas_arus              String?
+  v_input_ac                  String?
+  v_output_dc_floating        String?
+  v_output_dc_boosting        String?
+  v_output_dc_equalizing      String?
+  v_output_load               String?
+  kapasitas_baterai_terhubung String?
+  jenis_baterai_terhubung     String?
+  jum_sel_baterai_terhubung   String?
+  dc_ground                   String?
+  jenis_relay                 String?
   // nama                      String
-  nameplate                 String?
-  status                    StatusOperasiAlat @default(OPERASI)
+  nameplate                   String?
+  status                      StatusOperasiAlat @default(OPERASI)
 
   ultg_id            String
   ultg               ultg             @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
