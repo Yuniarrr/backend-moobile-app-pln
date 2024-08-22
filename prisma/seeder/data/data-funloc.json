@@ -1,0 +1,1244 @@
+[
+  {
+    "id": "27c6bc7e-1f5a-49b3-96c5-029b8dc3d064",
+    "nama_lokasi": "GI 150 BATURAJA BAY KAPASITOR 1",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0017"
+  },
+  {
+    "id": "c9841de8-c2e0-4d26-80ba-dabc0bf8a938",
+    "nama_lokasi": "GI BTRJA BAY TD 2 30 MVA",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0002"
+  },
+  {
+    "id": "e881dded-2005-4ea0-b7d8-0a6137026f46",
+    "nama_lokasi": "CUBICLE TRF#2",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0012"
+  },
+  {
+    "id": "7376921d-a05a-475b-af77-411c36d4314c",
+    "nama_lokasi": "GI BTRJA BAY PT SEMEN 2",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0016"
+  },
+  {
+    "id": "d22a5642-50e4-4124-896b-e52c44c951c4",
+    "nama_lokasi": "GI 150KV BATURAJA",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098"
+  },
+  {
+    "id": "06d7d1b3-f4b8-47e1-a0d7-bf908e621a18",
+    "nama_lokasi": "GI BTRJA BAY TD 3 60 MVA",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0003"
+  },
+  {
+    "id": "0890be3b-3439-42a2-998a-0ebf34d165d8",
+    "nama_lokasi": "GI BTRJA BAY BUKIT ASAM 1",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0004"
+  },
+  {
+    "id": "8c9b44e8-2211-4f65-b3a7-5fa983596837",
+    "nama_lokasi": "CUBICLE TRF#3",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0013"
+  },
+  {
+    "id": "601a6191-995f-4ef8-9029-9b7ccc2f896d",
+    "nama_lokasi": "GI 150 BATURAJA BAY KAPASITOR 2",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0018"
+  },
+  {
+    "id": "563af8d1-f94f-43c5-836b-5089f4bd1889",
+    "nama_lokasi": "GI BTRJA BAY TD 1 60 MVA",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0001"
+  },
+  {
+    "id": "183fedb5-9771-4fa0-a2a1-a920825965ca",
+    "nama_lokasi": "GI BTRJA BAY MARTAPURA 1",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0006"
+  },
+  {
+    "id": "f63794cd-f345-460a-973a-2ca497ee4920",
+    "nama_lokasi": "GI BTRJA BAY TRAFO#4 TEST",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0014"
+  },
+  {
+    "id": "35440f44-1c6f-40af-af22-a480fee6ce9c",
+    "nama_lokasi": "GI BTRJA BAY PT SEMEN",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0015"
+  },
+  {
+    "id": "e2f7e3e9-8ddb-42a7-b43f-d8da9851bf72",
+    "nama_lokasi": "GI 150 BATURAJA BAY KAPASITOR 3",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0019"
+  },
+  {
+    "id": "5dad0a8a-8275-48e6-af94-5ff875b471bb",
+    "nama_lokasi": "GI BTRJA BAY MARTAPURA 2",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0007"
+  },
+  {
+    "id": "b3d1c1b2-31e0-45e4-8a23-7719827bfa0d",
+    "nama_lokasi": "GI BTRJA BAY KOPEL",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0010"
+  },
+  {
+    "id": "46869a2e-a61a-4ce2-99d5-19ec1dcb1b33",
+    "nama_lokasi": "CUBICLE TRF#1",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0011"
+  },
+  {
+    "id": "449831ba-e579-4d63-a478-1663870d86d5",
+    "nama_lokasi": "GEDUNG GI 150 kV GI BATURAJA",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-G0001"
+  },
+  {
+    "id": "15f6b9bf-eb5f-4dac-b102-7959c6d0953c",
+    "nama_lokasi": "GI BTRJA BAY BUKIT ASAM 2",
+    "gi": "GI 150KV BATURAJA",
+    "funloc_id": "TRS-3224-098.098-B0005"
+  },
+  {
+    "id": "d7e34008-3742-4550-bfe3-b45017b1fead",
+    "nama_lokasi": "GI 150KV BLAMBANGAN UMPU",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102"
+  },
+  {
+    "id": "e55f0ecf-1c4e-4a56-bbdb-1a1b89ef84be",
+    "nama_lokasi": "GI BLAMBANGAN UMPU BAY BUSBAR B 150kV",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0005"
+  },
+  {
+    "id": "cdeb71dc-a38b-4670-8365-9eaaecc454e2",
+    "nama_lokasi": "GI BLAMBANGAN UMPU TD.2 150/20kV",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0008"
+  },
+  {
+    "id": "d6be8012-7fd5-4b5e-ba8d-f30679b53f8e",
+    "nama_lokasi": "GI BLAMBANGAN UMPU BAY BUKIT KEMUNING 1",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0003"
+  },
+  {
+    "id": "12362dd8-c08f-40fa-bf9a-96e630985492",
+    "nama_lokasi": "GI BLAMBANGAN UMPU BAY BUSBAR A 150kV",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0004"
+  },
+  {
+    "id": "52c45081-34e8-4d38-9456-c77ca4361028",
+    "nama_lokasi": "GEDUNG GI 150 kV GI BLAMBANGAN UMPU",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-G0001"
+  },
+  {
+    "id": "f304e6bc-e3ea-4f2b-879d-23c4a961ce73",
+    "nama_lokasi": "GI BLAMBANGAN UMPU TD.1 150/20kV",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0001"
+  },
+  {
+    "id": "98c0a76a-88f0-4a60-909e-8fd2045c9dfb",
+    "nama_lokasi": "GI BLAMBANGAN UMPU BAY CUBICLE TRF#1",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0006"
+  },
+  {
+    "id": "090ed34f-eaac-4330-9d01-d1a8cc6008c9",
+    "nama_lokasi": "GI BLMPU BAY KAPASITOR",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0007"
+  },
+  {
+    "id": "56d1a459-5ea1-4745-a6d9-2761ded53e34",
+    "nama_lokasi": "GI BLAMBANGAN UMPU BAY BUKIT KEMUNING 2",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0002"
+  },
+  {
+    "id": "1201936b-1d32-4487-9ec2-0bc6069d3ef4",
+    "nama_lokasi": "GI 150 BLAMBANGAN UMPU BAY MARTAPURA 1",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0010"
+  },
+  {
+    "id": "afd27079-b17c-497f-893e-d165485f5fc5",
+    "nama_lokasi": "GI 150 BLAMBANGAN UMPU BAY KOPEL",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0009"
+  },
+  {
+    "id": "a909cbaf-f0c2-480a-bed1-c130f87ccb0a",
+    "nama_lokasi": "GI 150 BLAMBANGAN UMPU BAY MARTAPURA 2",
+    "gi": "GI 150KV BLAMBANGAN UMPU",
+    "funloc_id": "TRS-3224-102.102-B0011"
+  },
+  {
+    "id": "2439260b-dc51-493e-affd-8abb2bd809a2",
+    "nama_lokasi": "GI BKSAM BAY 150/20 KV TD#1",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0001"
+  },
+  {
+    "id": "2d9cdcfa-f278-4027-bd55-7e350f400f9b",
+    "nama_lokasi": "GI BKSAM BAY PHT 150 kV GUMEG#1",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0003"
+  },
+  {
+    "id": "ab61d643-803d-4b4e-88c7-e014646aec35",
+    "nama_lokasi": "GI BKSAM BAY PHT 150 kV BTRJA#2",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0006"
+  },
+  {
+    "id": "d9564efe-7fd1-432b-a72e-a182bd5e58d1",
+    "nama_lokasi": "GI BKSAM BAY PHT 150 kV LAHAT#2",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0008"
+  },
+  {
+    "id": "12f00e5a-ae4b-40c8-9859-7284bf1f86ae",
+    "nama_lokasi": "GI BKSAM BAY PHT 150 kV LAHAT#1",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0007"
+  },
+  {
+    "id": "5dd772a2-d555-43f7-9a53-351a30bf07f6",
+    "nama_lokasi": "GI 150KV BUKIT ASAM",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073"
+  },
+  {
+    "id": "a8ebdb79-a210-476b-8fa4-fe9dabe66b9f",
+    "nama_lokasi": "BAY CUBICLE TRF#2",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0013"
+  },
+  {
+    "id": "d51f5345-f2a7-428c-8129-c3c4f19aedca",
+    "nama_lokasi": "GI BKSAM BAY COUPLE 150kV",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0011"
+  },
+  {
+    "id": "c15bd99a-e896-48cd-9e8f-904747d3d776",
+    "nama_lokasi": "BAY CUBICLE TRF#1",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0012"
+  },
+  {
+    "id": "8d3cd585-cde5-4a7a-9852-711baf0a714b",
+    "nama_lokasi": "GI BKSAM BAY PHT 150 kV GUMEG#2",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0004"
+  },
+  {
+    "id": "a6c81706-46a8-405a-a2f2-3c44932689b3",
+    "nama_lokasi": "GI BKSAM BAY PHT 150 kV BTRJA#1",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0005"
+  },
+  {
+    "id": "53942e3c-05f6-4c01-b9ab-87e7bc731e83",
+    "nama_lokasi": "GI BKSAM BAY BUSBAR B 150kV",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0010"
+  },
+  {
+    "id": "e635d4fc-c2bd-4816-a98f-65781391f733",
+    "nama_lokasi": "GI BKSAM BAY BUSBAR A 150kV",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0009"
+  },
+  {
+    "id": "423baab7-c3d5-4baf-a48d-774d9288a0cd",
+    "nama_lokasi": "GI BKSAM BAY 150/20 KV TD#2",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-B0002"
+  },
+  {
+    "id": "143afcce-3b1f-4c20-b391-fabfbadbc2f3",
+    "nama_lokasi": "GEDUNG GI 150 kV BUKIT ASAM",
+    "gi": "GI 150KV BUKIT ASAM",
+    "funloc_id": "TRS-3224-073.073-G0001"
+  },
+  {
+    "id": "9572f5e7-22b6-4e10-8035-c50ac439dae4",
+    "nama_lokasi": "GI 150KV GUNUNG MEGANG",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076"
+  },
+  {
+    "id": "40ca6938-dbdf-4f30-a2f0-14a228815ca4",
+    "nama_lokasi": "GI GUMEG BAY BUSBAR A 150kV",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0006"
+  },
+  {
+    "id": "376e3b44-7198-42e8-b725-0463b01d66d8",
+    "nama_lokasi": "GI GUMEG BAY COUPLE 150kV",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0008"
+  },
+  {
+    "id": "1316b743-5815-4e41-be64-4b9e5ca3e420",
+    "nama_lokasi": "GI GUMEG BAY CUBICLE TRF#2",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0012"
+  },
+  {
+    "id": "15496e1b-e852-4dfb-a6c0-d529e9f2b9a0",
+    "nama_lokasi": "GEDUNG GI 150 kV GUNUNG MEGANG",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-G0001"
+  },
+  {
+    "id": "7bee8a15-27a9-4064-9d5e-865d41433682",
+    "nama_lokasi": "GI GUMEG BAY TRF#1 150/20kV",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0001"
+  },
+  {
+    "id": "f1f4109a-6562-4cdc-b423-d58cb191c9ed",
+    "nama_lokasi": "GI GUMEG BAY TRF#2 150/20kV",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0013"
+  },
+  {
+    "id": "7d01a293-f99b-433e-9404-74b2a8c6a2fb",
+    "nama_lokasi": "GI GUMEG BAY PHT 150 kV PNDPO#1",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0004"
+  },
+  {
+    "id": "89fc3de2-bc11-4305-9045-d7a84c89d641",
+    "nama_lokasi": "GI GUMEG BAY PHT 150 kV PNDPO#2",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0005"
+  },
+  {
+    "id": "eede79e4-2de5-48a4-84c3-44861d256681",
+    "nama_lokasi": "GI GUMEG BAY BUSBAR B 150kV",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0007"
+  },
+  {
+    "id": "2335aa85-0efe-42ad-98ba-9b0f64728ae3",
+    "nama_lokasi": "GI GUMEG BAY PHT 150 kV BKSAM#1",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0002"
+  },
+  {
+    "id": "65a1cb4c-0422-4542-8c99-9fbe58ae273f",
+    "nama_lokasi": "GI GUMEG BAY CUBICLE TRF#1",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0009"
+  },
+  {
+    "id": "5e8a37eb-80b0-4ffa-83c1-26c73c7f9055",
+    "nama_lokasi": "GI GUMEG BAY PHT 150 kV BKSAM#2",
+    "gi": "GI 150KV GUNUNG MEGANG",
+    "funloc_id": "TRS-3224-076.076-B0003"
+  },
+  {
+    "id": "45690aa7-500a-45d5-b179-32385a6dd9ff",
+    "nama_lokasi": "GI LUMUT BALAI BUSBAR A 150 KV",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0006"
+  },
+  {
+    "id": "b139b801-d8c7-42ab-bde5-a5a85eaf83ff",
+    "nama_lokasi": "GI LUMUT BALAI BAY PHT 150 KV RDDAP 1",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0008"
+  },
+  {
+    "id": "00ebb672-ba5e-43b3-988c-dd4513319191",
+    "nama_lokasi": "GI LBLAI BAY PHT 150 KV PLTP LBLAI 1",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0001"
+  },
+  {
+    "id": "f57c962a-1ed0-40d8-bb42-41eed37554ed",
+    "nama_lokasi": "GI LUMUT BALAI BAY KOPEL 150 KV",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0005"
+  },
+  {
+    "id": "45e2efee-8837-403b-86d9-44bce7cd097a",
+    "nama_lokasi": "GI LUMUT BALAI BAY PHT 150 KV RDDAP 2",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0009"
+  },
+  {
+    "id": "1a80fbce-7d87-407e-ac44-ff99d6db1ddb",
+    "nama_lokasi": "GI 150KV LUMUT BALAI",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243"
+  },
+  {
+    "id": "153d3cc9-93f4-4aa7-916c-c511d38f0b06",
+    "nama_lokasi": "GI LUMUT BALAI BAY 150/20 KV TD#1",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0003"
+  },
+  {
+    "id": "ad0106f4-cc66-4f21-9fb3-028f7822f46e",
+    "nama_lokasi": "GI LUMUT BALAI KUBIKEL 20 KV TD#1",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0004"
+  },
+  {
+    "id": "2ccb4d56-38ff-4345-aedc-c9e55e3151e4",
+    "nama_lokasi": "GI LUMUT BALAI BUSBAR B 150 KV",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0007"
+  },
+  {
+    "id": "eeb8df2e-ff2c-4daa-9c81-6c4b9896f009",
+    "nama_lokasi": "GI LBLAI BAY PHT 150 KV PLTP LBLAI 2",
+    "gi": "GI 150KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-243.243-B0002"
+  },
+  {
+    "id": "efdce373-feb7-40f7-aa03-5aaf4d6b7053",
+    "nama_lokasi": "GI 150 kV MARTAPURA BAY BATURAJA 1",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0004"
+  },
+  {
+    "id": "4c2e7978-ae1a-49df-9c34-e5d75659e1cb",
+    "nama_lokasi": "GI MARTAPURA BUSBAR B 150 KV",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0011"
+  },
+  {
+    "id": "28fe443c-dae3-41d1-8f9f-82e387223b94",
+    "nama_lokasi": "GI 150 kV MARTAPURA BAY BATURAJA 2",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0005"
+  },
+  {
+    "id": "2d501c24-2ae5-4630-8e70-02ae36c049d0",
+    "nama_lokasi": "GI MARTAPURA BAY KOPEL 150 KV",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0009"
+  },
+  {
+    "id": "6fbc3bda-7641-485f-a601-b096dae498db",
+    "nama_lokasi": "GI MARTAPURA BUSBAR A 150 KV",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0010"
+  },
+  {
+    "id": "ee7d2f68-b0de-49a9-911a-9629e4241693",
+    "nama_lokasi": "GI 150 kV MARTAPURA BAY BLAMBANGAN UMPU 2",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0003"
+  },
+  {
+    "id": "c82e33ae-b1b0-4f4b-8364-997b62d4a36f",
+    "nama_lokasi": "GI 150 kV MARTAPURA BAY BLAMBANGAN UMPU 1",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0002"
+  },
+  {
+    "id": "07310621-ce6f-41d5-b59f-fd170b5ff418",
+    "nama_lokasi": "GI 150 kV MARTAPURA BAY CUBICLE TRF#1",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0006"
+  },
+  {
+    "id": "c7996623-bbe0-43f9-8b47-2ce394f5652c",
+    "nama_lokasi": "GEDUNG GI 150 kV GI MARTAPURA",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-G0001"
+  },
+  {
+    "id": "8cb70b59-00cb-4153-8550-2d60cbe6e4c4",
+    "nama_lokasi": "GI MARTAPURA BAY PHT 150 KV MUARA DUA 2",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0008"
+  },
+  {
+    "id": "f4e4a286-f507-4c65-8a10-78694e53d288",
+    "nama_lokasi": "GI 150KV MARTAPURA",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181"
+  },
+  {
+    "id": "84c1f335-f0ad-45bc-8251-6ce9098d449c",
+    "nama_lokasi": "GI 150 kV MARTAPURA TD.1 150/20kV",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0001"
+  },
+  {
+    "id": "f870e78c-0f2e-4737-834f-49934fd8879d",
+    "nama_lokasi": "GI MARTAPURA BAY PHT 150 KV MUARA DUA 1",
+    "gi": "GI 150KV MARTAPURA",
+    "funloc_id": "TRS-3224-181.181-B0007"
+  },
+  {
+    "id": "66756591-df1d-4e3b-9fd6-abd29d19aa04",
+    "nama_lokasi": "GI 150KV MUARA DUA",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202"
+  },
+  {
+    "id": "a0812098-eaa9-48a0-8de5-bb125d69b3c6",
+    "nama_lokasi": "GI MUARA DUA BAY PHT 150 KV MARTAPURA 2",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202-B0002"
+  },
+  {
+    "id": "f2198d29-83ef-4a5c-9788-02912d9ee48c",
+    "nama_lokasi": "GI MUARA DUA BAY PHT 150 KV MARTAPURA 1",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202-B0001"
+  },
+  {
+    "id": "558c5c5c-fd70-49ab-adaa-7328bd055453",
+    "nama_lokasi": "GI MUARA DUA BAY 150/20 KV TD#1",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202-B0003"
+  },
+  {
+    "id": "1201f24f-02f5-4365-9ca6-106de89f40b9",
+    "nama_lokasi": "GI MUARA DUA KUBIKEL 20 KV TD#1",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202-B0007"
+  },
+  {
+    "id": "87298c84-e1e5-40df-88af-98bf80eb6094",
+    "nama_lokasi": "GEDUNG GI 150 KV MUARA DUA",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202-G0001"
+  },
+  {
+    "id": "0f55a245-15e5-4f96-ac80-966cd490adbd",
+    "nama_lokasi": "GI MUARA DUA BUSBAR B 150 KV",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202-B0006"
+  },
+  {
+    "id": "f8830ec4-aefb-4cbb-8822-c0dbe6d975df",
+    "nama_lokasi": "GI MUARA DUA BAY KOPEL 150 KV",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202-B0004"
+  },
+  {
+    "id": "2401304a-3f0b-45d0-b0a8-9d17acf80e9a",
+    "nama_lokasi": "GI MUARA DUA BUSBAR A 150 KV",
+    "gi": "GI 150KV MUARA DUA",
+    "funloc_id": "TRS-3224-202.202-B0005"
+  },
+  {
+    "id": "9e3c9635-e832-4c79-8ea7-a6481bcc5f95",
+    "nama_lokasi": "GI PNDPO BAY CUBICLE TRF#1",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0003"
+  },
+  {
+    "id": "2f64b192-7ac7-4d8e-92e3-9f8e957263f8",
+    "nama_lokasi": "GI PNDPO BAY PHT 150 kV GUMEG#2",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0013"
+  },
+  {
+    "id": "04b89ba1-50f0-4e6b-bea9-bf2f5e0308ad",
+    "nama_lokasi": "GI 150KV PENDOPO",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234"
+  },
+  {
+    "id": "a9bcf24b-24a6-4102-bb10-10d22064430d",
+    "nama_lokasi": "GI PNDPO BAY PHT 150 kV LAHAT#2",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0005"
+  },
+  {
+    "id": "65fb1b2a-2e35-4925-baff-a9ee0b40e56a",
+    "nama_lokasi": "GI PNDPO BAY PHT 150 kV SBING#1",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0006"
+  },
+  {
+    "id": "6037e913-6b7a-4ffb-84ea-20c9099171c9",
+    "nama_lokasi": "GI PNDPO BAY PHT 150 kV GUMEG#1",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0012"
+  },
+  {
+    "id": "bf2dde7e-cb83-4ab0-973a-b4bb120fd305",
+    "nama_lokasi": "GI PNDPO BAY TRF#1 150/20kV",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0001"
+  },
+  {
+    "id": "93d75764-c4e9-4f54-894e-36af799bc562",
+    "nama_lokasi": "GI PNDPO BAY COUPLE 150 kV",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0002"
+  },
+  {
+    "id": "7a1a5c21-6b08-4591-8c81-0867c427fb3e",
+    "nama_lokasi": "GI PNDPO BAY PHT 150 kV LAHAT#1",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0004"
+  },
+  {
+    "id": "a620a151-7769-47b5-8527-11abf40b9bb6",
+    "nama_lokasi": "GI PNDPO BAY PHT 150 kV SBING#2",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0007"
+  },
+  {
+    "id": "a819aa25-48d3-43e6-8615-14b65c727eb7",
+    "nama_lokasi": "GI PNDPO BAY BUSBAR B 150 kV",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0015"
+  },
+  {
+    "id": "58dd460e-000e-41f4-a72a-b9ad36fe38f8",
+    "nama_lokasi": "GI PNDPO BAY PHT 150 kV PBLIH#2",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0009"
+  },
+  {
+    "id": "9d915e10-4bc0-428c-8de3-8e700453cc01",
+    "nama_lokasi": "GI PNDPO BAY BUSBAR B 150 kV",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0014"
+  },
+  {
+    "id": "b96406d7-a4fb-4f69-bc5d-d12902aa2ed7",
+    "nama_lokasi": "GI PNDPO BAY PHT 150 kV PBLIH#1",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-B0008"
+  },
+  {
+    "id": "ba87369b-5103-42d9-ab81-59c0d7393e6a",
+    "nama_lokasi": "GEDUNG GI 150 kV PENDOPO",
+    "gi": "GI 150KV PENDOPO",
+    "funloc_id": "TRS-3224-234.234-G0001"
+  },
+  {
+    "id": "c38cb2ef-fd56-481e-89a6-d2149bfd84a2",
+    "nama_lokasi": "GI PBLIH BAY TRF#2 150/20kV",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0002"
+  },
+  {
+    "id": "c6440156-32ec-4f27-8033-723d7f2f01fc",
+    "nama_lokasi": "GEDUNG GI 150 kV PRABUMULIH",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-G0001"
+  },
+  {
+    "id": "dc43a2be-9732-4613-b155-5a42c6ff7421",
+    "nama_lokasi": "GI PBLIH BAY PHT 150 kV PNDPO#1",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0005"
+  },
+  {
+    "id": "4fa1093b-0eae-41d4-91a0-1533fb143cc0",
+    "nama_lokasi": "GI PBLIH BAY BUSBAR A 150kV",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0007"
+  },
+  {
+    "id": "a275274f-4175-4d7b-822b-f9355c832e3e",
+    "nama_lokasi": "GI PBLIH BAY BUSBAR B 150kV",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0008"
+  },
+  {
+    "id": "44ee3ff6-7970-4c5f-9ca6-ec165fa7bb99",
+    "nama_lokasi": "GI PBLIH BAY COUPLE 150kV",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0009"
+  },
+  {
+    "id": "c96d9e7b-f532-4127-98ca-b138736bf651",
+    "nama_lokasi": "GI PBLIH BAY CUBICLE TRF#2",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0011"
+  },
+  {
+    "id": "56d4b472-3f40-42c2-b8f1-113666e13632",
+    "nama_lokasi": "GI 150KV PRABUMULIH",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074"
+  },
+  {
+    "id": "fb937722-0efa-46db-a110-e1a7645d1db6",
+    "nama_lokasi": "GI PBLIH BAY PHT 150 kV SPTGA#2",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0004"
+  },
+  {
+    "id": "cd4804ff-c451-4fbf-88c9-fc3d8e4d283a",
+    "nama_lokasi": "GI PBLIH BAY CUBICLE TRF#1",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0010"
+  },
+  {
+    "id": "e600d89b-8172-4885-8b4e-716dedc3adc4",
+    "nama_lokasi": "GI PBLIH BAY TRF#3 60 MVA 150/20kV",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0012"
+  },
+  {
+    "id": "712d456f-1ce7-4014-8439-7ff5ac9453e0",
+    "nama_lokasi": "GI PBLIH BAY CUBICLE TRF#3",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0013"
+  },
+  {
+    "id": "272807c6-32df-4365-ab9b-84b2d54f0245",
+    "nama_lokasi": "GI PBLIH BAY PHT 150 kV PNDPO#2",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0006"
+  },
+  {
+    "id": "141c5beb-9e8d-410b-b709-ccbfe1aeb3d9",
+    "nama_lokasi": "GI PBLIH BAY TRF#1 150/20kV",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0001"
+  },
+  {
+    "id": "c415daa7-8613-4ba6-b026-890249624424",
+    "nama_lokasi": "GI PBLIH BAY PHT 150 kV SPTGA#1",
+    "gi": "GI 150KV PRABUMULIH",
+    "funloc_id": "TRS-3224-074.074-B0003"
+  },
+  {
+    "id": "e4f9c9f7-06f4-4511-85be-1f0f029b3789",
+    "nama_lokasi": "GI 150KV SIMPANG TIGA",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075"
+  },
+  {
+    "id": "88545696-8de5-4204-a7b3-da7d0a3c5a1d",
+    "nama_lokasi": "GI SPTGA  BAY TRF#1 150/20kV",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0001"
+  },
+  {
+    "id": "8988ec82-4619-4ed2-a704-8fc0b700db04",
+    "nama_lokasi": "GI SPTGA  BAY COUPLE 150kV",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0009"
+  },
+  {
+    "id": "2414b000-3ed8-4f09-8d5b-dc55ed6467e3",
+    "nama_lokasi": "GI SPTGA BAY TRF#3 150/20kV",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0012"
+  },
+  {
+    "id": "91b031a1-2cac-4fce-a4c5-2dbda97a2dd6",
+    "nama_lokasi": "GEDUNG GI 150 kV SIMPANG TIGA",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-G0001"
+  },
+  {
+    "id": "dc2f81e3-8bd2-4531-bfe8-fe7f6edd3e58",
+    "nama_lokasi": "GI SPTGA BAY CUBICLE TRF#3",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0013"
+  },
+  {
+    "id": "28f199dc-94c2-4740-8136-b163638dc3a5",
+    "nama_lokasi": "GI SPTGA  BAY PHT 150 kV KRSAN#1",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0005"
+  },
+  {
+    "id": "19ff4273-f65e-434f-9ce5-f028e51b1862",
+    "nama_lokasi": "GI SPTGA  BAY BUSBAR A 150kV",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0007"
+  },
+  {
+    "id": "4c578f18-96b7-4563-ba24-11ee0c0115e8",
+    "nama_lokasi": "GI SPTGA  BAY CUBICLE TRF#2",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0011"
+  },
+  {
+    "id": "5c5ee338-8859-4de6-aa03-662d8893be6c",
+    "nama_lokasi": "GI SPTGA  BAY PHT 150 kV PBLIH#1",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0003"
+  },
+  {
+    "id": "42b9c904-bf1c-4588-823f-bf91b7751e35",
+    "nama_lokasi": "GI SPTGA  BAY TRF#2 150/20kV",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0002"
+  },
+  {
+    "id": "e2215199-8cdd-4efa-af01-f7b28ba5631f",
+    "nama_lokasi": "GI SPTGA  BAY PHT 150 kV PBLIH#2",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0004"
+  },
+  {
+    "id": "da57f966-b4d9-4f93-9d76-0992da3f7589",
+    "nama_lokasi": "GI SPTGA  BAY PHT 150 kV KRSAN#2",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0006"
+  },
+  {
+    "id": "4072207c-7dd0-487c-b697-196555540aba",
+    "nama_lokasi": "GI SPTGA  BAY CUBICLE TRF#1",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0010"
+  },
+  {
+    "id": "20282787-5197-476c-85c5-92aa0227dde0",
+    "nama_lokasi": "GI SPTGA  BAY BUSBAR B 150kV",
+    "gi": "GI 150KV SIMPANG TIGA",
+    "funloc_id": "TRS-3224-075.075-B0008"
+  },
+  {
+    "id": "45452f6c-135f-4508-8c8a-5ec7ed50d7ec",
+    "nama_lokasi": "GITET LUMUT BALAI D3 PHT 275 KV GMWNG 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0007"
+  },
+  {
+    "id": "1d800b26-ee28-47f2-90ad-2692aec8e538",
+    "nama_lokasi": "GITET LUMUT BALAI D2 275 KV BAY IBT 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0016"
+  },
+  {
+    "id": "c26a0a78-6b6f-42ff-9067-635284f44416",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6B3 DIAMETER 3",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0029"
+  },
+  {
+    "id": "46daedc2-3bfa-4f7a-b818-e15c71e75805",
+    "nama_lokasi": "GI LBLAI BAY PHT 150 KV PLTP LBLAI 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0005"
+  },
+  {
+    "id": "85a413fa-65e3-4daa-a202-a04725464f9d",
+    "nama_lokasi": "GITET LUMUT BALAI D4 PHT 275 KV GMWNG 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0008"
+  },
+  {
+    "id": "be6560c4-648e-4a68-a236-98ebbdd95412",
+    "nama_lokasi": "GITET LUMUT BALAI 275 KV BAY KOPEL",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0020"
+  },
+  {
+    "id": "85a2087d-9470-4ff7-86ad-0b834c68fbe2",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6AB1 DIAMETER 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0022"
+  },
+  {
+    "id": "608ee49d-ed66-44ae-b45e-0c6ee2aadaa6",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6A2 DIAMETER 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0024"
+  },
+  {
+    "id": "83c7c2f1-7eab-4468-a595-1e466829fcd2",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203"
+  },
+  {
+    "id": "f8db463a-8d4b-4ef3-82ee-043c24d4ee64",
+    "nama_lokasi": "GITET LUMUT BALAI D3 PHT 275 KV LAHAT 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0003"
+  },
+  {
+    "id": "1f679724-13c6-409b-bf11-644463bb4632",
+    "nama_lokasi": "GI LUMUT BALAI BAY PHT 150 KV RDDAP 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0014"
+  },
+  {
+    "id": "945a8105-12c8-4954-a78c-631ceb1d5327",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6AB4 DIAMETER 4",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0031"
+  },
+  {
+    "id": "57e674cc-44a0-43e0-897e-949e02ea82ef",
+    "nama_lokasi": "GI LUMUT BALAI BAY INCOMER 150 KV IBT 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0001"
+  },
+  {
+    "id": "393563d5-dee6-4f91-a71b-deed72b6fd9d",
+    "nama_lokasi": "GI LUMUT BALAI BAY INCOMER 150 KV IBT 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0002"
+  },
+  {
+    "id": "b30edbf7-8215-48a1-9897-21a826646e97",
+    "nama_lokasi": "GITET LUMUT BALAI KOPEL BUS B 275 KV",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0019"
+  },
+  {
+    "id": "6203a016-8613-4e2e-9ae3-8a989d4fb282",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6AB2 DIAMETER 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0025"
+  },
+  {
+    "id": "d93cf985-d42e-4e73-864a-bfc2cf4eb5c8",
+    "nama_lokasi": "GI LBLAI BAY PHT 150 KV PLTP LBLAI 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0006"
+  },
+  {
+    "id": "3aec91b8-cecc-48c5-845c-cc65c76f020f",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6A3 DIAMETER 3",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0027"
+  },
+  {
+    "id": "9a4065e1-8cdb-4a33-99b3-7957d24cc6b3",
+    "nama_lokasi": "GI LUMUT BALAI BUSBAR A 150 KV",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0012"
+  },
+  {
+    "id": "ecf815be-f17c-4e12-a5d7-149752996c3f",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6B2 DIAMETER 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0026"
+  },
+  {
+    "id": "8ee956f3-2312-4463-bdf4-6a389347d400",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6B4 DIAMETER 4",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0032"
+  },
+  {
+    "id": "5ea57f3b-4341-47c0-9d4f-6b853a283327",
+    "nama_lokasi": "GEDUNG GI/TET 150/275 KV LUMUT BALAI",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-G0001"
+  },
+  {
+    "id": "87a5ab5f-c056-4b66-9223-2ff14d601b46",
+    "nama_lokasi": "GI LUMUT BALAI KUBIKEL 20 KV TD#1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0010"
+  },
+  {
+    "id": "6cc8e5b2-9220-4081-a6c1-049d8b7cf314",
+    "nama_lokasi": "GITET LUMUT BALAI D1 275 KV BAY IBT 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0017"
+  },
+  {
+    "id": "f1492fbf-c885-4f0e-9978-0752c70f3761",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6A1 DIAMETER 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0021"
+  },
+  {
+    "id": "2bf0ee6f-f75d-4773-9a0a-f1a90e1be03c",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6AB3 DIAMETER 3",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0028"
+  },
+  {
+    "id": "428b708a-151f-468f-bbf0-4c45d10e936f",
+    "nama_lokasi": "GITET LUMUT BALAI D4 PHT 275 KV LAHAT 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0004"
+  },
+  {
+    "id": "ee6f9240-db6f-4d59-8172-cbcbdab45708",
+    "nama_lokasi": "GI LUMUT BALAI BAY 150/20 KV TD#1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0009"
+  },
+  {
+    "id": "3119c127-b80d-4ba1-9615-532fea3018dd",
+    "nama_lokasi": "GI LUMUT BALAI BAY KOPEL 150 KV",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0011"
+  },
+  {
+    "id": "2a88156c-7fbd-43db-a62b-7ac58b201ab9",
+    "nama_lokasi": "GI LUMUT BALAI BUSBAR B 150 KV",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0013"
+  },
+  {
+    "id": "e025ed1b-7ff0-4f95-a05b-4e8b788f4c0b",
+    "nama_lokasi": "GI LUMUT BALAI BAY PHT 150 KV RDDAP 2",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0015"
+  },
+  {
+    "id": "c3d21dd7-bef5-4aa8-b9f0-717ec74d8b79",
+    "nama_lokasi": "GITET LUMUT BALAI KOPEL BUS A 275 KV",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0018"
+  },
+  {
+    "id": "af705eef-10df-4fc5-9a3b-94c64aa226f6",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6B1 DIAMETER 1",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0023"
+  },
+  {
+    "id": "f529d136-669f-4551-9693-62486cd31518",
+    "nama_lokasi": "GITET 275 KV LUMUT BALAI BAY 6A4 DIAMETER 4",
+    "gi": "GITET 275 KV LUMUT BALAI",
+    "funloc_id": "TRS-3224-203.203-B0030"
+  },
+  {
+    "id": "f5ea7af1-69e3-46b9-b7fc-0261cb0a89f7",
+    "nama_lokasi": "GITET MENIM 275KV BAY 6AB4  DIAMETER #4",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0010"
+  },
+  {
+    "id": "c69ec55e-6f90-4a0d-a12a-82d1fc0adbb1",
+    "nama_lokasi": "GITET 275 KV MUARA ENIM ",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253"
+  },
+  {
+    "id": "cf16135c-3d96-495f-b20c-4c07d0883953",
+    "nama_lokasi": "GITET MENIM 275KV BAY 6AB3 DIAMETER #3",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0009"
+  },
+  {
+    "id": "a8bf7abd-b124-44a4-bef6-facc55ad6a3a",
+    "nama_lokasi": "GITET MENIM 275kV BAY IBT#2 500MVA",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0013"
+  },
+  {
+    "id": "bfd925d3-78f1-4586-bb8c-e247a087b89f",
+    "nama_lokasi": "GITET MENIM 275KV BAY PHT GMWNG #1",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0003"
+  },
+  {
+    "id": "e5fda7a8-61fa-4b93-a127-d438e9e48477",
+    "nama_lokasi": "GITET MENIM 275KV BAY 6AB5 DIAMETER #5",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0011"
+  },
+  {
+    "id": "6d4fa941-0aea-4341-bbf8-01fbbb4977a5",
+    "nama_lokasi": "GITET MENIM 275KV BAY PHT LBALAI #1",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0001"
+  },
+  {
+    "id": "df7e552f-b4f3-4ddc-9eaf-514d03c670d1",
+    "nama_lokasi": "GITET MENIM 275KV BAY 6AB1 DIAMETER #1",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0007"
+  },
+  {
+    "id": "d26e22d8-070e-430b-83f4-efdbd284ef00",
+    "nama_lokasi": "GITET MENIM 275KV BAY PHT GMWNG #2",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0004"
+  },
+  {
+    "id": "bae6eb9b-db0e-4d54-9ae0-ba05969adfc0",
+    "nama_lokasi": "GITET MENIM 275KV BAY 6AB2 DIAMETER #2",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0008"
+  },
+  {
+    "id": "d90516e6-3f57-4dd9-b4b9-5c21cc86f95d",
+    "nama_lokasi": "GITET MENIM 275kV BAY IBT#1 500MVA",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0012"
+  },
+  {
+    "id": "88d50618-2cac-4f62-94f7-8060aeefc0f2",
+    "nama_lokasi": "GITET MENIM 275KV BAY BUSBAR B",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0006"
+  },
+  {
+    "id": "578033f4-e5d1-409f-9465-e8bad7f475e1",
+    "nama_lokasi": "GITET MENIM 275KV BAY PHT LBALAI #2",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0002"
+  },
+  {
+    "id": "847d053f-514d-4413-b134-b287d0d80b54",
+    "nama_lokasi": "GITET MENIM 275KV BAY BUSBAR A",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0005"
+  },
+  {
+    "id": "ee6b2682-5e96-4f16-9590-147029c63b00",
+    "nama_lokasi": "GITET MENIM 275kV  BAY IBT#3 500MVA",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-B0014"
+  },
+  {
+    "id": "867aef30-4078-4429-a012-3594f8bedba4",
+    "nama_lokasi": "GEDUNG GITET MENIM 275KV",
+    "gi": "GITET 275 KV MUARA ENIM ",
+    "funloc_id": "TRS-3224-253.253-G0001"
+  },
+  {
+    "id": "2443b31b-ecea-49bf-a151-54b55aaa172a",
+    "nama_lokasi": "GITET 500KV MUARA ENIM",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254"
+  },
+  {
+    "id": "d555c150-81da-4e2d-a3a9-b6c65545f4d2",
+    "nama_lokasi": "GITET MENIM 500KV BAY NAURI #1",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0001"
+  },
+  {
+    "id": "93117638-a215-4e66-b730-e1474c93f7e3",
+    "nama_lokasi": "GITET MENIM 500KV BAY IBT #2",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0006"
+  },
+  {
+    "id": "05ab66f2-b05f-4bbb-96a4-368d942384ae",
+    "nama_lokasi": "GITET MENIM 500KV BAY 7AB7 DIAMETER #7",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0016"
+  },
+  {
+    "id": "30d8ce78-b07b-412b-bdce-0bc634081e7b",
+    "nama_lokasi": "GITET MENIM 500KV BAY BUSBAR A",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0008"
+  },
+  {
+    "id": "311ae992-f977-4852-be9c-261061d8f768",
+    "nama_lokasi": "GITET MENIM 500kV BAY TRAFO PS 2",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0018"
+  },
+  {
+    "id": "bd89dba0-fdeb-463e-8633-2acd554f5038",
+    "nama_lokasi": "GEDUNG GITET MENIM 500KV",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-G0001"
+  },
+  {
+    "id": "c337ac4b-317c-469d-9512-4ae891f6e073",
+    "nama_lokasi": "GITET MENIM 500KV BAY 7AB2 DIAMETER #2",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0011"
+  },
+  {
+    "id": "0e42a5ca-9ae4-44ec-a4a6-b6543a53cf95",
+    "nama_lokasi": "GITET MENIM 500KV BAY 7AB6 DIAMETER #6",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0015"
+  },
+  {
+    "id": "23f9a5f4-269f-4b85-9c58-da32a5efd26e",
+    "nama_lokasi": "GITET MENIM 500KV BAY NAURI  #2",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0002"
+  },
+  {
+    "id": "89b3e6a7-adb4-4ccd-a92b-9ff9b8126333",
+    "nama_lokasi": "GITET MENIM 500KV BAY BUSBAR B",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0009"
+  },
+  {
+    "id": "84012a2e-64f1-4a19-9bc7-8b757b2e6311",
+    "nama_lokasi": "GITET MENIM 500KV BAY 7AB1 DIAMETER #1",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0010"
+  },
+  {
+    "id": "b043fad1-6014-427d-8ad1-0dda9c17e0e3",
+    "nama_lokasi": "GITET MENIM 500KV BAY 7AB4  DIAMETER #4",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0013"
+  },
+  {
+    "id": "3c7ab26f-065e-45c6-a534-d6ad63f22d36",
+    "nama_lokasi": "GITET MENIM 500KV BAY SUMSEL.8_2",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0004"
+  },
+  {
+    "id": "36f9ff43-fcee-419c-9145-fa1fe9bcd95e",
+    "nama_lokasi": "GITET MENIM 500KV BAY IBT #1",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0005"
+  },
+  {
+    "id": "cc19ce0d-72b9-4880-bb6e-d07694ea516d",
+    "nama_lokasi": "GITET MENIM 500KV BAY IBT #3 ",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0007"
+  },
+  {
+    "id": "b028a541-2611-4ad2-877e-c0d99c688913",
+    "nama_lokasi": "GITET MENIM 500KV BAY 7AB5 DIAMETER #5",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0014"
+  },
+  {
+    "id": "4db7b251-1041-4c0f-a85f-4fb70a9321cb",
+    "nama_lokasi": "GITET MENIM 500KV BAY SUMSEL8_1",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0003"
+  },
+  {
+    "id": "300958bf-2a8e-45fa-abd7-7dbb07411faf",
+    "nama_lokasi": "GITET MENIM 500KV BAY 7AB3 DIAMETER #3",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0012"
+  },
+  {
+    "id": "8f5da8cc-cb77-423f-b687-02e433dd8558",
+    "nama_lokasi": "GITET MENIM 500kV BAY TRAFO PS 1",
+    "gi": "GITET 500KV MUARA ENIM",
+    "funloc_id": "TRS-3224-254.254-B0017"
+  }
+]

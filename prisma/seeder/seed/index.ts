@@ -8,3 +8,6 @@ export * from './alat';
 export * from './tindak-lanjut';
 export * from './fix-alat';
 export * from './anomali';
+export * from './parse-funloc';
+export * from './parse-alat';
+export * from './fix-alat-2';

@@ -8,6 +8,9 @@ import {
   tindakLanjut,
   fixAlat,
   anomalis,
+  parseDataFunloc,
+  parseDataAlat,
+  fixAlat2,
 } from './seed';
 
 const prisma = new PrismaClient();
@@ -21,8 +24,11 @@ async function main() {
     // await users();
     // await alats();
     // await tindakLanjut(); // just for prod
-    await fixAlat();
+    // await fixAlat();
     // await anomalis();
+    // await parseDataFunloc();
+    // await parseDataAlat();
+    await fixAlat2();
   } catch (error) {
     console.error('Seeding error:', error);
   } finally {
