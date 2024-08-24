@@ -206,7 +206,7 @@ model alat {
   kategori_peralatan_detail   String?
   tanggal_operasi             DateTime?
   serial_id                   String?
-  fasa_terpasang              FasaTerpasang     @default(R)
+  fasa_terpasang              FasaTerpasang?    @default(R)
   mekanik_penggerak           String?
   media_pemadam               String?
   tipe                        String?
@@ -241,16 +241,16 @@ model alat {
   nameplate                   String?
   status                      StatusOperasiAlat @default(OPERASI)
 
-  ultg_id            String
-  ultg               ultg             @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  gi_id              String
-  gi                 gi               @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ultg_id            String?
+  ultg               ultg?            @relation(fields: [ultg_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  gi_id              String?
+  gi                 gi?              @relation(fields: [gi_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   jenis_peralatan_id String?
   jenis_peralatan    jenis_peralatan? @relation(fields: [jenis_peralatan_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   bay_id             String?
   bay                bay?             @relation(fields: [bay_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  dibuat_oleh        String
-  pembuat            users            @relation(fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  dibuat_oleh        String?
+  pembuat            users?           @relation(fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at      DateTime          @default(now())
   updated_at      DateTime          @default(now()) @updatedAt

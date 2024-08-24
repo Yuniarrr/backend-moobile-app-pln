@@ -56,16 +56,16 @@ interface alat {
 }
 
 const changeStatus = (status: string) => {
-  switch (status) {
-    case 'Operasi':
+  switch (status.toLowerCase()) {
+    case 'operasi':
       return StatusOperasiAlat.OPERASI;
-    case 'Tidak Operasi':
+    case 'tidak operasi':
       return StatusOperasiAlat.TIDAK_OPERASI;
-    case 'Hapus':
+    case 'hapus':
       return StatusOperasiAlat.DIHAPUS;
-    case 'Digudangkan':
+    case 'digudangkan':
       return StatusOperasiAlat.DIGUDANGKAN;
-    case 'Belum Operasi':
+    case 'belum operasi':
       return StatusOperasiAlat.BELUM_OPERASI;
     default:
       return null;
@@ -78,8 +78,20 @@ export const fixAlat2 = async () => {
     const jsonData = await fsPromises.readFile(pathFile, 'utf8');
 
     const datas: alat[] = JSON.parse(jsonData);
+    const failedData: alat[] = [];
 
     for (const data of datas) {
+      const findGi = await prisma.gi.findFirst({
+        where: {
+          nama: {
+            contains: data.gi.trim(),
+          },
+        },
+      });
+
+      console.log('findGi');
+      console.log(findGi);
+
       const findJenisAlat = await prisma.jenis_peralatan.findFirst({
         where: {
           nama: {
@@ -87,6 +99,11 @@ export const fixAlat2 = async () => {
           },
         },
       });
+
+      console.log('findJenisAlat');
+      console.log(findJenisAlat);
+
+      let bay_id = '';
 
       const findBay = await prisma.bay.findFirst({
         where: {
@@ -96,30 +113,38 @@ export const fixAlat2 = async () => {
         },
       });
 
+      bay_id = findBay?.id;
+
+      if (!findBay) {
+        const newBay = await prisma.bay.create({
+          data: {
+            funloc_id: data.funloc_id,
+            nama_lokasi: data.nama_lokasi,
+            gi_id: findGi.id,
+          },
+        });
+
+        bay_id = newBay.id;
+      }
+
+      console.log('findBay');
+      console.log(findBay);
+
       // console.log('data.gi');
       // console.log(data.gi);
 
-      const findGi = await prisma.gi.findFirst({
-        where: {
-          nama: {
-            contains: data.gi.trim(),
-          },
-        },
-        include: {
-          ultg: {
-            select: {
-              id: true,
-              nama: true,
-            },
-          },
-        },
-      });
+      // console.log('findGi');
+      // console.log(findGi);
+      // console.log('data.id');
+      // console.log(data.id);
 
-      console.log('findGi');
-      console.log(findGi);
+      // if (findGi.ultg.nama === 'ULTG MUARA ENIM') {
+      //   failedData.push(data);
+      //   continue;
+      // }
 
-      console.log('data.id');
-      console.log(data.id);
+      console.log('data');
+      console.log(data);
 
       const detailAlat = {
         techidentno: data.techidentno,
@@ -186,12 +211,15 @@ export const fixAlat2 = async () => {
         dc_ground: data.dc_ground === '' ? null : data.dc_ground,
         jenis_relay: data.jenis_relay === '' ? null : data.jenis_relay,
         jenis_peralatan_id: findJenisAlat.id,
-        bay_id: findBay.id,
-        ultg_id: findGi.ultg.id,
+        bay_id,
+        ultg_id: findGi.ultg_id,
         gi_id: findGi.id,
-        dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
-        // dibuat_oleh: '72dd3e37-fd3d-4244-8fef-5a38c74dd126',
+        // dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
+        dibuat_oleh: '72dd3e37-fd3d-4244-8fef-5a38c74dd126',
       };
+
+      console.log('detailAlat');
+      console.log(detailAlat);
 
       await prisma.alat.upsert({
         where: { id: data.id },
@@ -205,6 +233,16 @@ export const fixAlat2 = async () => {
         },
       });
     }
+
+    const userJson = JSON.stringify(failedData, null, 2);
+
+    fs.writeFile('./prisma/seeder/data/failed-alat.json', userJson, err => {
+      if (err) {
+        console.error('Error writing file:', err);
+        return;
+      }
+      console.log('Success write file');
+    });
     console.log('selesai');
   } catch (error) {
     console.error(`Error in fix alat 2: ${error}`);
