@@ -115,8 +115,11 @@ export const fixAlat2 = async () => {
         },
       });
 
-      // console.log('findGi');
-      // console.log(findGi);
+      console.log('findGi');
+      console.log(findGi);
+
+      console.log('data.id');
+      console.log(data.id);
 
       const detailAlat = {
         techidentno: data.techidentno,
@@ -182,25 +185,22 @@ export const fixAlat2 = async () => {
             : data.jum_sel_baterai_terhubung,
         dc_ground: data.dc_ground === '' ? null : data.dc_ground,
         jenis_relay: data.jenis_relay === '' ? null : data.jenis_relay,
+        jenis_peralatan_id: findJenisAlat.id,
+        bay_id: findBay.id,
+        ultg_id: findGi.ultg.id,
+        gi_id: findGi.id,
+        dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
+        // dibuat_oleh: '72dd3e37-fd3d-4244-8fef-5a38c74dd126',
       };
 
       await prisma.alat.upsert({
         where: { id: data.id },
         create: {
           id: data.id,
-          jenis_peralatan_id: findJenisAlat.id,
-          bay_id: findBay.id,
-          ultg_id: findGi.ultg.id,
-          gi_id: findGi.id,
-          dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
+          // dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
           ...detailAlat,
         },
         update: {
-          jenis_peralatan_id: findJenisAlat.id,
-          bay_id: findBay.id,
-          ultg_id: findGi.ultg.id,
-          gi_id: findGi.id,
-          dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
           ...detailAlat,
         },
       });

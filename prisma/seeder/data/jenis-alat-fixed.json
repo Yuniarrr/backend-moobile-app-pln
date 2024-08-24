@@ -58,5 +58,15 @@
     "id": "7a52188d-9c42-48da-8f8b-619c80814c80",
     "nama": "Panel ACDB",
     "kategori_peralatan": "SEKUNDER"
+  },
+  {
+    "id": "3262e248-e3c2-46ba-8f2d-427df8302468",
+    "nama": "Kubikel",
+    "kategori_peralatan": "SEKUNDER"
+  },
+  {
+    "id": "b3e561a0-d44b-429f-a86e-f33f25a5e421",
+    "nama": "Relay",
+    "kategori_peralatan": "SEKUNDER"
   }
 ]
