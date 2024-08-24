@@ -89,9 +89,6 @@ export const fixAlat2 = async () => {
         },
       });
 
-      console.log('findGi');
-      console.log(findGi);
-
       const findJenisAlat = await prisma.jenis_peralatan.findFirst({
         where: {
           nama: {
@@ -99,9 +96,6 @@ export const fixAlat2 = async () => {
           },
         },
       });
-
-      console.log('findJenisAlat');
-      console.log(findJenisAlat);
 
       let bay_id = '';
 
@@ -126,25 +120,6 @@ export const fixAlat2 = async () => {
 
         bay_id = newBay.id;
       }
-
-      console.log('findBay');
-      console.log(findBay);
-
-      // console.log('data.gi');
-      // console.log(data.gi);
-
-      // console.log('findGi');
-      // console.log(findGi);
-      // console.log('data.id');
-      // console.log(data.id);
-
-      // if (findGi.ultg.nama === 'ULTG MUARA ENIM') {
-      //   failedData.push(data);
-      //   continue;
-      // }
-
-      console.log('data');
-      console.log(data);
 
       const detailAlat = {
         techidentno: data.techidentno,
@@ -214,8 +189,8 @@ export const fixAlat2 = async () => {
         bay_id,
         ultg_id: findGi.ultg_id,
         gi_id: findGi.id,
-        // dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
-        dibuat_oleh: '72dd3e37-fd3d-4244-8fef-5a38c74dd126',
+        dibuat_oleh: '5d8d91b2-1c26-4dc3-9df6-86acdc48cc55',
+        // dibuat_oleh: '72dd3e37-fd3d-4244-8fef-5a38c74dd126',
       };
 
       console.log('detailAlat');
