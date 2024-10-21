@@ -193,9 +193,6 @@ export const fixAlat2 = async () => {
         // dibuat_oleh: '72dd3e37-fd3d-4244-8fef-5a38c74dd126',
       };
 
-      console.log('detailAlat');
-      console.log(detailAlat);
-
       await prisma.alat.upsert({
         where: { id: data.id },
         create: {

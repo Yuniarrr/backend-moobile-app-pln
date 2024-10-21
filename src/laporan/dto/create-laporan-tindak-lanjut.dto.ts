@@ -23,10 +23,6 @@ export class CreateLaporanTindakLanjutDto {
   @IsOptional()
   material?: string | null;
 
-  @ApiProperty({ example: 'ULTG ID' })
-  @IsNotEmpty()
-  waktu_pengerjaan: Date;
-
   @ApiProperty({ description: 'Nameplate' })
   foto: Express.Multer.File;
 

@@ -27,6 +27,13 @@ enum StatusLaporan {
   DELETE
 }
 
+enum StatusDecision {
+  ACCEPT
+  REJECT
+  EDIT
+  AWAITING
+}
+
 enum PIC {
   JARGI
   HARGI
@@ -153,6 +160,7 @@ model laporan_anomali {
   detail_pic                String?
   nama_pembuat              String
   status                    StatusLaporan     @default(OPEN)
+  status_decision           StatusDecision    @default(AWAITING)
   laporan_anomali_id        String
 
   ultg_id            String
@@ -180,14 +188,13 @@ model laporan_anomali {
 }
 
 model laporan_tindak_lanjut {
-  id               String   @id @default(uuid())
-  kegiatan         String   @db.Text
-  ket_kegiatan     String   @db.Text
-  material         String?
-  waktu_pengerjaan DateTime
-  foto             String?
-  berita_acara     String?
-  nama_pembuat     String
+  id           String  @id @default(uuid())
+  kegiatan     String  @db.Text
+  ket_kegiatan String  @db.Text
+  material     String?
+  foto         String?
+  berita_acara String?
+  nama_pembuat String
 
   laporan_anomali_id String
   laporan_anomali    laporan_anomali @relation(fields: [laporan_anomali_id], references: [id], onDelete: Cascade, onUpdate: Cascade)

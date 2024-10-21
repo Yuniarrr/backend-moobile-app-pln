@@ -117,7 +117,6 @@ export class LaporanService {
     return await this.prisma.laporan_tindak_lanjut.create({
       data: {
         ...data,
-        waktu_pengerjaan: new Date(data.waktu_pengerjaan),
         dibuat_oleh: user_id,
         foto: newFoto,
         berita_acara: newBA,
@@ -227,9 +226,6 @@ export class LaporanService {
         foto: fotoPath || isLaporanTindakLanjutExist.foto,
         berita_acara:
           beritaAcaraPath || isLaporanTindakLanjutExist.berita_acara,
-        waktu_pengerjaan: data.waktu_pengerjaan
-          ? new Date(data.waktu_pengerjaan)
-          : isLaporanTindakLanjutExist.waktu_pengerjaan,
       },
     });
   }
@@ -461,7 +457,6 @@ export class LaporanService {
             id: true,
             kegiatan: true,
             ket_kegiatan: true,
-            waktu_pengerjaan: true,
             nama_pembuat: true,
             created_at: true,
             pembuat: {
@@ -654,7 +649,7 @@ export class LaporanService {
           { label: 'ID Laporan Anomali', value: 'laporan_anomali_id' },
         ],
         content: data.map(item => ({
-          id: item.id,
+          id: item.laporan_anomali_id,
           kategori_peralatan: item.kategori_peralatan ?? '',
           kategori_peralatan_detail: item.kategori_peralatan_detail ?? '',
           anomali: item.anomali,
@@ -664,10 +659,8 @@ export class LaporanService {
           tanggal_laporan: this.formatDate(item.tanggal_laporan.toISOString()),
           batas_waktu: this.formatDate(item.batas_waktu.toISOString()),
           tindak_lanjut_awal: item.tindak_lanjut_awal || '',
-          foto: item.foto ? `http://157.173.221.186/${item.foto}` : '',
-          berita_acara: item.berita_acara
-            ? `http://157.173.221.186/${item.berita_acara}`
-            : '',
+          foto: this.formatLink(item.foto),
+          berita_acara: this.formatLink(item.berita_acara),
           pic: item.pic ?? '',
           detail_pic: item.detail_pic ?? '',
           nama_pembuat: item.nama_pembuat ?? '',
@@ -713,6 +706,11 @@ export class LaporanService {
             username: true,
           },
         },
+        laporan_anomali: {
+          select: {
+            laporan_anomali_id: true,
+          },
+        },
       },
     });
 
@@ -724,7 +722,7 @@ export class LaporanService {
           { label: 'Kegiatan', value: 'kegiatan' },
           { label: 'Keterangan Kegiatan', value: 'ket_kegiatan' },
           { label: 'Material', value: 'material' },
-          { label: 'Waktu Pengerjaan', value: 'waktu_pengerjaan' },
+          { label: 'Tanggal Submit', value: 'date_submit' },
           { label: 'Link Foto', value: 'foto' },
           { label: 'Link Berita Acara', value: 'berita_acara' },
           { label: 'Nama Pelapor', value: 'nama_pembuat' },
@@ -732,17 +730,13 @@ export class LaporanService {
           { label: 'ID Laporan Anomali', value: 'laporan_anomali_id' },
         ],
         content: data.map(item => ({
-          id: item.id,
+          id: item.laporan_anomali.laporan_anomali_id,
           kegiatan: item.kegiatan,
           ket_kegiatan: item.ket_kegiatan ?? '',
           material: item.material || '',
-          waktu_pengerjaan: this.formatDate(
-            item.waktu_pengerjaan.toISOString(),
-          ),
-          foto: item.foto ? `http://157.173.221.186/${item.foto}` : '',
-          berita_acara: item.berita_acara
-            ? `http://157.173.221.186/${item.berita_acara}`
-            : '',
+          date_submit: this.formatDate(item.created_at.toISOString()),
+          foto: this.formatLink(item.foto),
+          berita_acara: this.formatLink(item.berita_acara),
           nama_pembuat: item.nama_pembuat ?? '',
           pembuat: item.pembuat.username,
           laporan_anomali_id: item.laporan_anomali_id,
@@ -769,6 +763,16 @@ export class LaporanService {
       month: 'short',
       year: 'numeric',
     });
+  }
+
+  formatLink(link?: string) {
+    if (link.startsWith('http://') || link.startsWith('https://')) {
+      return link;
+    } else if (link) {
+      return `http://157.173.221.186/${link}`;
+    } else {
+      return '';
+    }
   }
 
   async createRencanaPenyelesaian(
