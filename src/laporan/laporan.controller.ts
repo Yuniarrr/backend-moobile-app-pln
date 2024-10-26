@@ -19,7 +19,6 @@ import {
   UsePipes,
   UploadedFiles,
   Res,
-  Req,
 } from '@nestjs/common';
 import {
   FileFieldsInterceptor,
@@ -46,15 +45,9 @@ import {
   RolesGuard,
   SuccessResponse,
 } from 'common';
-import { Response, Request } from 'express';
-import { FileInjector } from 'nestjs-file-upload';
+import { Response } from 'express';
 
-import {
-  CREATE_LAPORAN_ANOMALI_BODY,
-  CREATE_LAPORAN_TINDAK_LANJUT_BODY,
-  UPDATE_LAPORAN_ANOMALI_BODY,
-  UPDATE_LAPORAN_TINDAK_LANJUT_BODY,
-} from './decorators';
+import { UPDATE_LAPORAN_TINDAK_LANJUT_BODY } from './decorators';
 import {
   CreateLaporanAnomaliDto,
   CreateLaporanTindakLanjutDto,

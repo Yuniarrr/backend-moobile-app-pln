@@ -66,6 +66,10 @@ export class CreateLaporanAnomaliDto {
   @ApiPropertyOptional({ description: 'Nameplate' })
   berita_acara?: Express.Multer.File;
 
+  @ApiPropertyOptional({ example: 'ULTG ID' })
+  @IsOptional()
+  berita_acara_url?: string;
+
   @ApiProperty({ example: 'ULTG ID' })
   @IsNotEmpty()
   pic: string;

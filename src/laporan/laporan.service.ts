@@ -37,15 +37,13 @@ export class LaporanService {
     foto?: Express.Multer.File[],
     berita_acara?: Express.Multer.File[],
   ) {
-    console.log('foto');
-    console.log(foto);
-    console.log('berita_acara');
-    console.log(berita_acara);
     const fotoPath = foto ? `uploads/laporan/${foto[0].filename}` : null;
 
-    const beritaAcaraPath = berita_acara
+    let beritaAcaraPath = berita_acara
       ? `uploads/laporan/${berita_acara[0].filename}`
       : null;
+
+    beritaAcaraPath = data.berita_acara_url ?? beritaAcaraPath;
 
     delete data.foto;
     delete data.berita_acara;
@@ -88,9 +86,11 @@ export class LaporanService {
 
     const newFoto = foto ? `uploads/laporan/${foto[0].filename}` : null;
 
-    const newBA = berita_acara
+    let newBA = berita_acara
       ? `uploads/laporan/${berita_acara[0].filename}`
       : null;
+
+    newBA = data.berita_acara_url ?? newBA;
 
     delete data.foto;
     delete data.berita_acara;

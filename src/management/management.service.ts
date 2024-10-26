@@ -238,11 +238,74 @@ export class ManagementService {
   }
 
   async getUltg(ultg_id?: string) {
-    return await this.prisma.ultg.findMany({
+    const ultgs = await this.prisma.ultg.findMany({
       where: { id: ultg_id },
       include: {
-        gi: true,
+        laporan_anomali: {
+          select: {
+            status_decision: true,
+          },
+        },
+        gi: {
+          include: {
+            laporan_anomali: {
+              select: {
+                status_decision: true,
+              },
+            },
+          },
+        },
       },
+    });
+
+    return ultgs.map(ultg => {
+      // Determine flags for each ultg
+      const is_awaiting_exist = ultg.laporan_anomali.some(
+        anomali => anomali.status_decision === 'AWAITING',
+      );
+      const is_rejected_exist = ultg.laporan_anomali.some(
+        anomali => anomali.status_decision === 'REJECT',
+      );
+      const is_approved_exist = ultg.laporan_anomali.some(
+        anomali => anomali.status_decision === 'ACCEPT',
+      );
+
+      // Map through each gi to include flags
+      const gi = ultg.gi.map(gi => {
+        const gi_is_awaiting_exist = gi.laporan_anomali.some(
+          anomali => anomali.status_decision === 'AWAITING',
+        );
+        const gi_is_rejected_exist = gi.laporan_anomali.some(
+          anomali => anomali.status_decision === 'REJECT',
+        );
+        const gi_is_approved_exist = gi.laporan_anomali.some(
+          anomali => anomali.status_decision === 'ACCEPT',
+        );
+
+        return {
+          id: gi.id,
+          nama: gi.nama,
+          ultg_id: gi.ultg_id,
+          created_at: gi.created_at,
+          updated_at: gi.updated_at,
+          deleted_at: gi.deleted_at,
+          is_awaiting_exist: gi_is_awaiting_exist,
+          is_rejected_exist: gi_is_rejected_exist,
+          is_approved_exist: gi_is_approved_exist,
+        };
+      });
+
+      return {
+        id: ultg.id,
+        nama: ultg.nama,
+        created_at: ultg.created_at,
+        updated_at: ultg.updated_at,
+        deleted_at: ultg.deleted_at,
+        is_awaiting_exist,
+        is_rejected_exist,
+        is_approved_exist,
+        gi,
+      };
     });
   }
 

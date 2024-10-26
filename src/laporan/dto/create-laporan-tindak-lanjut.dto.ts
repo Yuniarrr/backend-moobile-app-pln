@@ -23,11 +23,17 @@ export class CreateLaporanTindakLanjutDto {
   @IsOptional()
   material?: string | null;
 
-  @ApiProperty({ description: 'Nameplate' })
-  foto: Express.Multer.File;
+  @ApiPropertyOptional({ description: 'Nameplate' })
+  @IsOptional()
+  foto?: Express.Multer.File;
 
-  @ApiProperty({ description: 'Nameplate' })
-  berita_acara: Express.Multer.File;
+  @ApiPropertyOptional({ description: 'Nameplate' })
+  @IsOptional()
+  berita_acara?: Express.Multer.File;
+
+  @ApiPropertyOptional({ example: 'ULTG ID' })
+  @IsOptional()
+  berita_acara_url?: string;
 
   @ApiProperty({ example: 'ULTG ID' })
   @IsNotEmpty()
