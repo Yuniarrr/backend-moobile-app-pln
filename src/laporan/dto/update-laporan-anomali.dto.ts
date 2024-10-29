@@ -2,7 +2,7 @@
 /* eslint-disable @darraghor/nestjs-typed/all-properties-are-whitelisted */
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 
-import { StatusDecision, StatusLaporan } from '@prisma/client';
+import { StatusReview, StatusLaporan } from '@prisma/client';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 import { IsEnumOptional } from 'common';
@@ -15,8 +15,8 @@ export class UpdateLaporanAnomaliDto extends PartialType(
   @IsEnumOptional('Status', StatusLaporan)
   status?: StatusLaporan;
 
-  @IsEnumOptional('Status', StatusDecision)
-  status_decision?: StatusDecision;
+  @IsEnumOptional('Status', StatusReview)
+  status_review?: StatusReview;
 
   @Transform(({ value }) => value === 'true')
   @ApiProperty({ example: 'ULTG ID' })

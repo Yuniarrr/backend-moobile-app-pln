@@ -27,7 +27,7 @@ enum StatusLaporan {
   DELETE
 }
 
-enum StatusDecision {
+enum StatusReview {
   ACCEPT
   REJECT
   EDIT
@@ -160,7 +160,7 @@ model laporan_anomali {
   detail_pic                String?
   nama_pembuat              String
   status                    StatusLaporan     @default(OPEN)
-  status_decision           StatusDecision    @default(AWAITING)
+  status_review             StatusReview      @default(AWAITING)
   laporan_anomali_id        String
 
   ultg_id            String

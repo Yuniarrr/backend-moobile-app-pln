@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import fsPromises from 'node:fs/promises';
@@ -243,14 +245,14 @@ export class ManagementService {
       include: {
         laporan_anomali: {
           select: {
-            status_decision: true,
+            status_review: true,
           },
         },
         gi: {
           include: {
             laporan_anomali: {
               select: {
-                status_decision: true,
+                status_review: true,
               },
             },
           },
@@ -260,27 +262,27 @@ export class ManagementService {
 
     return ultgs.map(ultg => {
       // Determine flags for each ultg
-      const is_awaiting_exist = ultg.laporan_anomali.some(
-        anomali => anomali.status_decision === 'AWAITING',
-      );
-      const is_rejected_exist = ultg.laporan_anomali.some(
-        anomali => anomali.status_decision === 'REJECT',
-      );
-      const is_approved_exist = ultg.laporan_anomali.some(
-        anomali => anomali.status_decision === 'ACCEPT',
-      );
+      const ultgAwaitingCount = ultg.laporan_anomali.filter(
+        anomali => anomali.status_review === 'AWAITING',
+      ).length;
+      const ultgRejectCount = ultg.laporan_anomali.filter(
+        anomali => anomali.status_review === 'REJECT',
+      ).length;
+      const ultgAcceptCount = ultg.laporan_anomali.filter(
+        anomali => anomali.status_review === 'ACCEPT',
+      ).length;
 
       // Map through each gi to include flags
       const gi = ultg.gi.map(gi => {
-        const gi_is_awaiting_exist = gi.laporan_anomali.some(
-          anomali => anomali.status_decision === 'AWAITING',
-        );
-        const gi_is_rejected_exist = gi.laporan_anomali.some(
-          anomali => anomali.status_decision === 'REJECT',
-        );
-        const gi_is_approved_exist = gi.laporan_anomali.some(
-          anomali => anomali.status_decision === 'ACCEPT',
-        );
+        const gi_awaiting_count = gi.laporan_anomali.filter(
+          anomali => anomali.status_review === 'AWAITING',
+        ).length;
+        const gi_rejected_count = gi.laporan_anomali.filter(
+          anomali => anomali.status_review === 'REJECT',
+        ).length;
+        const gi_approved_count = gi.laporan_anomali.filter(
+          anomali => anomali.status_review === 'ACCEPT',
+        ).length;
 
         return {
           id: gi.id,
@@ -289,9 +291,9 @@ export class ManagementService {
           created_at: gi.created_at,
           updated_at: gi.updated_at,
           deleted_at: gi.deleted_at,
-          is_awaiting_exist: gi_is_awaiting_exist,
-          is_rejected_exist: gi_is_rejected_exist,
-          is_approved_exist: gi_is_approved_exist,
+          awaiting_count: gi_awaiting_count,
+          rejected_count: gi_rejected_count,
+          approved_count: gi_approved_count,
         };
       });
 
@@ -301,9 +303,9 @@ export class ManagementService {
         created_at: ultg.created_at,
         updated_at: ultg.updated_at,
         deleted_at: ultg.deleted_at,
-        is_awaiting_exist,
-        is_rejected_exist,
-        is_approved_exist,
+        awaiting_count: ultgAwaitingCount,
+        rejected_count: ultgRejectCount,
+        approved_count: ultgAcceptCount,
         gi,
       };
     });

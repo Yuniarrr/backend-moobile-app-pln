@@ -418,9 +418,11 @@ export class LaporanService {
         skip,
         take: perPage,
         where,
-        orderBy: {
-          created_at: 'desc',
-        },
+        orderBy: [
+          { created_at: 'desc' },
+          { status_review: 'asc' },
+          { status: 'asc' },
+        ],
         select: {
           id: true,
           anomali: true,
@@ -429,6 +431,7 @@ export class LaporanService {
           batas_waktu: true,
           status: true,
           kategori: true,
+          status_review: true,
         },
       }),
     ]);
