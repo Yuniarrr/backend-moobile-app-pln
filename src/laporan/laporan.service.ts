@@ -152,14 +152,14 @@ export class LaporanService {
 
     let beritaAcaraPath;
 
-    if (data.is_delete_berita_acara === true) {
+    if (data.berita_acara_url) {
+      beritaAcaraPath = data.berita_acara_url;
+    } else if (data.is_delete_berita_acara === true) {
       beritaAcaraPath = null;
     } else if (data.is_delete_berita_acara === false) {
       beritaAcaraPath = berita_acara
         ? `uploads/laporan/${berita_acara[0].filename}`
         : isLaporanAnomaliExist.berita_acara;
-    } else if (data.berita_acara_url) {
-      beritaAcaraPath = data.berita_acara_url;
     }
 
     delete data.foto;
