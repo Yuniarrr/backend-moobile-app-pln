@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-array-reduce */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -274,7 +275,8 @@ export class LaporanService {
       endDate = new Date(year, month, 0, 23, 59, 59); // Last day of the month
     }
 
-    return await this.prisma.laporan_anomali.groupBy({
+    // Fetch the grouped data
+    const data = await this.prisma.laporan_anomali.groupBy({
       by: ['ultg_id', 'status'],
       where: {
         status: {
@@ -295,6 +297,40 @@ export class LaporanService {
         ultg_id: 'asc',
       },
     });
+
+    // Reformat data to ensure each `ultg_id` has both `OPEN` and `CLOSE` statuses
+    const result = data.reduce((accumulator, current) => {
+      const { ultg_id, status, _count } = current;
+
+      // Find or initialize the entry for the current ultg_id
+      let ultgEntry = accumulator.find(entry => entry.ultg_id === ultg_id);
+
+      if (!ultgEntry) {
+        ultgEntry = { ultg_id, statuses: { OPEN: 0, CLOSE: 0 } };
+        accumulator.push(ultgEntry);
+      }
+
+      // Assign the count to the appropriate status
+      if (status === 'OPEN' || status === 'CLOSE') {
+        ultgEntry.statuses[status] = _count.id;
+      }
+
+      return accumulator;
+    }, [] as Array<{ ultg_id: string; statuses: { OPEN: number; CLOSE: number } }>);
+
+    // Convert the result back into the desired format
+    return result.flatMap(entry => [
+      {
+        ultg_id: entry.ultg_id,
+        status: 'OPEN',
+        _count: { id: entry.statuses.OPEN },
+      },
+      {
+        ultg_id: entry.ultg_id,
+        status: 'CLOSE',
+        _count: { id: entry.statuses.CLOSE },
+      },
+    ]);
   }
 
   getBatasWaktu(kategori: Kategori) {
