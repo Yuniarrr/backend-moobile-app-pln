@@ -819,12 +819,14 @@ export class LaporanService {
   }
 
   formatLink(link?: string) {
+    if (!link) {
+      return '';
+    }
+
     if (link.startsWith('http://') || link.startsWith('https://')) {
       return link;
     } else if (link) {
       return `http://157.173.221.186/${link}`;
-    } else {
-      return '';
     }
   }
 
