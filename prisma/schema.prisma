@@ -129,6 +129,7 @@ model users {
   alat                     alat[]
   laporan_tindak_lanjut    laporan_tindak_lanjut[]
   rencana_penyelesaian     rencana_penyelesaian[]
+  pereview_laporan_anomali laporan_anomali[]       @relation("pereview")
 }
 
 model jenis_peralatan {
@@ -177,6 +178,8 @@ model laporan_anomali {
   pembuat            users            @relation("dibuat", fields: [dibuat_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
   diedit_oleh        String?
   pengedit           users?           @relation("diedit", fields: [diedit_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  direview_oleh      String?
+  pereview           users?           @relation("pereview", fields: [direview_oleh], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   created_at            DateTime                @default(now())
   updated_at            DateTime                @default(now()) @updatedAt

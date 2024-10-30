@@ -57,6 +57,8 @@ export class LaporanService {
     // const ultg_id = data.ultg_id;
     // delete data.ultg_id;
 
+    delete data.berita_acara_url;
+
     return await this.prisma.laporan_anomali.create({
       data: {
         ...data,
@@ -114,6 +116,8 @@ export class LaporanService {
     delete data.status;
     delete data.kategori;
 
+    delete data.berita_acara_url;
+
     return await this.prisma.laporan_tindak_lanjut.create({
       data: {
         ...data,
@@ -159,11 +163,15 @@ export class LaporanService {
     delete data.berita_acara;
     delete data.is_delete_berita_acara;
     delete data.is_delete_foto;
+    delete data.berita_acara_url;
 
     return await this.prisma.laporan_anomali.update({
       where: { id: laporan_anomali_id },
       data: {
         ...data,
+        direview_oleh: data.status_review
+          ? user_id
+          : isLaporanAnomaliExist.direview_oleh,
         pic: data.pic as PIC,
         foto: fotoPath,
         berita_acara: beritaAcaraPath,
@@ -218,6 +226,7 @@ export class LaporanService {
 
     delete data.status;
     delete data.kategori;
+    delete data.berita_acara_url;
 
     return await this.prisma.laporan_tindak_lanjut.update({
       where: { id: laporan_tindak_lanjut_id },
@@ -419,9 +428,9 @@ export class LaporanService {
         take: perPage,
         where,
         orderBy: [
-          { created_at: 'desc' },
-          { status_review: 'asc' },
           { status: 'asc' },
+          { status_review: 'desc' },
+          { created_at: 'desc' },
         ],
         select: {
           id: true,
@@ -490,6 +499,11 @@ export class LaporanService {
           },
         },
         pengedit: {
+          select: {
+            username: true,
+          },
+        },
+        pereview: {
           select: {
             username: true,
           },
