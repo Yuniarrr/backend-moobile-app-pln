@@ -158,6 +158,8 @@ export class LaporanService {
       beritaAcaraPath = berita_acara
         ? `uploads/laporan/${berita_acara[0].filename}`
         : isLaporanAnomaliExist.berita_acara;
+    } else if (data.berita_acara_url) {
+      beritaAcaraPath = data.berita_acara_url;
     }
 
     delete data.foto;
