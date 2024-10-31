@@ -4,7 +4,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { type PIC, type Prisma, type Kategori } from '@prisma/client';
@@ -31,6 +35,42 @@ export class LaporanService {
     private readonly upload: UploadService,
     private readonly config: ConfigService,
   ) {}
+
+  async update() {
+    const datas = await this.prisma.laporan_anomali.findMany({
+      orderBy: { created_at: 'asc' },
+    });
+    let currentNumber = 1;
+
+    for (const data of datas) {
+      const formattedNumber = currentNumber.toString().padStart(6, '0');
+      console.log('>>>> before');
+      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+      console.log(data.laporan_anomali_id + ' ===== ' + data.created_at);
+      console.log('>>>> after');
+      console.log(currentNumber);
+      console.log(`LA-${formattedNumber}`);
+
+      const batasWaktu = this.getBatasWaktu(data.kategori, data.created_at);
+      console.log('data.created_at');
+      console.log(data.created_at);
+      console.log('data.kategori');
+      console.log(data.kategori);
+      console.log('batasWaktu');
+      console.log(batasWaktu);
+
+      await this.prisma.laporan_anomali.update({
+        where: { id: data.id },
+        data: {
+          batas_waktu: batasWaktu,
+          laporan_anomali_id: `LA-${formattedNumber}`,
+          status_review: 'ACCEPT',
+        },
+      });
+
+      currentNumber++;
+    }
+  }
 
   async createLaporanAnomali(
     data: CreateLaporanAnomaliDto,
@@ -335,36 +375,37 @@ export class LaporanService {
     ]);
   }
 
-  getBatasWaktu(kategori: Kategori) {
-    const today = new Date();
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    let batas_waktu;
+  getBatasWaktu(kategori: Kategori, date: Date = new Date()) {
+    let daysToAdd: number;
 
     switch (kategori) {
       case 'K1': {
-        batas_waktu = new Date(today);
-        batas_waktu.setDate(today.getDate() + 30);
+        daysToAdd = 90;
         break;
       }
 
       case 'K2': {
-        batas_waktu = new Date(today);
-        batas_waktu.setDate(today.getDate() + 45);
+        daysToAdd = 180;
         break;
       }
 
       case 'K3': {
-        batas_waktu = new Date(today);
-        batas_waktu.setDate(today.getDate() + 60);
+        daysToAdd = 270;
         break;
       }
 
       case 'K4': {
-        batas_waktu = new Date(today);
-        batas_waktu.setDate(today.getDate() + 90);
+        daysToAdd = 360;
         break;
       }
+
+      default: {
+        throw new BadRequestException(`Kategori tidak valid`);
+      }
     }
+
+    const batas_waktu = new Date(date); // Use provided date or today's date if not provided
+    batas_waktu.setDate(date.getDate() + daysToAdd);
 
     return batas_waktu;
   }

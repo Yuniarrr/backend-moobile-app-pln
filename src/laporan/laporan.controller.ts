@@ -84,6 +84,16 @@ import { LaporanService } from './laporan.service';
 export class LaporanController {
   constructor(private readonly laporanService: LaporanService) {}
 
+  @Get('custom-update')
+  async update() {
+    await this.laporanService.update();
+
+    return new SuccessResponse(
+      HttpStatus.OK,
+      'Data Laporan Anomali berhasil didapatkan',
+    );
+  }
+
   @Post('anomali')
   @Roles('ADMIN', 'GI')
   @ApiConsumes('multipart/form-data')
