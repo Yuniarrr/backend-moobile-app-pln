@@ -56,6 +56,8 @@ export class AuthService {
       role: isUserExist.role,
       user_id: isUserExist.id,
       username: isUserExist.username,
+      gi_id: isUserExist.gi_id,
+      ultg_id: isUserExist.ultg_id,
     };
   }
 

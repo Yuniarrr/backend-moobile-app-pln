@@ -5,7 +5,8 @@ export class RegisterDto {
   @IsStringDefined('Username is required', 'user')
   username: string;
 
-  @IsEnumDefined('Role is required', Role, Role.HAR)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  @IsEnumDefined('Role is required', Role, Role.ULTG)
   role: Role;
 
   @IsStringDefined('Password is required', 'password')

@@ -86,7 +86,7 @@ export class LaporanController {
 
   @Get('custom-update')
   async update() {
-    await this.laporanService.update();
+    await this.laporanService.updateUser();
 
     return new SuccessResponse(
       HttpStatus.OK,
@@ -128,7 +128,7 @@ export class LaporanController {
   }
 
   @Post('tindak/lanjut')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   // @ApiConsumes('multipart/form-data')
   // @CREATE_LAPORAN_TINDAK_LANJUT_BODY()
   // @FileInjector(CreateLaporanTindakLanjutDto)
@@ -163,7 +163,7 @@ export class LaporanController {
   }
 
   @Post('rencana/penyelesaian')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async createRencanaPenyelesaian(
     @Body(ValidationPipe) data: CreateRencanaPenyelesaianDto,
     @GetUser('id') user_id: string,
@@ -181,7 +181,7 @@ export class LaporanController {
   }
 
   @Get('total-anomali')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   @ApiQuery({
     name: 'bulan',
     required: false,
@@ -211,7 +211,7 @@ export class LaporanController {
   }
 
   @Get('download')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   @ApiQuery({
     name: 'tipe',
     required: false,
@@ -284,7 +284,7 @@ export class LaporanController {
     type: Number,
     description: 'Per page (optional)',
   })
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getLaporanAnomali(
     @Query('gi_id') gi_id: string,
     @Query('status') status: StatusLaporan,
@@ -328,7 +328,7 @@ export class LaporanController {
   }
 
   @Get('anomali/:laporan_anomali_id')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getDetailLaporanAnomali(
     @Param('laporan_anomali_id') laporan_anomali_id: string,
   ) {
@@ -344,7 +344,7 @@ export class LaporanController {
   }
 
   @Patch('anomali/:laporan_anomali_id')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   @UsePipes(new ValidationPipe())
   @UseInterceptors(
     FileFieldsInterceptor([
@@ -378,7 +378,7 @@ export class LaporanController {
   }
 
   @Patch('tindak/lanjut/:laporan_tindak_lanjut_id')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   @ApiConsumes('multipart/form-data')
   @UPDATE_LAPORAN_TINDAK_LANJUT_BODY()
   // @FileInjector(UpdateLaporanTindakLanjutDto)

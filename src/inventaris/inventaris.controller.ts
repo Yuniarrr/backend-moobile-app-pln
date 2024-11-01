@@ -15,7 +15,7 @@ import {
   UploadedFile,
   Res,
 } from '@nestjs/common';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -38,9 +38,8 @@ import {
   SuccessResponse,
 } from 'common';
 import { type Response } from 'express';
-import { FileInjector } from 'nestjs-file-upload';
 
-import { CREATE_ALAT_BODY, CREATE_UPLOAD_BODY } from './decorators';
+import { CREATE_UPLOAD_BODY } from './decorators';
 import {
   CreateAlatDto,
   CreateJenisAlatDto,
@@ -77,7 +76,7 @@ export class InventarisController {
   constructor(private readonly inventarisService: InventarisService) {}
 
   @Post('alat')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('nameplate'))
   async createAlat(
@@ -116,7 +115,7 @@ export class InventarisController {
   }
 
   @Post('jenis/alat')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   @ApiConsumes('application/x-www-form-urlencoded', 'application/json')
   async createJenisAlat(@Body(ValidationPipe) data: CreateJenisAlatDto) {
     const alat = await this.inventarisService.createJenisAlat(data);
@@ -140,7 +139,7 @@ export class InventarisController {
     ],
     description: 'Kategori Alat',
   })
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getJenisAlat(@Query('kategori_alat') kategori_alat: KategoriPeralatan) {
     const alat = await this.inventarisService.getJenisAlat(kategori_alat);
 
@@ -184,7 +183,7 @@ export class InventarisController {
     type: Number,
     description: 'Per page (optional)',
   })
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getAlat(
     @Query('ultg_id') ultg_id: string,
     @Query('gi_id') gi_id: string,
@@ -223,7 +222,7 @@ export class InventarisController {
     type: String,
     description: 'Tanggal akhir Laporan',
   })
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async unduhAlat(
     @Res() response: Response,
     @Query('awal') awal?: string,
@@ -237,7 +236,7 @@ export class InventarisController {
   }
 
   @Get('alat/:alat_id')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getDetailAlat(@Param('alat_id') alat_id: string) {
     const alat = await this.inventarisService.getDetailAlat(alat_id);
 
@@ -245,7 +244,7 @@ export class InventarisController {
   }
 
   @Patch('jenis/alat/:jenis_alat_id')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async updateJenisAlat(
     @Param('jenis_alat_id') jenis_alat_id: string,
     @Body(ValidationPipe) data: UpdateJenisAlatDto,
@@ -259,7 +258,7 @@ export class InventarisController {
   }
 
   @Patch('alat/:alat_id')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   // @ApiConsumes('multipart/form-data')
   @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('nameplate'))

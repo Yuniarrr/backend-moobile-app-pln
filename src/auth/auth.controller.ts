@@ -102,7 +102,7 @@ export class AuthController {
   @Patch('ganti-password')
   @ApiBearerAuth()
   @UseGuards(JwtGuard, RolesGuard)
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async gantiPassword(
     @Body(ValidationPipe) data: GantiPasswordDto,
     @GetUser('id') user_id: string,
@@ -118,7 +118,7 @@ export class AuthController {
   @Get('logout')
   @ApiBearerAuth()
   @UseGuards(JwtGuard, RolesGuard)
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async logout(@GetUser('id') user_id: string) {
     await this.authService.logout(user_id);
 
@@ -128,7 +128,7 @@ export class AuthController {
   @Post('me')
   @ApiBearerAuth()
   @UseGuards(JwtGuard, RolesGuard)
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   @NoCache()
   async userMe(@Body(ValidationPipe) data: MeDto) {
     const user = await this.authService.userMe(data.user_id);
@@ -143,7 +143,7 @@ export class AuthController {
   @Get('health-check')
   @ApiBearerAuth()
   @UseGuards(JwtGuard, RolesGuard)
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   @NoCache()
   healthCheck(@GetUser('id') user_id: string) {
     return new SuccessResponse(

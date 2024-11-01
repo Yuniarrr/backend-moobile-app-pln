@@ -8,7 +8,8 @@ export class CreateUserDto {
   @IsStringDefined('Password', 'password')
   password: string;
 
-  @IsEnumDefined('Role', Role, Role.HAR)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  @IsEnumDefined('Role', Role, Role.ULTG)
   role: Role;
 
   @IsStringOptional('ULTG id', 'id')

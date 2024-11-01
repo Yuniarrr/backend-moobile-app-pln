@@ -137,7 +137,7 @@ export class ManagementController {
     name: 'role',
     required: false,
     type: String,
-    enum: [Role.ADMIN, Role.GI, Role.HAR],
+    enum: [Role.ADMIN, Role.GI, Role.ULTG],
     description: 'Role of the user',
   })
   @ApiQuery({
@@ -191,7 +191,7 @@ export class ManagementController {
   }
 
   @Get('user/:user_id')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getDetailUser(@Param('user_id') user_id: string) {
     const details = await this.managementService.getDetailUser(user_id);
 
@@ -209,7 +209,7 @@ export class ManagementController {
     type: String,
     description: 'Id of the ultg',
   })
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getUltg(@Query('ultg_id') ultg_id: string) {
     const details = await this.managementService.getUltg(ultg_id);
 
@@ -227,7 +227,7 @@ export class ManagementController {
     type: String,
     description: 'Id of the gi',
   })
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getListBay(@Query('gi_id') gi_id: string) {
     const details = await this.managementService.getListBay(gi_id);
 
@@ -239,7 +239,7 @@ export class ManagementController {
   }
 
   @Get('gi')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getGI() {
     const details = await this.managementService.getGI();
 
@@ -251,7 +251,7 @@ export class ManagementController {
   }
 
   @Get('gi/:gi_id')
-  @Roles('ADMIN', 'GI', 'HAR')
+  @Roles('ADMIN', 'GI', 'ULTG')
   async getDetailGI(@Param('gi_id') gi_id: string) {
     const details = await this.managementService.getDetailGI(gi_id);
 

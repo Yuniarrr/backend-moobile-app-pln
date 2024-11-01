@@ -81,6 +81,21 @@ export class LaporanService {
     }
   }
 
+  async updateUser() {
+    const users = await this.prisma.users.findMany({
+      where: { role: 'HAR' },
+    });
+
+    for (const user of users) {
+      await this.prisma.users.update({
+        where: { id: user.id },
+        data: {
+          role: 'ULTG',
+        },
+      });
+    }
+  }
+
   async createLaporanAnomali(
     data: CreateLaporanAnomaliDto,
     user_id: string,
@@ -777,8 +792,8 @@ export class LaporanService {
           ultg: item.ultg.nama,
           gi: item.gi.nama,
           jenis_peralatan: item.jenis_peralatan?.nama ?? '',
-          bay: item.bay.nama_lokasi,
-          funloc_id: item.bay.funloc_id,
+          bay: item.bay?.nama_lokasi ?? '',
+          funloc_id: item.bay?.funloc_id ?? '',
           techidentno: item.alat?.techidentno ?? '',
           alat_id: item.alat_id,
         })),

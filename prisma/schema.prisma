@@ -12,6 +12,7 @@ enum Role {
   GI
   ADMIN
   HAR
+  ULTG
 }
 
 enum Kategori {
