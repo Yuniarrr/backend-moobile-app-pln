@@ -37,6 +37,15 @@ export class LaporanService {
   ) {}
 
   async update() {
+    // const dateWita = getTime(8);
+    // const dateJakarta = getTime();
+
+    // console.log('dateJakarta: ');
+    // console.log(dateJakarta);
+    // console.log('dateWita');
+    // console.log(dateWita);
+
+    // return dateJakarta;
     const datas = await this.prisma.laporan_anomali.findMany({
       orderBy: { created_at: 'asc' },
     });
@@ -62,9 +71,9 @@ export class LaporanService {
       await this.prisma.laporan_anomali.update({
         where: { id: data.id },
         data: {
-          batas_waktu: batasWaktu,
+          // batas_waktu: batasWaktu,
           laporan_anomali_id: `LA-${formattedNumber}`,
-          status_review: 'ACCEPT',
+          status_review: 'AWAITING',
         },
       });
 
@@ -215,6 +224,9 @@ export class LaporanService {
         direview_oleh: data.status_review
           ? user_id
           : isLaporanAnomaliExist.direview_oleh,
+        tanggal_review: data.status_review
+          ? getTime()
+          : isLaporanAnomaliExist.tanggal_review,
         pic: data.pic as PIC,
         foto: fotoPath,
         berita_acara: beritaAcaraPath,
