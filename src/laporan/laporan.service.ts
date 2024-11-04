@@ -11,7 +11,12 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { type PIC, type Prisma, type Kategori } from '@prisma/client';
+import {
+  type PIC,
+  type Prisma,
+  type Kategori,
+  type StatusReview,
+} from '@prisma/client';
 import { type Response } from 'express';
 import xlsx, { type ISettings } from 'json-as-xlsx';
 import { UploadService } from 'upload/upload.service';
@@ -73,7 +78,7 @@ export class LaporanService {
         data: {
           // batas_waktu: batasWaktu,
           laporan_anomali_id: `LA-${formattedNumber}`,
-          status_review: 'AWAITING',
+          // status_review: 'AWAITING',
         },
       });
 
@@ -709,6 +714,9 @@ export class LaporanService {
 
     const data = await this.prisma.laporan_anomali.findMany({
       where,
+      orderBy: {
+        created_at: 'desc',
+      },
       include: {
         ultg: {
           select: {
@@ -750,7 +758,7 @@ export class LaporanService {
           { label: 'Nama Lokasi', value: 'bay' },
           { label: 'Funloc ID', value: 'funloc_id' },
           { label: 'Techidentno (TID)', value: 'funloc_id' },
-          { label: 'ID Alat', value: 'alat_id' },
+          // { label: 'ID Alat', value: 'alat_id' },
           { label: 'Kategori Peralatan', value: 'kategori_peralatan' },
           {
             label: 'Kategori Peralatan Detail',
@@ -769,7 +777,8 @@ export class LaporanService {
           { label: 'Detail PIC', value: 'detail_pic' },
           { label: 'Nama Pelapor', value: 'nama_pembuat' },
           { label: 'Status', value: 'status' },
-          { label: 'ID Laporan Anomali', value: 'laporan_anomali_id' },
+          { label: 'Status Review', value: 'status_review' },
+          { label: 'Tanggal Review', value: 'tanggal_review' },
         ],
         content: data.map(item => ({
           id: item.laporan_anomali_id,
@@ -788,14 +797,17 @@ export class LaporanService {
           detail_pic: item.detail_pic ?? '',
           nama_pembuat: item.nama_pembuat ?? '',
           status: item.status,
-          laporan_anomali_id: item.laporan_anomali_id,
           ultg: item.ultg.nama,
           gi: item.gi.nama,
           jenis_peralatan: item.jenis_peralatan?.nama ?? '',
           bay: item.bay?.nama_lokasi ?? '',
           funloc_id: item.bay?.funloc_id ?? '',
           techidentno: item.alat?.techidentno ?? '',
-          alat_id: item.alat_id,
+          // alat_id: item.alat_id,
+          status_review: this.formatStatusReview(item.status_review),
+          tanggal_review: item.tanggal_review
+            ? this.formatDate(item.tanggal_review.toISOString())
+            : '',
         })),
       },
     ];
@@ -823,6 +835,9 @@ export class LaporanService {
 
     const data = await this.prisma.laporan_tindak_lanjut.findMany({
       where,
+      orderBy: {
+        created_at: 'desc',
+      },
       include: {
         pembuat: {
           select: {
@@ -841,7 +856,7 @@ export class LaporanService {
       {
         sheet: 'Laporan Tindak Lanjut',
         columns: [
-          { label: 'ID', value: 'id' },
+          { label: 'ID Laporan Anomali', value: 'laporan_anomali_id' },
           { label: 'Kegiatan', value: 'kegiatan' },
           { label: 'Keterangan Kegiatan', value: 'ket_kegiatan' },
           { label: 'Material', value: 'material' },
@@ -850,10 +865,9 @@ export class LaporanService {
           { label: 'Link Berita Acara', value: 'berita_acara' },
           { label: 'Nama Pelapor', value: 'nama_pembuat' },
           { label: 'Nama Pembuat', value: 'pembuat' },
-          { label: 'ID Laporan Anomali', value: 'laporan_anomali_id' },
         ],
         content: data.map(item => ({
-          id: item.laporan_anomali.laporan_anomali_id,
+          laporan_anomali_id: item.laporan_anomali.laporan_anomali_id,
           kegiatan: item.kegiatan,
           ket_kegiatan: item.ket_kegiatan ?? '',
           material: item.material || '',
@@ -862,7 +876,6 @@ export class LaporanService {
           berita_acara: this.formatLink(item.berita_acara),
           nama_pembuat: item.nama_pembuat ?? '',
           pembuat: item.pembuat.username,
-          laporan_anomali_id: item.laporan_anomali_id,
         })),
       },
     ];
@@ -886,6 +899,26 @@ export class LaporanService {
       month: 'short',
       year: 'numeric',
     });
+  }
+
+  formatStatusReview(status: StatusReview) {
+    switch (status) {
+      case 'AWAITING': {
+        return 'Menunggu Review';
+      }
+
+      case 'REJECT': {
+        return 'Ditolak';
+      }
+
+      case 'ACCEPT': {
+        return 'Disetujui';
+      }
+
+      default: {
+        return '';
+      }
+    }
   }
 
   formatLink(link?: string) {

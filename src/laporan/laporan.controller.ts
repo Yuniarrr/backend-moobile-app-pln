@@ -86,7 +86,7 @@ export class LaporanController {
 
   @Get('custom-update')
   async update() {
-    await this.laporanService.updateUser();
+    await this.laporanService.update();
 
     return new SuccessResponse(
       HttpStatus.OK,
